@@ -1,9 +1,11 @@
-import State from "../internal/State";
+import {Container} from 'pixi.js';
+
 import {isIOS} from "../../utils";
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
+import ViewState from "./ViewState";
 
-class InitialViewState implements State {
+class InitialViewState implements ViewState {
     public static TAG = "InitialViewState";
 
     /**
@@ -45,6 +47,17 @@ class InitialViewState implements State {
             window.removeEventListener("touchstart", this._handleGoNextStateAction);
         }
     }
+
+    /**
+     * Get pixi container.
+     *
+     * @return {TopViewContainer}
+     * @override
+     */
+    public getContainer = (): Container => {
+        // TODO: implement
+        return null;
+    };
 
     private _handleGoNextStateAction(): void {
         dispatchEvent(Events.INITIALIZED);

@@ -1,6 +1,8 @@
-import State from "../internal/State";
+import {Container} from 'pixi.js';
 
-class TopViewState implements State {
+import ViewState from "./ViewState";
+
+class TopViewState implements ViewState {
     public static TAG = "TopViewState";
 
     update(elapsedTime: number): void {
@@ -13,6 +15,17 @@ class TopViewState implements State {
 
     onExit(): void {
         console.log(`${TopViewState.TAG}@onExit`);
+    }
+
+    /**
+     * Get pixi container.
+     *
+     * @return {TopViewContainer}
+     * @override
+     */
+    public getContainer = (): Container => {
+        // TODO: implement
+        return null;
     }
 }
 

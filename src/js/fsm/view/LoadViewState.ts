@@ -1,9 +1,11 @@
-import State from "../internal/State";
+import {Container} from 'pixi.js';
+
 import {dispatchEvent} from '../EventUtils';
 import {Events} from "../ApplicationState";
 import manifest from '../../resources/manifest';
+import ViewState from "./ViewState";
 
-class LoadViewState implements State {
+class LoadViewState implements ViewState {
     public static TAG = "LoadViewState";
 
     private _loader: PIXI.loaders.Loader = new PIXI.loaders.Loader();
@@ -36,6 +38,17 @@ class LoadViewState implements State {
     onExit(): void {
         console.log(`${LoadViewState.TAG}@onExit`);
     }
+
+    /**
+     * Get pixi container.
+     *
+     * @return {TopViewContainer}
+     * @override
+     */
+    public getContainer = (): Container => {
+        // TODO: implement
+        return null;
+    };
 
     private _onLoadProgress = (): void => {
 
