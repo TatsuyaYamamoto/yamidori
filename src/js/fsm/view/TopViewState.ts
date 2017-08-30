@@ -1,9 +1,12 @@
 import {Container} from 'pixi.js';
 
 import ViewState from "./ViewState";
+import TopViewContainer from "../../container/views/TopViewContainer";
 
 class TopViewState implements ViewState {
     public static TAG = "TopViewState";
+
+    private _container: TopViewContainer;
 
     update(elapsedTime: number): void {
 
@@ -11,6 +14,7 @@ class TopViewState implements ViewState {
 
     onEnter(): void {
         console.log(`${TopViewState.TAG}@onEnter`);
+        this._container = new TopViewContainer();
     }
 
     onExit(): void {
@@ -24,8 +28,7 @@ class TopViewState implements ViewState {
      * @override
      */
     public getContainer = (): Container => {
-        // TODO: implement
-        return null;
+        return this._container;
     }
 }
 

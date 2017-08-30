@@ -4,10 +4,12 @@ import {dispatchEvent} from '../EventUtils';
 import {Events} from "../ApplicationState";
 import manifest from '../../resources/manifest';
 import ViewState from "./ViewState";
+import LoadViewContainer from "../../container/views/LoadViewContainer";
 
 class LoadViewState implements ViewState {
     public static TAG = "LoadViewState";
 
+    private _container: LoadViewContainer;
     private _loader: PIXI.loaders.Loader = new PIXI.loaders.Loader();
 
     /**
@@ -23,6 +25,8 @@ class LoadViewState implements ViewState {
      */
     onEnter(): void {
         console.log(`${LoadViewState.TAG}@onEnter`);
+
+        this._container = new LoadViewContainer();
 
         Object.keys(manifest).forEach((key) => {
             this._loader.add(key, manifest[key]);
@@ -46,8 +50,7 @@ class LoadViewState implements ViewState {
      * @override
      */
     public getContainer = (): Container => {
-        // TODO: implement
-        return null;
+        return this._container;
     };
 
     private _onLoadProgress = (): void => {

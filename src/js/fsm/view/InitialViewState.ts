@@ -4,9 +4,12 @@ import {isIOS} from "../../utils";
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
 import ViewState from "./ViewState";
+import InitialViewContainer from "../../container/views/InitialViewContainer";
 
 class InitialViewState implements ViewState {
     public static TAG = "InitialViewState";
+
+    private _container: InitialViewContainer;
 
     /**
      *
@@ -22,6 +25,8 @@ class InitialViewState implements ViewState {
      */
     onEnter(): void {
         console.log(`${InitialViewState.TAG}@onEnter`);
+
+        this._container = new InitialViewContainer();
 
         // TODO: Check login?
         // TODO: Setup screen scale?
@@ -55,8 +60,7 @@ class InitialViewState implements ViewState {
      * @override
      */
     public getContainer = (): Container => {
-        // TODO: implement
-        return null;
+        return this._container;
     };
 
     private _handleGoNextStateAction(): void {

@@ -15,11 +15,10 @@ export enum Events {
 }
 
 class ApplicationState extends Application implements State {
-    private _viewStateMachine = new StateMachine({
-        [InitialViewState.TAG]: new InitialViewState(),
-        [LoadViewState.TAG]: new LoadViewState(),
-        [TopViewState.TAG]: new TopViewState(),
-    });
+    private _viewStateMachine: StateMachine;
+    private _initialViewState: InitialViewState;
+    private _loadViewState: LoadViewState;
+    private _topViewState: TopViewState;
 
     constructor() {
         super(800, 450, {backgroundColor: 0xeeeeee});
@@ -38,6 +37,16 @@ class ApplicationState extends Application implements State {
      * @override
      */
     onEnter(): void {
+        this._initialViewState = new InitialViewState();
+        this._loadViewState = new LoadViewState();
+        this._topViewState = new TopViewState();
+
+        this._viewStateMachine = new StateMachine({
+            [InitialViewState.TAG]: this._initialViewState,
+            [LoadViewState.TAG]: this._loadViewState,
+            [TopViewState.TAG]: this._topViewState
+        });
+
         addEvents({
             [Events.INITIALIZED]: this._changeToLoadViewState,
             [Events.PRELOAD_COMPLETE]: this._changeToTopViewState
@@ -58,10 +67,14 @@ class ApplicationState extends Application implements State {
 
     private _changeToLoadViewState = () => {
         this._viewStateMachine.change(LoadViewState.TAG);
+        this.stage.removeChildren();
+        this.stage.addChild(this._loadViewState.getContainer());
     };
 
     private _changeToTopViewState = () => {
         this._viewStateMachine.change(TopViewState.TAG);
+        this.stage.removeChildren();
+        this.stage.addChild(this._topViewState.getContainer());
     };
 }
 
