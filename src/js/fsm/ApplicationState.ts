@@ -6,6 +6,8 @@ import {addEvents, removeEvents} from './EventUtils';
 import InitialViewState from "./view/InitialViewState";
 import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";
+import {getCurrentViewSize} from "../utils";
+
 
 export enum Events {
     INITIALIZED = "ApplicationState@INITIALIZED",
@@ -52,6 +54,8 @@ class ApplicationState extends Application implements State {
             [Events.PRELOAD_COMPLETE]: this._changeToTopViewState
         });
 
+        window.addEventListener('resize', this.onResize);
+
         this._viewStateMachine.init(InitialViewState.TAG);
     }
 
@@ -63,7 +67,15 @@ class ApplicationState extends Application implements State {
             Events.INITIALIZED,
             Events.PRELOAD_COMPLETE
         ]);
+        window.removeEventListener('resize', this.onResize);
     }
+
+    private onResize = (event: Event): void => {
+        const {newWidth, newHeight} = getCurrentViewSize();
+
+        this.renderer.view.style.width = `${newWidth}px`;
+        this.renderer.view.style.height = `${newHeight}px`;
+    };
 
     private _changeToLoadViewState = () => {
         this._viewStateMachine.change(LoadViewState.TAG);

@@ -24,6 +24,7 @@ class TopViewState implements ViewState {
     /**
      * Get pixi container.
      *
+     * {@see ViewState#getContainer}
      * @return {TopViewContainer}
      * @override
      */
