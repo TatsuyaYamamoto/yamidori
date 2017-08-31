@@ -7,6 +7,7 @@ import InitialViewState from "./view/InitialViewState";
 import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";
 import {getCurrentViewSize} from "../utils";
+import GameViewState from "./view/GameViewState";
 
 
 export enum Events {
@@ -21,6 +22,7 @@ class ApplicationState extends Application implements State {
     private _initialViewState: InitialViewState;
     private _loadViewState: LoadViewState;
     private _topViewState: TopViewState;
+    private _gameViewState: GameViewState;
 
     constructor() {
         super(800, 450, {backgroundColor: 0xeeeeee});
@@ -42,16 +44,20 @@ class ApplicationState extends Application implements State {
         this._initialViewState = new InitialViewState();
         this._loadViewState = new LoadViewState();
         this._topViewState = new TopViewState();
+        this._gameViewState = new GameViewState();
 
         this._viewStateMachine = new StateMachine({
             [InitialViewState.TAG]: this._initialViewState,
             [LoadViewState.TAG]: this._loadViewState,
-            [TopViewState.TAG]: this._topViewState
+            [TopViewState.TAG]: this._topViewState,
+            [GameViewState.TAG]: this._gameViewState
         });
 
         addEvents({
             [Events.INITIALIZED]: this._changeToLoadViewState,
-            [Events.PRELOAD_COMPLETE]: this._changeToTopViewState
+            [Events.PRELOAD_COMPLETE]: this._changeToTopViewState,
+            [Events.GAME_START_REQUEST]: this._changeToGameViewState,
+            [Events.BACK_TO_TOP_REQUEST]: this._changeToTopViewState,
         });
 
         window.addEventListener('resize', this.onResize);
@@ -65,7 +71,9 @@ class ApplicationState extends Application implements State {
     onExit(): void {
         removeEvents([
             Events.INITIALIZED,
-            Events.PRELOAD_COMPLETE
+            Events.PRELOAD_COMPLETE,
+            Events.GAME_START_REQUEST,
+            Events.BACK_TO_TOP_REQUEST
         ]);
         window.removeEventListener('resize', this.onResize);
     }
@@ -87,6 +95,12 @@ class ApplicationState extends Application implements State {
         this._viewStateMachine.change(TopViewState.TAG);
         this.stage.removeChildren();
         this.stage.addChild(this._topViewState.getContainer());
+    };
+
+    private _changeToGameViewState = () => {
+        this._viewStateMachine.change(GameViewState.TAG);
+        this.stage.removeChildren();
+        this.stage.addChild(this._gameViewState.getContainer());
     };
 }
 
