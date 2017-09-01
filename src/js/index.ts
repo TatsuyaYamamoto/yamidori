@@ -28,7 +28,7 @@ function init() {
 
     rootState.onEnter();
     rootState.ticker.add((deltaTime: number) => {
-        rootState.update(deltaTime);
+        rootState.update(rootState.ticker.elapsedMS);
     });
 }
 
