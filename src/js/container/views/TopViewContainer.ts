@@ -1,42 +1,30 @@
-import {interaction} from 'pixi.js';
+import {Container, interaction} from 'pixi.js';
 
 import ViewContainer from "./ViewContainer";
 import GameStartButton from "../sprite/button/GameStartButton";
 import {Events} from "../../fsm/ApplicationState";
 import {dispatchEvent} from '../../fsm/EventUtils'
+import Background from "../sprite/background/Background";
 
 class TopViewContainer extends ViewContainer {
+    private _backgroundLayer: Container;
+    private _background: Background;
+
     private _gameStartButton;
 
     constructor() {
         super();
+        this._backgroundLayer = new Container();
+        this._background = new Background();
+        this._backgroundLayer.addChild(this._background);
+
         this._gameStartButton = new GameStartButton();
         this._gameStartButton.setOnClickListener(this.onGameStartButtonClick);
-        this.addChild(this._gameStartButton)
-    }
 
-    /**
-     * {@see ViewContainer#onOpen}
-     * @override
-     */
-    protected onOpen(): void {
-        super.onOpen();
-    }
-
-    /**
-     * {@see ViewContainer#onClose}
-     * @override
-     */
-    protected onClose(): void {
-        super.onClose();
-    }
-
-    /**
-     * {@see ViewContainer#onRendererSizeChange}
-     * @override
-     */
-    protected onRendererSizeChange(newWidth: number, newheight: number): void {
-        super.onRendererSizeChange(newWidth, newheight);
+        this.addChild(
+            this._backgroundLayer,
+            this._gameStartButton
+        )
     }
 
     private onGameStartButtonClick = (event: interaction.InteractionEvent): void => {
