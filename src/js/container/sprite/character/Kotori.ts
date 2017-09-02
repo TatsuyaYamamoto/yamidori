@@ -10,6 +10,7 @@ enum Speed {
 }
 
 class Kotori extends ClickableSprite {
+    // TODO implement direction enum.
     private _isRight: boolean;
     private _id: number;
     private _speed: Speed;
@@ -30,6 +31,15 @@ class Kotori extends ClickableSprite {
      */
     public get id(): number {
         return this._id;
+    }
+
+    /**
+     * Return true if these direction is right.
+     *
+     * @return {boolean}
+     */
+    public get isRight(): boolean {
+        return this._isRight;
     }
 
     /**

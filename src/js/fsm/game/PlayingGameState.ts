@@ -2,6 +2,8 @@ import {Container} from 'pixi.js';
 
 import GameState from "./GameState";
 import Kotori from "../../container/sprite/character/Kotori";
+import {Events as GameEvents} from '../view/GameViewState'
+import {dispatchEvent} from '../EventUtils';
 
 class PlayingGameState implements GameState {
     public static TAG = "PlayingGameState";
@@ -16,6 +18,11 @@ class PlayingGameState implements GameState {
 
         this._kotoriMap.forEach((k: Kotori) => {
             k.move(elapsedTime);
+
+            if (this.isOnDeadLine(k)) {
+                console.log("Gameover!!");
+                dispatchEvent(GameEvents.GAME_OVER);
+            }
         });
 
         if (this._nextAppearTimeMillis < this._elapsedTimeMillis) {
@@ -38,6 +45,8 @@ class PlayingGameState implements GameState {
 
     onExit(): void {
         console.log(`${PlayingGameState.TAG}@onExit`);
+        this._kotoriMap.forEach((k: Kotori) => k.destroy());
+        this._kotoriMap.clear();
     }
 
     public getContainer(): Container {
@@ -67,6 +76,14 @@ class PlayingGameState implements GameState {
 
     private getRandomBool(): boolean {
         return Math.floor(Math.random() * 2) === 1;
+    }
+
+    private isOnDeadLine(kotori: Kotori): boolean {
+        if (kotori.isRight) {
+            return 300 < kotori.x
+        } else {
+            return kotori.x < 600
+        }
     }
 }
 

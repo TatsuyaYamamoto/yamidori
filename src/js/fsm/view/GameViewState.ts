@@ -84,7 +84,7 @@ class GameViewState implements ViewState {
     };
 
     private _changeToOverGameState = (): void => {
-
+        this._gameStateMachine.change(OverGameState.TAG);
     }
 }
 
