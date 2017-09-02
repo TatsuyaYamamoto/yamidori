@@ -80,9 +80,7 @@ class ApplicationState extends Application implements State {
 
     private onResize = (event: Event): void => {
         const {width, height} = getCurrentViewSize();
-
-        this.renderer.view.style.width = `${width}px`;
-        this.renderer.view.style.height = `${height}px`;
+        this.renderer.resize(width, height);
     };
 
     private _changeToLoadViewState = () => {
