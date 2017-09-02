@@ -7,6 +7,7 @@ import {addEvents, removeEvents} from "../EventUtils";
 import CountGameState from "../game/CountGameState";
 import OverGameState from "../game/OverGameState";
 import PlayingGameState from "../game/PlayingGameState";
+import {SKIP_COUNT_DOWN_FOR_GAME_START} from "../../Constants";
 
 export enum Events {
     COUNT_START = "GameViewState@COUNT_START",
@@ -48,6 +49,9 @@ class GameViewState implements ViewState {
         });
 
         this._gameStateMachine.init(CountGameState.TAG);
+        if (SKIP_COUNT_DOWN_FOR_GAME_START) {
+            this._changeToPlayingGameState();
+        }
     }
 
     onExit(): void {
