@@ -7,12 +7,16 @@ class PlayingGameState implements GameState {
     public static TAG = "PlayingGameState";
 
     private _container: Container;
-    private _kotoriList: Kotori[] = [];
+    private _kotoriMap: Map<number, Kotori>;
     private _elapsedTimeMillis = 0;
     private _nextAppearTimeMillis = 0;
 
     update(elapsedTime: number): void {
         this._elapsedTimeMillis += elapsedTime;
+
+        this._kotoriMap.forEach((k: Kotori) => {
+            k.move(elapsedTime);
+        });
 
         if (this._nextAppearTimeMillis < this._elapsedTimeMillis) {
             console.log('Appear kotori!');
@@ -20,13 +24,14 @@ class PlayingGameState implements GameState {
 
             const kotori = this.createKotori();
             this._container.addChild(kotori);
-            this._kotoriList.push(kotori);
+            this._kotoriMap.set(kotori.id, kotori);
         }
     }
 
     onEnter(): void {
         console.log(`${PlayingGameState.TAG}@onEnter`);
         this._container = new Container();
+        this._kotoriMap = new Map();
         this._elapsedTimeMillis = 0;
         this._nextAppearTimeMillis = this.getNextAppearTimeMillis();
     }
@@ -46,14 +51,14 @@ class PlayingGameState implements GameState {
     private createKotori(): Kotori {
         const isRight = this.getRandomBool();
         const kotori = new Kotori(isRight);
-        kotori.position.set(isRight ? 50 : 800, this.getRandomNumber(50, 300));
+        kotori.position.set(isRight ? 0 : 1000, this.getRandomNumber(50, 300));
         kotori.setOnClickListener(() => this.handleClickKotori(kotori));
         return kotori;
     }
 
     private handleClickKotori = (targetSprite: Kotori) => {
-        console.log('on click!');
         targetSprite.destroy();
+        this._kotoriMap.delete(targetSprite.id);
     };
 
     private getRandomNumber(min: number, max: number): number {
