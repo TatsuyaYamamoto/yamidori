@@ -52,6 +52,32 @@ class Kotori extends ClickableSprite {
 
         this.position.x += this._speed * elapsedTime * direction;
     }
+
+    /**
+     * Destroy kotori-chun.
+     * Before {@link this#destroy} decrement alpha.
+     */
+    public destroyByTap(): void {
+        Promise.resolve()
+            .then(() => {
+                return new Promise((resolve) => {
+                    this.startAlphaDecrementLoop(resolve);
+                })
+            })
+            .then(() => this.destroy());
+    }
+
+    private startAlphaDecrementLoop(callback) {
+        setTimeout(() => {
+            this.alpha -= 0.2;
+
+            if (this.alpha > 0) {
+                this.startAlphaDecrementLoop(callback);
+            } else {
+                callback();
+            }
+        }, 33); // 1000 ms / 30FPS
+    }
 }
 
 export default Kotori;

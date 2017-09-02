@@ -24,7 +24,7 @@ class PlayingGameState implements GameState {
             this._container.addChild(kotori);
             this._kotoriMap.set(kotori.id, kotori);
         }
-        
+
         this._kotoriMap.forEach((k: Kotori) => {
             k.move(elapsedTime);
 
@@ -66,7 +66,7 @@ class PlayingGameState implements GameState {
     }
 
     private handleClickKotori = (targetSprite: Kotori) => {
-        targetSprite.destroy();
+        targetSprite.destroyByTap();
         this._kotoriMap.delete(targetSprite.id);
     };
 
