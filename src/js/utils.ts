@@ -1,4 +1,4 @@
-import {ASPECT_RATIO} from "./Constants";
+import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "./Constants";
 
 /**
  * Return true if the device's OS is iOS. Otherwise false.
@@ -23,4 +23,14 @@ export function getCurrentViewSize(): { width: number, height: number } {
     if (currentWindowAspectRatio < ASPECT_RATIO) height = window.innerWidth / ASPECT_RATIO;
 
     return {width, height}
+}
+
+/**
+ * Return view size ratio of current window size to application basic size.
+ *
+ * @return {number}
+ */
+export function getScale(): number {
+    const {width} = getCurrentViewSize();
+    return width / BASIC_IMAGE_WIDTH;
 }
