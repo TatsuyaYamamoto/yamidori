@@ -29,8 +29,8 @@ abstract class ViewContainer extends Container {
     }
 
     private onResize = (event: Event): void => {
-        const {newWidth, newHeight} = getCurrentViewSize();
-        this.onRendererSizeChange(newWidth, newHeight);
+        const {width, height} = getCurrentViewSize();
+        this.onRendererSizeChange(width, height);
     }
 }
 

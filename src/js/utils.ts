@@ -10,17 +10,17 @@ export function isIOS(): boolean {
 }
 
 
-export function getCurrentViewSize(): { newWidth: number, newHeight: number } {
+export function getCurrentViewSize(): { width: number, height: number } {
     const currentWindowAspectRatio = window.innerWidth / window.innerHeight;
 
-    let newWidth = window.innerWidth;
-    let newHeight = window.innerHeight;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
 
     // horizontally long then expected ratio.
-    if (ASPECT_RATIO < currentWindowAspectRatio) newWidth = window.innerHeight * ASPECT_RATIO;
+    if (ASPECT_RATIO < currentWindowAspectRatio) width = window.innerHeight * ASPECT_RATIO;
 
     // vertically long then expected ratio.
-    if (currentWindowAspectRatio < ASPECT_RATIO) newHeight = window.innerWidth / ASPECT_RATIO;
+    if (currentWindowAspectRatio < ASPECT_RATIO) height = window.innerWidth / ASPECT_RATIO;
 
-    return {newWidth, newHeight}
+    return {width, height}
 }

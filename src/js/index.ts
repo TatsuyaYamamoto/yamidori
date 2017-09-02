@@ -5,12 +5,18 @@
  * @author Tatsuya Yamamoto
  */
 import ApplicationState from "./fsm/ApplicationState";
+import {getCurrentViewSize} from "./utils";
+
+/**
+ * Initial window size.
+ */
+const {width, height} = getCurrentViewSize();
 
 /**
  * Root application state;
  * @type {any}
  */
-const rootState = new ApplicationState();
+const rootState = new ApplicationState({width, height});
 
 /**
  * Main game element.

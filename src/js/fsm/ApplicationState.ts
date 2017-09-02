@@ -24,8 +24,8 @@ class ApplicationState extends Application implements State {
     private _topViewState: TopViewState;
     private _gameViewState: GameViewState;
 
-    constructor() {
-        super(800, 450, {backgroundColor: 0xeeeeee});
+    constructor(options) {
+        super(Object.assign({}, options, {backgroundColor: 0xeeeeee}));
     }
 
     /**
@@ -79,10 +79,10 @@ class ApplicationState extends Application implements State {
     }
 
     private onResize = (event: Event): void => {
-        const {newWidth, newHeight} = getCurrentViewSize();
+        const {width, height} = getCurrentViewSize();
 
-        this.renderer.view.style.width = `${newWidth}px`;
-        this.renderer.view.style.height = `${newHeight}px`;
+        this.renderer.view.style.width = `${width}px`;
+        this.renderer.view.style.height = `${height}px`;
     };
 
     private _changeToLoadViewState = () => {
