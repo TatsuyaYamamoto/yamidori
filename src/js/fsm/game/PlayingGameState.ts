@@ -16,15 +16,6 @@ class PlayingGameState implements GameState {
     update(elapsedTime: number): void {
         this._elapsedTimeMillis += elapsedTime;
 
-        this._kotoriMap.forEach((k: Kotori) => {
-            k.move(elapsedTime);
-
-            if (this.isOnDeadLine(k)) {
-                console.log("Gameover!!");
-                dispatchEvent(GameEvents.GAME_OVER);
-            }
-        });
-
         if (this._nextAppearTimeMillis < this._elapsedTimeMillis) {
             console.log('Appear kotori!');
             this._nextAppearTimeMillis += this.getNextAppearTimeMillis();
@@ -33,6 +24,15 @@ class PlayingGameState implements GameState {
             this._container.addChild(kotori);
             this._kotoriMap.set(kotori.id, kotori);
         }
+        
+        this._kotoriMap.forEach((k: Kotori) => {
+            k.move(elapsedTime);
+
+            if (this.isOnDeadLine(k)) {
+                console.log("Gameover!!");
+                dispatchEvent(GameEvents.GAME_OVER);
+            }
+        });
     }
 
     onEnter(): void {
