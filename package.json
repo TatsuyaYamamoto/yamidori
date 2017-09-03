@@ -30,6 +30,7 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "animejs": "^2.0.2",
     "pixi.js": "^4.5.4"
   }
 }
