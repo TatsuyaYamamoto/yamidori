@@ -1,4 +1,5 @@
 import {Text as PixiText, TextStyle} from 'pixi.js';
+import {getScale} from "../../../utils";
 
 export const basicTextStyle = {
     fontFamily: 'Arial',
@@ -10,6 +11,7 @@ export const basicTextStyle = {
 class Text extends PixiText {
     constructor(text: string, style?: object) {
         super(text, new TextStyle(Object.assign({}, basicTextStyle, style)));
+        this.scale.set(getScale());
         this.anchor.set(0.5);
     };
 }
