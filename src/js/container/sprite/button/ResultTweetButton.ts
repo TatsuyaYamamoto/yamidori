@@ -7,9 +7,6 @@ import {getCurrentViewSize} from "../../../utils";
 class ResultTweetButton extends Button {
     constructor() {
         super(Sprite.fromImage(manifest.buttonResultTweet).texture);
-
-        const {width, height} = getCurrentViewSize();
-        this.position.set(width / 2, height / 2)
     }
 }
 
