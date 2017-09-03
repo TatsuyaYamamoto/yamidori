@@ -28,6 +28,7 @@ class BrandLogoAnimation extends Container {
 
         this._width = width || 400;
         this._height = height || this._width;
+        this._timeoutAfterComplete = 500;
 
         // create sprites
         this._characters = BRAND_CHARACTERS.map((char) => {
@@ -181,7 +182,7 @@ class BrandLogoAnimation extends Container {
                 easing: 'linear',
                 delay: TIMELINE.CHARACTER_BOU_WAITING * DURATION_SCALE,
                 complete: () => {
-                    onComplete && onComplete();
+                    setTimeout(() => onComplete && onComplete(), this._timeoutAfterComplete);
                 }
             });
     }
