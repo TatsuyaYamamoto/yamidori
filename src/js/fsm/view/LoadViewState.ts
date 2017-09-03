@@ -5,6 +5,7 @@ import {Events as ApplicationEvents} from "../ApplicationState";
 import manifest from '../../resources/manifest';
 import ViewState from "./ViewState";
 import LoadViewContainer from "../../container/views/LoadViewContainer";
+import {SKIP_BRAND_LOGO_ANIMATION} from "../../Constants";
 
 export enum Events {
     COMPLETE_LOAD = "LoadViewState@COMPLETE_LOAD",
@@ -81,6 +82,11 @@ class LoadViewState implements ViewState {
     };
 
     private _handleLoadCompleteEvent = () => {
+        if (SKIP_BRAND_LOGO_ANIMATION) {
+            dispatchEvent(ApplicationEvents.PRELOAD_COMPLETE);
+            return;
+        }
+
         this._isLoadComplete = true;
 
         if (this._isLoadComplete && this._isLogoAnimComplete) {

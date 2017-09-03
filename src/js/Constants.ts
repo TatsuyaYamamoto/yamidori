@@ -28,3 +28,10 @@ export const BASIC_IMAGE_HEIGHT = BASIC_IMAGE_WIDTH / ASPECT_RATIO;
  * @type {boolean}
  */
 export const SKIP_COUNT_DOWN_FOR_GAME_START = false;
+
+/**
+ * Skip brant logo animation on load view if true.
+ *
+ * @type {boolean}
+ */
+export const SKIP_BRAND_LOGO_ANIMATION = false;
