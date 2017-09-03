@@ -35,3 +35,13 @@ export const SKIP_COUNT_DOWN_FOR_GAME_START = false;
  * @type {boolean}
  */
 export const SKIP_BRAND_LOGO_ANIMATION = false;
+
+/**
+ * External URLs.
+ */
+export const URL = {
+    YAMIDORI: "http://games.sokontokoro-factory.net/yamidori/",
+    TWITTER_HOME_T28: "https://twitter.com/t28_tatsuya",
+    TWITTER_HOME_SANZASHI: "https://twitter.com/xxsanzashixx",
+    TWITTER_TWEET_PAGE: "https://twitter.com/intent/tweet"
+};
