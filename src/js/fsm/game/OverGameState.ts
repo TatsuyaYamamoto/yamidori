@@ -6,6 +6,9 @@ import GameRestartButton from "../../container/sprite/button/GameRestartButton";
 import {getCurrentViewSize} from "../../utils";
 import GoBackHomeButton from "../../container/sprite/button/GoBackHomeButton";
 import ResultTweetButton from "../../container/sprite/button/ResultTweetButton";
+import {dispatchEvent} from "../EventUtils";
+import {Events as ApplicationEvents} from "../ApplicationState";
+import {tweetGameResult} from '../../network';
 
 class OverGameState implements GameState {
     public static TAG = "OverGameState";
@@ -32,12 +35,15 @@ class OverGameState implements GameState {
 
         this._gameRestartButton = new GameRestartButton();
         this._gameRestartButton.position.set(width * 0.3, height * 0.7);
+        this._gameRestartButton.setOnClickListener(this.handleTapRestartGame);
 
         this._goBackHomeButton = new GoBackHomeButton();
         this._goBackHomeButton.position.set(width * 0.7, height * 0.7);
+        this._goBackHomeButton.setOnClickListener(this.handleTapGoBackHome);
 
         this._resultTweetButton = new ResultTweetButton();
         this._resultTweetButton.position.set(width * 0.8, height * 0.2);
+        this._resultTweetButton.setOnClickListener(this.handleTapResultTweet);
 
         this._container.addChild(
             this._gameOverLogo,
@@ -54,6 +60,19 @@ class OverGameState implements GameState {
     public getContainer(): Container {
         return this._container;
     }
+
+    private handleTapGoBackHome = () => {
+        dispatchEvent(ApplicationEvents.GAME_START_REQUEST)
+    };
+
+    private handleTapRestartGame = () => {
+        dispatchEvent(ApplicationEvents.BACK_TO_TOP_REQUEST)
+    };
+
+    private handleTapResultTweet = () => {
+        // TODO: Get tweet text.
+        tweetGameResult("Dummy text");
+    };
 }
 
 export default OverGameState;
