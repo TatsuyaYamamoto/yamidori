@@ -11,4 +11,6 @@ export default {
 
     buttonGameStart: `${BASE_DIR}button_game_start.png`,
     buttonGameRestart: `${BASE_DIR}button_game_restart.png`,
+    buttonGoBackHome: `${BASE_DIR}button_go_back_home.png`,
+    buttonResultTweet: `${BASE_DIR}button_result_tweet.png`,
 }
