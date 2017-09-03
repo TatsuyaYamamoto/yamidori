@@ -8,36 +8,47 @@ import Background from "../sprite/background/Background";
 import Text from "../sprite/text/Text";
 import {getCurrentViewSize, getString} from "../../utils";
 import {Ids} from "../../resources/string";
+import GoCreditButton from "../sprite/button/GoCreditButton";
+import GoHowToPlayButton from "../sprite/button/GoHowToPlayButton";
+import GoTwitterHomeButton from "../sprite/button/GoTwitterHomeButton";
 
 class TopViewContainer extends ViewContainer {
-    private _backgroundLayer: Container;
     private _background: Background;
 
-    private _buttonLayer: Container;
     private _tapInfoText: Text;
-    private _gameStartButton;
+    private _gameStartButton: GameStartButton;
+    private _goCreditButton: GoCreditButton;
+    private _goHowToPlayButton: GoHowToPlayButton;
+    private _goTwitterHomeButton: GoTwitterHomeButton;
 
     constructor() {
         super();
         const {width, height} = getCurrentViewSize();
 
-        this._backgroundLayer = new Container();
         this._background = new Background();
-
-        this._buttonLayer = new Container();
 
         this._tapInfoText = new Text(getString(Ids.TAP_DISPLAY_INFO));
         this._tapInfoText.position.set(width * 0.5, height * 0.9);
 
         this._gameStartButton = new GameStartButton();
+        this._gameStartButton.position.set(width * 0.5, height * 0.8);
         this._gameStartButton.setOnClickListener(this.onGameStartButtonClick);
 
-        this._backgroundLayer.addChild(this._background);
-        this._buttonLayer.addChild(this._tapInfoText);
+        this._goCreditButton = new GoCreditButton();
+        this._goCreditButton.position.set(width * 0.7, height * 0.8);
+        this._goCreditButton.setOnClickListener(this.onGameStartButtonClick);
 
-        this.addChild(
-            this._backgroundLayer,
-            this._buttonLayer,
+        this._goHowToPlayButton = new GoHowToPlayButton();
+        this._goHowToPlayButton.position.set(width * 0.2, height * 0.8);
+        this._goHowToPlayButton.setOnClickListener(this.onGameStartButtonClick);
+
+        this._goTwitterHomeButton = new GoTwitterHomeButton();
+        this._goTwitterHomeButton.position.set(width * 0.7, height * 0.3);
+        this._goTwitterHomeButton.setOnClickListener(this.onGameStartButtonClick);
+
+        this.backGroundLayer.addChild(this._background);
+        this.applicationLayer.addChild(
+            this._tapInfoText
         );
 
         window.addEventListener('pointerdown', this.onWindowTap);
@@ -49,9 +60,12 @@ class TopViewContainer extends ViewContainer {
 
     private onWindowTap = (): void => {
         window.removeEventListener('pointerdown', this.onWindowTap);
-        this._buttonLayer.removeChildren();
-        this._buttonLayer.addChild(
-            this._gameStartButton
+        this.applicationLayer.removeChildren();
+        this.applicationLayer.addChild(
+            this._gameStartButton,
+            this._goCreditButton,
+            this._goHowToPlayButton,
+            this._goTwitterHomeButton
         )
     };
 }
