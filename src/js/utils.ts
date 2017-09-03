@@ -1,4 +1,5 @@
 import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "./Constants";
+import strings from "./resources/string";
 
 /**
  * Return true if the device's OS is iOS. Otherwise false.
@@ -33,4 +34,25 @@ export function getCurrentViewSize(): { width: number, height: number } {
 export function getScale(): number {
     const {width} = getCurrentViewSize();
     return width / BASIC_IMAGE_WIDTH;
+}
+
+/**
+ * Get string resource with ID.
+ *
+ * @param id
+ * @return {any}
+ */
+export function getString(id: string): string {
+    const text = strings[id];
+
+    if (typeof text === 'string') {
+        return text;
+    }
+
+    if (typeof text === 'object') {
+        // TODO: handle value in accordance with user lang.
+        return text['en']
+    }
+
+    throw new Error('Could not find a string resource with provided id.');
 }
