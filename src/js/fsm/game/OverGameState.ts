@@ -62,11 +62,11 @@ class OverGameState implements GameState {
     }
 
     private handleTapGoBackHome = () => {
-        dispatchEvent(ApplicationEvents.GAME_START_REQUEST)
+        dispatchEvent(ApplicationEvents.BACK_TO_TOP_REQUEST);
     };
 
     private handleTapRestartGame = () => {
-        dispatchEvent(ApplicationEvents.BACK_TO_TOP_REQUEST)
+        dispatchEvent(ApplicationEvents.GAME_START_REQUEST);
     };
 
     private handleTapResultTweet = () => {
