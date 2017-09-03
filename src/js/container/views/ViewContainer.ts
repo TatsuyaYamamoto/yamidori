@@ -3,6 +3,35 @@ import {Container} from 'pixi.js';
 import {getCurrentViewSize} from "../../utils";
 
 abstract class ViewContainer extends Container {
+    private _backGroundLayer: Container;
+    private _applicationLayer: Container;
+    private _informationLayer: Container;
+
+    constructor() {
+        super();
+
+        this._backGroundLayer = new Container();
+        this._applicationLayer = new Container();
+        this._informationLayer = new Container();
+
+        this.addChild(
+            this._backGroundLayer,
+            this._applicationLayer,
+            this._informationLayer
+        )
+    }
+
+    public get backGroundLayer(): Container {
+        return this._backGroundLayer;
+    }
+
+    public get applicationLayer(): Container {
+        return this._applicationLayer;
+    }
+
+    public get informationLayer(): Container {
+        return this._informationLayer;
+    }
 
     /**
      * Fire on opening the view.

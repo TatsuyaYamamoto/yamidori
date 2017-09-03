@@ -80,11 +80,14 @@ class GameViewState implements ViewState {
 
     private _changeToPlayingGameState = (): void => {
         this._gameStateMachine.change(PlayingGameState.TAG);
-        this._container.addChild(this._playingGameState.getContainer());
+        this._container.applicationLayer.removeChildren();
+        this._container.applicationLayer.addChild(this._playingGameState.getContainer());
     };
 
     private _changeToOverGameState = (): void => {
         this._gameStateMachine.change(OverGameState.TAG);
+        this._container.applicationLayer.removeChildren();
+        this._container.applicationLayer.addChild(this._overGameState.getContainer());
     }
 }
 

@@ -1,15 +1,11 @@
-import {Sprite, Texture, interaction} from 'pixi.js';
+import {interaction} from 'pixi.js';
+
+import Sprite from "./Sprite";
 
 /**
  * @class
  */
 abstract class ClickableSprite extends Sprite {
-    public constructor(texture: Texture) {
-        super(texture);
-
-        this.anchor.set(0.5);
-    }
-
     /**
      * Set to {@link _onClickListener}
      *
