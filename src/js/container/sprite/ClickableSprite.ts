@@ -13,7 +13,7 @@ abstract class ClickableSprite extends Sprite {
      */
     public setOnClickListener(fn: (event: interaction.InteractionEvent) => void) {
         this.interactive = true;
-        this.on('pointerdown', fn);
+        this.on('touchstart', fn);
     }
 }
 

@@ -51,7 +51,7 @@ class TopViewContainer extends ViewContainer {
             this._tapInfoText
         );
 
-        window.addEventListener('pointerdown', this.onWindowTap);
+        window.addEventListener('touchstart', this.onWindowTap);
     }
 
     private onGameStartButtonClick = (event: interaction.InteractionEvent): void => {
@@ -59,7 +59,7 @@ class TopViewContainer extends ViewContainer {
     };
 
     private onWindowTap = (): void => {
-        window.removeEventListener('pointerdown', this.onWindowTap);
+        window.removeEventListener('touchstart', this.onWindowTap);
         this.applicationLayer.removeChildren();
         this.applicationLayer.addChild(
             this._gameStartButton,
