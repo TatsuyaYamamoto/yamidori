@@ -1,5 +1,5 @@
 /**
- * @fileOverview Define util functions for {@link EventTarget}
+ * @fileOverview Define custom event util functions for global {@link EventTarget}.
  */
 
 /**

@@ -56,3 +56,12 @@ export function getString(id: string): string {
 
     throw new Error('Could not find a string resource with provided id.');
 }
+
+/**
+ * Return true if running browser is supporting touch events.
+ * @see https://github.com/Modernizr/Modernizr/blob/v3.3.1/feature-detects/touchevents.js
+ * @return {boolean}
+ */
+export function isSupportTouchEvent(): boolean {
+    return 'ontouchstart' in window;
+}

@@ -6,7 +6,7 @@ import {Events} from "../../fsm/ApplicationState";
 import {dispatchEvent} from '../../fsm/EventUtils'
 import Background from "../sprite/background/Background";
 import Text from "../sprite/text/Text";
-import {getCurrentViewSize, getString} from "../../utils";
+import {getCurrentViewSize, getString, isSupportTouchEvent} from "../../utils";
 import {Ids} from "../../resources/string";
 import GoCreditButton from "../sprite/button/GoCreditButton";
 import GoHowToPlayButton from "../sprite/button/GoHowToPlayButton";
@@ -51,7 +51,7 @@ class TopViewContainer extends ViewContainer {
             this._tapInfoText
         );
 
-        window.addEventListener('touchstart', this.onWindowTap);
+        window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this.onWindowTap);
     }
 
     private onGameStartButtonClick = (event: interaction.InteractionEvent): void => {

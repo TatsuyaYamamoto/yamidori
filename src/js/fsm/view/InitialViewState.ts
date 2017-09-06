@@ -1,6 +1,6 @@
 import {Container} from 'pixi.js';
 
-import {isIOS} from "../../utils";
+import {isIOS, isSupportTouchEvent} from "../../utils";
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
 import ViewState from "./ViewState";
@@ -35,7 +35,7 @@ class InitialViewState implements ViewState {
         if (isIOS()) {
             // TODO: Show information prompting to tap.
 
-            window.addEventListener("touchstart", this._handleGoNextStateAction);
+            window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);
         }
         else {
             this._handleGoNextStateAction();

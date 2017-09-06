@@ -1,6 +1,7 @@
 import {interaction} from 'pixi.js';
 
 import Sprite from "./Sprite";
+import {isSupportTouchEvent} from "../../utils";
 
 /**
  * @class
@@ -13,7 +14,7 @@ abstract class ClickableSprite extends Sprite {
      */
     public setOnClickListener(fn: (event: interaction.InteractionEvent) => void) {
         this.interactive = true;
-        this.on('touchstart', fn);
+        this.on(isSupportTouchEvent() ? 'touchstart' : 'click', fn);
     }
 }
 
