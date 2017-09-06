@@ -68,9 +68,11 @@ class PlayingGameState implements GameState {
     }
 
     private createKotori(): Kotori {
+        const {width} = getCurrentViewSize();
+
         const isRight = this.getRandomBool();
         const kotori = new Kotori(isRight);
-        kotori.position.set(isRight ? 0 : 1000, this.getRandomNumber(50, 300));
+        kotori.position.set(isRight ? 0 - kotori.width : width + kotori.width, this.getRandomNumber(50, 300));
         kotori.setOnClickListener(() => this.handleClickKotori(kotori));
         return kotori;
     }
