@@ -4,6 +4,9 @@ import GameState from "./GameState";
 import Kotori from "../../container/sprite/character/Kotori";
 import {Events as GameEvents} from '../view/GameViewState'
 import {dispatchEvent} from '../EventUtils';
+import {getCurrentViewSize} from "../../utils";
+
+export const DEAD_ZONE_WIDTH_RATE = 0.4;
 
 class PlayingGameState implements GameState {
     public static TAG = "PlayingGameState";
@@ -12,6 +15,8 @@ class PlayingGameState implements GameState {
     private _kotoriMap: Map<number, Kotori>;
     private _elapsedTimeMillis = 0;
     private _nextAppearTimeMillis = 0;
+    private _rightDeadLine: number;
+    private _leftDeadLine: number;
 
     update(elapsedTime: number): void {
         this._elapsedTimeMillis += elapsedTime;
@@ -28,7 +33,7 @@ class PlayingGameState implements GameState {
         this._kotoriMap.forEach((k: Kotori) => {
             k.move(elapsedTime);
 
-            if (this.isOnDeadLine(k)) {
+            if (this.isOnDeadZone(k)) {
                 console.log("Gameover!!");
                 dispatchEvent(GameEvents.GAME_OVER);
             }
@@ -41,6 +46,11 @@ class PlayingGameState implements GameState {
         this._kotoriMap = new Map();
         this._elapsedTimeMillis = 0;
         this._nextAppearTimeMillis = this.getNextAppearTimeMillis();
+
+        // Set deadline position.
+        const {width} = getCurrentViewSize();
+        this._leftDeadLine = width * (1 - DEAD_ZONE_WIDTH_RATE) / 2;
+        this._rightDeadLine = width * (1 + DEAD_ZONE_WIDTH_RATE) / 2;
     }
 
     onExit(): void {
@@ -78,11 +88,11 @@ class PlayingGameState implements GameState {
         return Math.floor(Math.random() * 2) === 1;
     }
 
-    private isOnDeadLine(kotori: Kotori): boolean {
+    private isOnDeadZone(kotori: Kotori): boolean {
         if (kotori.isRight) {
-            return 300 < kotori.x
+            return this._leftDeadLine < kotori.x
         } else {
-            return kotori.x < 600
+            return kotori.x < this._rightDeadLine;
         }
     }
 }
