@@ -1,4 +1,4 @@
-import {Container} from 'pixi.js';
+import {Container, loaders} from 'pixi.js';
 
 import {addEvents, removeEvents, dispatchEvent} from '../EventUtils';
 import {Events as ApplicationEvents} from "../ApplicationState";
@@ -69,8 +69,8 @@ class LoadViewState implements ViewState {
         return this._container;
     };
 
-    private _onLoadProgress = (): void => {
-
+    private _onLoadProgress = (event: loaders.Loader): void => {
+        this._container.updateLoadedProgress(event.progress);
     };
 
     private _onLoadComplete = (): void => {
