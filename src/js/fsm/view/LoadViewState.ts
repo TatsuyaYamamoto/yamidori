@@ -2,8 +2,8 @@ import {Container} from 'pixi.js';
 
 import {addEvents, removeEvents, dispatchEvent} from '../EventUtils';
 import {Events as ApplicationEvents} from "../ApplicationState";
-import manifest from '../../resources/manifest';
 import ViewState from "./ViewState";
+import AssetLoader from '../../helper/AssetLoader';
 import LoadViewContainer from "../../container/views/LoadViewContainer";
 import {SKIP_BRAND_LOGO_ANIMATION} from "../../Constants";
 
@@ -16,7 +16,7 @@ class LoadViewState implements ViewState {
     public static TAG = "LoadViewState";
 
     private _container: LoadViewContainer;
-    private _loader: PIXI.loaders.Loader = new PIXI.loaders.Loader();
+    private _loader: AssetLoader;
     private _isLoadComplete: boolean = false;
     private _isLogoAnimComplete: boolean = false;
 
@@ -41,9 +41,7 @@ class LoadViewState implements ViewState {
 
         this._container = new LoadViewContainer();
 
-        Object.keys(manifest).forEach((key) => {
-            this._loader.add(key, manifest[key]);
-        });
+        this._loader = new AssetLoader();
         this._loader.onProgress.add(this._onLoadProgress);
         this._loader.onComplete.add(this._onLoadComplete);
         this._loader.load();
