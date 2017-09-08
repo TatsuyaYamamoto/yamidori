@@ -13,6 +13,7 @@ export enum Events {
     COUNT_START = "GameViewState@COUNT_START",
     GAME_START = "GameViewState@GAME_START",
     GAME_OVER = "GameViewState@GAME_OVER",
+    TAP_KOTORI = "GameViewState@TAP_KOTORI"
 }
 
 class GameViewState implements ViewState {
@@ -23,6 +24,8 @@ class GameViewState implements ViewState {
     private _countGameState: CountGameState;
     private _overGameState: OverGameState;
     private _playingGameState: PlayingGameState;
+
+    private _gamePoint: number;
 
     update(elapsedTime: number): void {
         this._gameStateMachine.update(elapsedTime);
@@ -46,9 +49,13 @@ class GameViewState implements ViewState {
             [Events.COUNT_START]: this._changeToCountState,
             [Events.GAME_START]: this._changeToPlayingGameState,
             [Events.GAME_OVER]: this._changeToOverGameState,
+            [Events.TAP_KOTORI]: this._incrementGamePoint
         });
 
         this._gameStateMachine.init(CountGameState.TAG);
+
+        this._gamePoint = 0;
+
         if (SKIP_COUNT_DOWN_FOR_GAME_START) {
             this._changeToPlayingGameState();
         }
@@ -59,7 +66,8 @@ class GameViewState implements ViewState {
         removeEvents([
             Events.COUNT_START,
             Events.GAME_START,
-            Events.GAME_OVER
+            Events.GAME_OVER,
+            Events.TAP_KOTORI
         ]);
     }
 
@@ -88,6 +96,10 @@ class GameViewState implements ViewState {
         this._gameStateMachine.change(OverGameState.TAG);
         this._container.applicationLayer.removeChildren();
         this._container.applicationLayer.addChild(this._overGameState.getContainer());
+    }
+
+    private _incrementGamePoint = (): void => {
+        this._gamePoint++;
     }
 }
 

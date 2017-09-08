@@ -5,6 +5,7 @@ import Kotori from "../../container/sprite/character/Kotori";
 import {Events as GameEvents} from '../view/GameViewState'
 import {dispatchEvent} from '../EventUtils';
 import {getCurrentViewSize} from "../../utils";
+import GamePointCount from "../../container/components/GamePointCount";
 
 export const DEAD_ZONE_WIDTH_RATE = 0.4;
 
@@ -12,6 +13,8 @@ class PlayingGameState implements GameState {
     public static TAG = "PlayingGameState";
 
     private _container: Container;
+    private _gamePointCount: GamePointCount;
+
     private _kotoriMap: Map<number, Kotori>;
     private _elapsedTimeMillis = 0;
     private _nextAppearTimeMillis = 0;
@@ -42,15 +45,21 @@ class PlayingGameState implements GameState {
 
     onEnter(): void {
         console.log(`${PlayingGameState.TAG}@onEnter`);
+
+        // Set deadline position.
+        const {width, height} = getCurrentViewSize();
+        this._leftDeadLine = width * (1 - DEAD_ZONE_WIDTH_RATE) / 2;
+        this._rightDeadLine = width * (1 + DEAD_ZONE_WIDTH_RATE) / 2;
+
+        // set container
         this._container = new Container();
+        this._gamePointCount = new GamePointCount();
+        this._gamePointCount.position.set(width * 0.5, height * 0.1);
+        this._container.addChild(this._gamePointCount);
+
         this._kotoriMap = new Map();
         this._elapsedTimeMillis = 0;
         this._nextAppearTimeMillis = this.getNextAppearTimeMillis();
-
-        // Set deadline position.
-        const {width} = getCurrentViewSize();
-        this._leftDeadLine = width * (1 - DEAD_ZONE_WIDTH_RATE) / 2;
-        this._rightDeadLine = width * (1 + DEAD_ZONE_WIDTH_RATE) / 2;
     }
 
     onExit(): void {
@@ -80,6 +89,7 @@ class PlayingGameState implements GameState {
     private handleClickKotori = (targetSprite: Kotori) => {
         targetSprite.destroyByTap();
         this._kotoriMap.delete(targetSprite.id);
+        dispatchEvent(GameEvents.TAP_KOTORI);
     };
 
     private getRandomNumber(min: number, max: number): number {
