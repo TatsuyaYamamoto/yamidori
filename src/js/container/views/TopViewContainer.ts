@@ -20,6 +20,7 @@ import TitleLogo from "../sprite/logo/TitleLogo";
 import SoundButton from "../sprite/button/SoundButton";
 import {loadSound, toggleMute} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest'
+import BackToTopButton from "../sprite/button/BackToTopButton";
 
 class TopViewContainer extends ViewContainer {
     private _background: Background;
@@ -34,8 +35,10 @@ class TopViewContainer extends ViewContainer {
     private _goRankingButton: GoRankingButton;
     private _goTwitterHomeButton: GoTwitterHomeButton;
     private _soundButton: SoundButton;
+    private _backToTopButton: BackToTopButton;
 
     private _okSound: Sound;
+    private _cancelSound: Sound;
     private _toggleSound: Sound;
 
     constructor() {
@@ -57,7 +60,7 @@ class TopViewContainer extends ViewContainer {
 
         this._goHowToPlayButton = new GoHowToPlayButton();
         this._goHowToPlayButton.position.set(width * 0.4, height * 0.5);
-        this._goHowToPlayButton.setOnClickListener(this.onGameStartButtonClick);
+        this._goHowToPlayButton.setOnClickListener(this.onHowToUseButtonClick);
 
         this._goRankingButton = new GoRankingButton();
         this._goRankingButton.position.set(width * 0.6, height * 0.5);
@@ -70,6 +73,10 @@ class TopViewContainer extends ViewContainer {
         this._goTwitterHomeButton.position.set(width * 0.9, height * 0.9);
         this._goTwitterHomeButton.setOnClickListener(this.onTwitterHomeButtonClick);
 
+        this._backToTopButton = new BackToTopButton();
+        this._backToTopButton.position.set(width * 0.2, height * 0.9);
+        this._backToTopButton.setOnClickListener(this.onBackToTopButton);
+
         this._soundButton = new SoundButton();
         this._soundButton.position.set(width * 0.8, height * 0.9);
         this._soundButton.setOnClickListener(this.onSoundButtonClick);
@@ -81,6 +88,7 @@ class TopViewContainer extends ViewContainer {
         );
 
         this._okSound = loadSound(manifest.soundOk);
+        this._cancelSound = loadSound(manifest.soundCancel);
         this._toggleSound = loadSound(manifest.soundToggleSound);
 
         window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this.onWindowTap);
@@ -95,6 +103,16 @@ class TopViewContainer extends ViewContainer {
         goTo(URL.TWITTER_HOME_T28);
     };
 
+    private onHowToUseButtonClick = (event: interaction.InteractionEvent): void => {
+        this._okSound.play();
+        this.showHowToUse();
+    };
+
+    private onBackToTopButton = () => {
+        this._cancelSound.play();
+        this.showMenu();
+    };
+
     private onSoundButtonClick = () => {
         this._toggleSound.play();
         toggleMute();
@@ -103,6 +121,19 @@ class TopViewContainer extends ViewContainer {
     private onWindowTap = (): void => {
         this._okSound.play();
         window.removeEventListener('touchstart', this.onWindowTap);
+        this.showMenu();
+    };
+
+    private showHowToUse = () => {
+        this.backGroundLayer.removeChildren();
+        this.backGroundLayer.addChild(this._background);
+        this.applicationLayer.removeChildren();
+        this.applicationLayer.addChild(
+            this._backToTopButton
+        )
+    };
+
+    private showMenu = () => {
         this.backGroundLayer.removeChildren();
         this.backGroundLayer.addChild(this._menuBackground);
         this.applicationLayer.removeChildren();
@@ -114,7 +145,7 @@ class TopViewContainer extends ViewContainer {
             this._goTwitterHomeButton,
             this._soundButton
         )
-    };
+    }
 }
 
 export default TopViewContainer;
