@@ -24,4 +24,9 @@ export default {
     soundZenkai: `${SOUND_BASE_DIR}zenkai.mp3`,
     soundGameLoop: `${SOUND_BASE_DIR}game_loop.mp3`,
     soundGameEnd: `${SOUND_BASE_DIR}game_end.mp3`,
+    soundOk: `${SOUND_BASE_DIR}ok.mp3`,
+    soundCancel: `${SOUND_BASE_DIR}cancel.mp3`,
+    soundToggleSound: `${SOUND_BASE_DIR}toggle_sound.mp3`,
+    soundCountHigh: `${SOUND_BASE_DIR}count_high.mp3`,
+    soundCountLow: `${SOUND_BASE_DIR}count_low.mp3`,
 }

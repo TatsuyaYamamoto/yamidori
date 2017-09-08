@@ -24,6 +24,8 @@ class OverGameState implements GameState {
     private _resultTweetButton: ResultTweetButton;
 
     private _gameOverSound: Sound;
+    private _okSound: Sound;
+    private _cancelSound: Sound;
 
     update(elapsedTime: number): void {
 
@@ -55,9 +57,12 @@ class OverGameState implements GameState {
             this._gameRestartButton,
             this._goBackHomeButton,
             this._resultTweetButton
-        )
+        );
 
         this._gameOverSound = loadSound(manifest.soundGameEnd);
+        this._okSound = loadSound(manifest.soundOk);
+        this._cancelSound = loadSound(manifest.soundCancel);
+
         this._gameOverSound.play();
     }
 
@@ -71,10 +76,12 @@ class OverGameState implements GameState {
     }
 
     private handleTapGoBackHome = () => {
+        this._cancelSound.play();
         dispatchEvent(ApplicationEvents.BACK_TO_TOP_REQUEST);
     };
 
     private handleTapRestartGame = () => {
+        this._okSound.play();
         dispatchEvent(ApplicationEvents.GAME_START_REQUEST);
     };
 

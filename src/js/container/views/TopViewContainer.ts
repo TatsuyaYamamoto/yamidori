@@ -1,4 +1,5 @@
 import {Container, interaction} from 'pixi.js';
+import Sound from "pixi-sound/lib/Sound";
 
 import ViewContainer from "./ViewContainer";
 import GameStartButton from "../sprite/button/GameStartButton";
@@ -17,7 +18,8 @@ import {URL} from '../../Constants';
 import MenuBackground from "../sprite/background/MenuBackground";
 import TitleLogo from "../sprite/logo/TitleLogo";
 import SoundButton from "../sprite/button/SoundButton";
-import {toggleMute} from "../../helper/SoundManager";
+import {loadSound, toggleMute} from "../../helper/SoundManager";
+import manifest from '../../resources/manifest'
 
 class TopViewContainer extends ViewContainer {
     private _background: Background;
@@ -32,6 +34,9 @@ class TopViewContainer extends ViewContainer {
     private _goRankingButton: GoRankingButton;
     private _goTwitterHomeButton: GoTwitterHomeButton;
     private _soundButton: SoundButton;
+
+    private _okSound: Sound;
+    private _toggleSound: Sound;
 
     constructor() {
         super();
@@ -75,10 +80,14 @@ class TopViewContainer extends ViewContainer {
             this._tapInfoText
         );
 
+        this._okSound = loadSound(manifest.soundOk);
+        this._toggleSound = loadSound(manifest.soundToggleSound);
+
         window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this.onWindowTap);
     }
 
     private onGameStartButtonClick = (event: interaction.InteractionEvent): void => {
+        this._okSound.play();
         dispatchEvent(Events.GAME_START_REQUEST);
     };
 
@@ -87,10 +96,12 @@ class TopViewContainer extends ViewContainer {
     };
 
     private onSoundButtonClick = () => {
+        this._toggleSound.play();
         toggleMute();
     };
 
     private onWindowTap = (): void => {
+        this._okSound.play();
         window.removeEventListener('touchstart', this.onWindowTap);
         this.backGroundLayer.removeChildren();
         this.backGroundLayer.addChild(this._menuBackground);
