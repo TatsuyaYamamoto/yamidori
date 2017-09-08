@@ -20,7 +20,7 @@ class TopViewState implements ViewState {
         console.log(`${TopViewState.TAG}@onEnter`);
         this._container = new TopViewContainer();
         this._zenkaiSound = loadSound(manifest.soundZenkai);
-        this._zenkaiSound.play();
+        this._zenkaiSound.play({loop: true});
     }
 
     onExit(): void {

@@ -67,7 +67,7 @@ class PlayingGameState implements GameState {
         this._nextAppearTimeMillis = this.getNextAppearTimeMillis();
 
         this._gameLoopSound = loadSound(manifest.soundGameLoop);
-        this._gameLoopSound.play();
+        this._gameLoopSound.play({loop: true});
     }
 
     onExit(): void {
