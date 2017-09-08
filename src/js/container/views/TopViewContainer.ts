@@ -16,6 +16,7 @@ import {goTo} from "../../network";
 import {URL} from '../../Constants';
 import MenuBackground from "../sprite/background/MenuBackground";
 import TitleLogo from "../sprite/logo/TitleLogo";
+import SoundButton from "../sprite/button/SoundButton";
 
 class TopViewContainer extends ViewContainer {
     private _background: Background;
@@ -29,6 +30,7 @@ class TopViewContainer extends ViewContainer {
     private _goHowToPlayButton: GoHowToPlayButton;
     private _goRankingButton: GoRankingButton;
     private _goTwitterHomeButton: GoTwitterHomeButton;
+    private _soundButton: SoundButton;
 
     constructor() {
         super();
@@ -62,6 +64,9 @@ class TopViewContainer extends ViewContainer {
         this._goTwitterHomeButton.position.set(width * 0.9, height * 0.9);
         this._goTwitterHomeButton.setOnClickListener(this.onTwitterHomeButtonClick);
 
+        this._soundButton = new SoundButton();
+        this._soundButton.position.set(width * 0.8, height * 0.9);
+
         this.backGroundLayer.addChild(this._background);
         this.applicationLayer.addChild(
             this._titleLog,
@@ -89,7 +94,8 @@ class TopViewContainer extends ViewContainer {
             this._goCreditButton,
             this._goHowToPlayButton,
             this._goRankingButton,
-            this._goTwitterHomeButton
+            this._goTwitterHomeButton,
+            this._soundButton
         )
     };
 }

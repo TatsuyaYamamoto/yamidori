@@ -18,4 +18,5 @@ export default {
     buttonGoRanking: `${BASE_DIR}button_go_ranking.png`,
     buttonGoTwitterHome: `${BASE_DIR}button_go_twitter_home.png`,
     buttonResultTweet: `${BASE_DIR}button_result_tweet.png`,
+    buttonSound: `${BASE_DIR}button_sound.png`,
 }
