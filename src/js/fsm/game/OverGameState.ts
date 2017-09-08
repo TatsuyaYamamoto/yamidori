@@ -64,7 +64,6 @@ class OverGameState implements GameState {
     onExit(): void {
         console.log(`${OverGameState.TAG}@onExit`);
         this._gameOverSound.stop();
-        this._gameOverSound.destroy();
     }
 
     public getContainer(): Container {

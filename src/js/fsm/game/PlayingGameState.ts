@@ -75,7 +75,6 @@ class PlayingGameState implements GameState {
         this._kotoriMap.forEach((k: Kotori) => k.destroy());
         this._kotoriMap.clear();
         this._gameLoopSound.stop();
-        this._gameLoopSound.destroy();
     }
 
     public getContainer(): Container {

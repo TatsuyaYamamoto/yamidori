@@ -26,7 +26,6 @@ class TopViewState implements ViewState {
     onExit(): void {
         console.log(`${TopViewState.TAG}@onExit`);
         this._zenkaiSound.stop();
-        this._zenkaiSound.destroy();
     }
 
     /**
