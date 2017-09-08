@@ -1,4 +1,5 @@
 import {Container} from 'pixi.js';
+import Sound from "pixi-sound/lib/Sound";
 
 import GameState from "./GameState";
 import GameOverLogo from '../../container/sprite/logo/GameOverLogo';
@@ -9,6 +10,8 @@ import ResultTweetButton from "../../container/sprite/button/ResultTweetButton";
 import {dispatchEvent} from "../EventUtils";
 import {Events as ApplicationEvents} from "../ApplicationState";
 import {tweetGameResult} from '../../network';
+import {loadSound} from "../../helper/SoundManager";
+import manifest from '../../resources/manifest';
 
 class OverGameState implements GameState {
     public static TAG = "OverGameState";
@@ -19,6 +22,8 @@ class OverGameState implements GameState {
     private _gameRestartButton: GameRestartButton;
     private _goBackHomeButton: GoBackHomeButton;
     private _resultTweetButton: ResultTweetButton;
+
+    private _gameOverSound: Sound;
 
     update(elapsedTime: number): void {
 
@@ -51,10 +56,15 @@ class OverGameState implements GameState {
             this._goBackHomeButton,
             this._resultTweetButton
         )
+
+        this._gameOverSound = loadSound(manifest.soundGameEnd);
+        this._gameOverSound.play();
     }
 
     onExit(): void {
         console.log(`${OverGameState.TAG}@onExit`);
+        this._gameOverSound.stop();
+        this._gameOverSound.destroy();
     }
 
     public getContainer(): Container {

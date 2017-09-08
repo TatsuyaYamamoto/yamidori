@@ -23,6 +23,9 @@ module.exports = {
             }
         ]
     },
+    // https://github.com/pixijs/pixi-sound/issues/28
+    // Resolve node fs module for pixi-sound.
+    node: {fs: "empty"},
     plugins: [
         new HtmlWebpackPlugin({
             template: '!!pug-loader!src/index.pug'

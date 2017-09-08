@@ -22,4 +22,6 @@ export default {
     buttonSound: `${IMAGE_BASE_DIR}button_sound.png`,
 
     soundZenkai: `${SOUND_BASE_DIR}zenkai.mp3`,
+    soundGameLoop: `${SOUND_BASE_DIR}game_loop.mp3`,
+    soundGameEnd: `${SOUND_BASE_DIR}game_end.mp3`,
 }

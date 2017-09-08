@@ -1,4 +1,5 @@
 import {Container} from 'pixi.js';
+import Sound from "pixi-sound/lib/Sound";
 
 import GameState from "./GameState";
 import Kotori from "../../container/sprite/character/Kotori";
@@ -6,6 +7,8 @@ import {Events as GameEvents} from '../view/GameViewState'
 import {dispatchEvent} from '../EventUtils';
 import {getCurrentViewSize} from "../../utils";
 import GamePointCount from "../../container/components/GamePointCount";
+import {loadSound} from "../../helper/SoundManager";
+import manifest from '../../resources/manifest';
 
 export const DEAD_ZONE_WIDTH_RATE = 0.4;
 
@@ -20,6 +23,8 @@ class PlayingGameState implements GameState {
     private _nextAppearTimeMillis = 0;
     private _rightDeadLine: number;
     private _leftDeadLine: number;
+
+    private _gameLoopSound: Sound;
 
     update(elapsedTime: number): void {
         this._elapsedTimeMillis += elapsedTime;
@@ -60,12 +65,17 @@ class PlayingGameState implements GameState {
         this._kotoriMap = new Map();
         this._elapsedTimeMillis = 0;
         this._nextAppearTimeMillis = this.getNextAppearTimeMillis();
+
+        this._gameLoopSound = loadSound(manifest.soundGameLoop);
+        this._gameLoopSound.play();
     }
 
     onExit(): void {
         console.log(`${PlayingGameState.TAG}@onExit`);
         this._kotoriMap.forEach((k: Kotori) => k.destroy());
         this._kotoriMap.clear();
+        this._gameLoopSound.stop();
+        this._gameLoopSound.destroy();
     }
 
     public getContainer(): Container {
