@@ -17,6 +17,7 @@ import {URL} from '../../Constants';
 import MenuBackground from "../sprite/background/MenuBackground";
 import TitleLogo from "../sprite/logo/TitleLogo";
 import SoundButton from "../sprite/button/SoundButton";
+import {toggleMute} from "../../helper/SoundManager";
 
 class TopViewContainer extends ViewContainer {
     private _background: Background;
@@ -66,6 +67,7 @@ class TopViewContainer extends ViewContainer {
 
         this._soundButton = new SoundButton();
         this._soundButton.position.set(width * 0.8, height * 0.9);
+        this._soundButton.setOnClickListener(this.onSoundButtonClick);
 
         this.backGroundLayer.addChild(this._background);
         this.applicationLayer.addChild(
@@ -82,6 +84,10 @@ class TopViewContainer extends ViewContainer {
 
     private onTwitterHomeButtonClick = (event: interaction.InteractionEvent): void => {
         goTo(URL.TWITTER_HOME_T28);
+    };
+
+    private onSoundButtonClick = () => {
+        toggleMute();
     };
 
     private onWindowTap = (): void => {
