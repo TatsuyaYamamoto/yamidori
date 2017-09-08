@@ -5,7 +5,7 @@ import Button from "./Button";
 
 class GoTwitterHomeButton extends Button {
     constructor() {
-        super(Sprite.fromImage(manifest.buttonGoBackHome).texture);
+        super(Sprite.fromImage(manifest.buttonGoTwitterHome).texture);
     }
 }
 
