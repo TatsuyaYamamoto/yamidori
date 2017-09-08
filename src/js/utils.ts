@@ -1,3 +1,5 @@
+import {loaders} from 'pixi.js';
+
 import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "./Constants";
 import strings from "./resources/string";
 
@@ -64,4 +66,31 @@ export function getString(id: string): string {
  */
 export function isSupportTouchEvent(): boolean {
     return 'ontouchstart' in window;
+}
+
+/**
+ * Preloaded resources with Pixi loader.
+ *
+ * @type {any}
+ * @private
+ */
+const AssetsCache: { string: loaders.Resource } = Object.create(null);
+
+/**
+ * Cache asset resource.
+ *
+ * @param resource
+ */
+export function setAsset(resource: loaders.Resource) {
+    AssetsCache[resource.url] = resource;
+}
+
+/**
+ * Get cached asset resource.
+ *
+ * @param url
+ * @return {any}
+ */
+export function getAsset(url: string) {
+    return AssetsCache[url];
 }

@@ -6,6 +6,7 @@ import ViewState from "./ViewState";
 import AssetLoader from '../../helper/AssetLoader';
 import LoadViewContainer from "../../container/views/LoadViewContainer";
 import {SKIP_BRAND_LOGO_ANIMATION} from "../../Constants";
+import {setAsset} from "../../utils";
 
 export enum Events {
     COMPLETE_LOAD = "LoadViewState@COMPLETE_LOAD",
@@ -44,7 +45,11 @@ class LoadViewState implements ViewState {
         this._loader = new AssetLoader();
         this._loader.onProgress.add(this._onLoadProgress);
         this._loader.onComplete.add(this._onLoadComplete);
-        this._loader.load();
+        this._loader.load(function (loader: AssetLoader, resources: { string: loaders.Resource }) {
+            Object.keys(resources).forEach((key) => {
+                setAsset(resources[key]);
+            })
+        });
     }
 
     /**
