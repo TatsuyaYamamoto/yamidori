@@ -14,9 +14,14 @@ import GoTwitterHomeButton from "../sprite/button/GoTwitterHomeButton";
 import GoRankingButton from "../sprite/button/GoRankingButton";
 import {goTo} from "../../network";
 import {URL} from '../../Constants';
+import MenuBackground from "../sprite/background/MenuBackground";
+import TitleLogo from "../sprite/logo/TitleLogo";
 
 class TopViewContainer extends ViewContainer {
     private _background: Background;
+    private _menuBackground: MenuBackground;
+
+    private _titleLog: TitleLogo;
 
     private _tapInfoText: Text;
     private _gameStartButton: GameStartButton;
@@ -30,6 +35,10 @@ class TopViewContainer extends ViewContainer {
         const {width, height} = getCurrentViewSize();
 
         this._background = new Background();
+        this._menuBackground = new MenuBackground();
+
+        this._titleLog = new TitleLogo();
+        this._titleLog.position.set(width * 0.5, height * 0.5);
 
         this._tapInfoText = new Text(getString(Ids.TAP_DISPLAY_INFO));
         this._tapInfoText.position.set(width * 0.5, height * 0.9);
@@ -55,6 +64,7 @@ class TopViewContainer extends ViewContainer {
 
         this.backGroundLayer.addChild(this._background);
         this.applicationLayer.addChild(
+            this._titleLog,
             this._tapInfoText
         );
 
@@ -71,6 +81,8 @@ class TopViewContainer extends ViewContainer {
 
     private onWindowTap = (): void => {
         window.removeEventListener('touchstart', this.onWindowTap);
+        this.backGroundLayer.removeChildren();
+        this.backGroundLayer.addChild(this._menuBackground);
         this.applicationLayer.removeChildren();
         this.applicationLayer.addChild(
             this._gameStartButton,

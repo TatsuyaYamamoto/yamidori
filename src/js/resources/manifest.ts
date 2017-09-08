@@ -2,6 +2,7 @@ const BASE_DIR = 'assets/image/';
 
 export default {
     background: `${BASE_DIR}background.png`,
+    backgroundMenu: `${BASE_DIR}background_menu.png`,
 
     logoTitle: `${BASE_DIR}logo_title.png`,
     logoGameOver: `${BASE_DIR}logo_gameover.png`,
