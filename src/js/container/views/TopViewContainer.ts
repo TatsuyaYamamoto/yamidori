@@ -21,6 +21,9 @@ import SoundButton from "../sprite/button/SoundButton";
 import {loadSound, toggleMute} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest'
 import BackToTopButton from "../sprite/button/BackToTopButton";
+import UsageTextArea from "../components/UsageTextArea";
+import Kotori from "../sprite/character/Kotori";
+import UsageTapTargetInfo from "../components/UsageTapTargetInfo";
 
 class TopViewContainer extends ViewContainer {
     private _background: Background;
@@ -29,6 +32,11 @@ class TopViewContainer extends ViewContainer {
     private _titleLog: TitleLogo;
 
     private _tapInfoText: Text;
+    private _usageTextArea: UsageTextArea;
+    private _usageTapTargetInfo: UsageTapTargetInfo;
+    
+    private _usageModelKotori: Kotori;
+
     private _gameStartButton: GameStartButton;
     private _goCreditButton: GoCreditButton;
     private _goHowToPlayButton: GoHowToPlayButton;
@@ -53,6 +61,15 @@ class TopViewContainer extends ViewContainer {
 
         this._tapInfoText = new Text(getString(Ids.TAP_DISPLAY_INFO));
         this._tapInfoText.position.set(width * 0.5, height * 0.9);
+
+        this._usageTextArea = new UsageTextArea();
+        this._usageTextArea.position.set(width * 0.35, height * 0.3);
+
+        this._usageTapTargetInfo = new UsageTapTargetInfo();
+        this._usageTapTargetInfo.position.set(width * 0.8, height * 0.7);
+
+        this._usageModelKotori = new Kotori(false);
+        this._usageModelKotori.position.set(width * 0.8, height * 0.4);
 
         this._gameStartButton = new GameStartButton();
         this._gameStartButton.position.set(width * 0.2, height * 0.5);
@@ -129,7 +146,10 @@ class TopViewContainer extends ViewContainer {
         this.backGroundLayer.addChild(this._background);
         this.applicationLayer.removeChildren();
         this.applicationLayer.addChild(
-            this._backToTopButton
+            this._backToTopButton,
+            this._usageTextArea,
+            this._usageTapTargetInfo,
+            this._usageModelKotori
         )
     };
 
