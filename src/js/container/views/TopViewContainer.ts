@@ -26,6 +26,7 @@ import Kotori from "../sprite/character/Kotori";
 import UsageTapTargetInfo from "../components/UsageTapTargetInfo";
 import CreditComponent from "../components/CreditComponent";
 import CreditBackground from "../sprite/background/CreditBackground";
+import VersionText from "../components/VersionText";
 
 class TopViewContainer extends ViewContainer {
     private _background: Background;
@@ -33,6 +34,7 @@ class TopViewContainer extends ViewContainer {
     private _creditBackground: CreditBackground;
 
     private _titleLog: TitleLogo;
+    private _appVersion: VersionText;
 
     private _tapInfoText: Text;
     private _usageTextArea: UsageTextArea;
@@ -67,6 +69,9 @@ class TopViewContainer extends ViewContainer {
 
         this._titleLog = new TitleLogo();
         this._titleLog.position.set(width * 0.5, height * 0.5);
+
+        this._appVersion = new VersionText();
+        this._appVersion.position.set(width * 0.1, height * 0.95);
 
         this._tapInfoText = new Text(getString(Ids.TAP_DISPLAY_INFO));
         this._tapInfoText.position.set(width * 0.5, height * 0.9);
@@ -122,7 +127,8 @@ class TopViewContainer extends ViewContainer {
         this.backGroundLayer.addChild(this._background);
         this.applicationLayer.addChild(
             this._titleLog,
-            this._tapInfoText
+            this._tapInfoText,
+            this._appVersion,
         );
 
         this._okSound = loadSound(manifest.soundOk);
