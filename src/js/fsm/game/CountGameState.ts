@@ -18,7 +18,6 @@ class CountGameState implements GameState {
 
     private _isCountedOne: boolean = false;
     private _isCountedTwo: boolean = false;
-    private _isCountedThree: boolean = false;
 
     private _countLowSound: Sound;
     private _countHighSound: Sound;
@@ -26,30 +25,25 @@ class CountGameState implements GameState {
     update(elapsedTimeMillis: number): void {
         this._initialTimeMillis += elapsedTimeMillis;
 
-        if (1000 < this._initialTimeMillis && !this._isCountedThree) {
-            console.log("Count down, 3!");
-            this._countInfo.count = 3;
-            this._container.addChild(this._countInfo);
-            this._countLowSound.play();
-            this._isCountedThree = true;
-        }
-
-        if (2000 < this._initialTimeMillis && !this._isCountedTwo) {
+        if (1000 < this._initialTimeMillis && !this._isCountedTwo) {
             console.log("Count down, 2!");
             this._countInfo.count = 2;
+            this._container.addChild(this._countInfo);
             this._countLowSound.play();
             this._isCountedTwo = true;
         }
 
-        if (3000 < this._initialTimeMillis && !this._isCountedOne) {
+        if (2000 < this._initialTimeMillis && !this._isCountedOne) {
             console.log("Count down, 1!");
             this._countInfo.count = 1;
-            this._countHighSound.play();
+            this._countLowSound.play();
             this._isCountedOne = true;
         }
 
-        if (this.isFinishedCounting()) {
+        // is finished counting.
+        if (3000 < this._initialTimeMillis && this._isCountedOne && this._isCountedTwo) {
             console.log("Count down, done!");
+            this._countHighSound.play();
             dispatchEvent(Events.GAME_START);
         }
     }
@@ -73,10 +67,6 @@ class CountGameState implements GameState {
 
     public getContainer(): Container {
         return this._container;
-    }
-
-    private isFinishedCounting(): boolean {
-        return 4000 < this._initialTimeMillis && this._isCountedOne && this._isCountedTwo && this._isCountedThree;
     }
 }
 
