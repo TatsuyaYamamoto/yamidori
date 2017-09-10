@@ -34,7 +34,7 @@ class TopViewContainer extends ViewContainer {
     private _tapInfoText: Text;
     private _usageTextArea: UsageTextArea;
     private _usageTapTargetInfo: UsageTapTargetInfo;
-    
+
     private _usageModelKotori: Kotori;
 
     private _gameStartButton: GameStartButton;
@@ -84,7 +84,7 @@ class TopViewContainer extends ViewContainer {
 
         this._goCreditButton = new GoCreditButton();
         this._goCreditButton.position.set(width * 0.8, height * 0.5);
-        this._goCreditButton.setOnClickListener(this.onGameStartButtonClick);
+        this._goCreditButton.setOnClickListener(this.onCreditButtonClick);
 
         this._goTwitterHomeButton = new GoTwitterHomeButton();
         this._goTwitterHomeButton.position.set(width * 0.9, height * 0.9);
@@ -123,6 +123,11 @@ class TopViewContainer extends ViewContainer {
     private onHowToUseButtonClick = (event: interaction.InteractionEvent): void => {
         this._okSound.play();
         this.showHowToUse();
+    };
+
+    private onCreditButtonClick = (event: interaction.InteractionEvent): void => {
+        this._okSound.play();
+        this.showCredit();
     };
 
     private onBackToTopButton = () => {
@@ -164,6 +169,15 @@ class TopViewContainer extends ViewContainer {
             this._goRankingButton,
             this._goTwitterHomeButton,
             this._soundButton
+        )
+    };
+
+    private showCredit = () => {
+        this.backGroundLayer.removeChildren();
+        this.backGroundLayer.addChild(this._menuBackground);
+        this.applicationLayer.removeChildren();
+        this.applicationLayer.addChild(
+            this._backToTopButton,
         )
     }
 }
