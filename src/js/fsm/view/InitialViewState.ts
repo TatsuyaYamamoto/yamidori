@@ -49,7 +49,7 @@ class InitialViewState implements ViewState {
         console.log(`${InitialViewState.TAG}@onExit`);
 
         if (isIOS()) {
-            window.removeEventListener("touchstart", this._handleGoNextStateAction);
+            window.removeEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);
         }
     }
 

@@ -142,7 +142,7 @@ class TopViewContainer extends ViewContainer {
 
     private onWindowTap = (): void => {
         this._okSound.play();
-        window.removeEventListener('touchstart', this.onWindowTap);
+        window.removeEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this.onWindowTap);
         this.showMenu();
     };
 
