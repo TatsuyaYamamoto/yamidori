@@ -4,6 +4,7 @@ const SOUND_BASE_DIR = 'assets/sound/';
 export default {
     background: `${IMAGE_BASE_DIR}background.png`,
     backgroundMenu: `${IMAGE_BASE_DIR}background_menu.png`,
+    backgroundCredit: `${IMAGE_BASE_DIR}background_credit.png`,
 
     logoTitle: `${IMAGE_BASE_DIR}logo_title.png`,
     logoGameOver: `${IMAGE_BASE_DIR}logo_gameover.png`,

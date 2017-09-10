@@ -14,7 +14,7 @@ import GoHowToPlayButton from "../sprite/button/GoHowToPlayButton";
 import GoTwitterHomeButton from "../sprite/button/GoTwitterHomeButton";
 import GoRankingButton from "../sprite/button/GoRankingButton";
 import {goTo} from "../../network";
-import {URL} from '../../Constants';
+import {NAME_AND_ROLE, URL} from '../../Constants';
 import MenuBackground from "../sprite/background/MenuBackground";
 import TitleLogo from "../sprite/logo/TitleLogo";
 import SoundButton from "../sprite/button/SoundButton";
@@ -24,10 +24,13 @@ import BackToTopButton from "../sprite/button/BackToTopButton";
 import UsageTextArea from "../components/UsageTextArea";
 import Kotori from "../sprite/character/Kotori";
 import UsageTapTargetInfo from "../components/UsageTapTargetInfo";
+import CreditComponent from "../components/CreditComponent";
+import CreditBackground from "../sprite/background/CreditBackground";
 
 class TopViewContainer extends ViewContainer {
     private _background: Background;
     private _menuBackground: MenuBackground;
+    private _creditBackground: CreditBackground;
 
     private _titleLog: TitleLogo;
 
@@ -45,6 +48,11 @@ class TopViewContainer extends ViewContainer {
     private _soundButton: SoundButton;
     private _backToTopButton: BackToTopButton;
 
+    private _t28Credit: CreditComponent;
+    private _sanzashiCredit: CreditComponent;
+    private _onjinCredit: CreditComponent;
+    private _loveliveCredit: CreditComponent;
+
     private _okSound: Sound;
     private _cancelSound: Sound;
     private _toggleSound: Sound;
@@ -55,6 +63,7 @@ class TopViewContainer extends ViewContainer {
 
         this._background = new Background();
         this._menuBackground = new MenuBackground();
+        this._creditBackground = new CreditBackground();
 
         this._titleLog = new TitleLogo();
         this._titleLog.position.set(width * 0.5, height * 0.5);
@@ -97,6 +106,18 @@ class TopViewContainer extends ViewContainer {
         this._soundButton = new SoundButton();
         this._soundButton.position.set(width * 0.8, height * 0.9);
         this._soundButton.setOnClickListener(this.onSoundButtonClick);
+
+        this._t28Credit = new CreditComponent(NAME_AND_ROLE.T28, URL.SOKONTOKORO_HOME);
+        this._t28Credit.position.set(width * 0.3, height * 0.5);
+
+        this._sanzashiCredit = new CreditComponent(NAME_AND_ROLE.SANZASHI, URL.TWITTER_HOME_SANZASHI);
+        this._sanzashiCredit.position.set(width * 0.3, height * 0.7);
+
+        this._onjinCredit = new CreditComponent(NAME_AND_ROLE.ON_JIN, URL.ONJIN_TOP);
+        this._onjinCredit.position.set(width * 0.7, height * 0.6);
+
+        this._loveliveCredit = new CreditComponent(NAME_AND_ROLE.LOVELIVE, URL.LOVELIVE_TOP);
+        this._loveliveCredit.position.set(width * 0.7, height * 0.8);
 
         this.backGroundLayer.addChild(this._background);
         this.applicationLayer.addChild(
@@ -174,10 +195,16 @@ class TopViewContainer extends ViewContainer {
 
     private showCredit = () => {
         this.backGroundLayer.removeChildren();
-        this.backGroundLayer.addChild(this._menuBackground);
+        this.backGroundLayer.addChild(
+            this._background,
+            this._creditBackground);
         this.applicationLayer.removeChildren();
         this.applicationLayer.addChild(
             this._backToTopButton,
+            this._t28Credit,
+            this._sanzashiCredit,
+            this._onjinCredit,
+            this._loveliveCredit
         )
     }
 }
