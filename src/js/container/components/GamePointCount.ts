@@ -25,12 +25,21 @@ class GamePointCount extends Container {
         this._roundedRectangle.beginFill(0x001111, 0.25);
         this._roundedRectangle.drawRoundedRect(-1 * width * 0.08, -1 * height * 0.05, width * 0.16, height * 0.1, 15);
         this._roundedRectangle.endFill();
-        
+
         this.addChild(
             this._roundedRectangle,
             this._kotoriIcon,
             this._text,
         );
+    }
+
+    get point(): number {
+        return this._point;
+    }
+
+    set point(point: number) {
+        this._point = point;
+        this._text.text = `× ${this._point}`;
     }
 
 }

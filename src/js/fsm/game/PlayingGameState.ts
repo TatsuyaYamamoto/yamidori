@@ -96,8 +96,13 @@ class PlayingGameState implements GameState {
     }
 
     private handleClickKotori = (targetSprite: Kotori) => {
+        // remove touched kotori.
         targetSprite.destroyByTap();
         this._kotoriMap.delete(targetSprite.id);
+        
+        // increment game point.
+        this._gamePointCount.point = this._gamePointCount.point + 1;
+
         dispatchEvent(GameEvents.TAP_KOTORI);
     };
 
