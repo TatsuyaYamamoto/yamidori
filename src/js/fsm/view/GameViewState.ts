@@ -56,6 +56,8 @@ class GameViewState implements ViewState {
 
         this._gamePoint = 0;
 
+        this._container.applicationLayer.addChild(this._countGameState.getContainer());
+
         if (SKIP_COUNT_DOWN_FOR_GAME_START) {
             this._changeToPlayingGameState();
         }
