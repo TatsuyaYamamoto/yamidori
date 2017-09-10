@@ -8,7 +8,7 @@ import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";
 import {getCurrentViewSize} from "../utils";
 import GameViewState from "./view/GameViewState";
-
+import {toggleMute} from '../helper/SoundManager';
 
 export enum Events {
     INITIALIZED = "ApplicationState@INITIALIZED",
@@ -61,6 +61,8 @@ class ApplicationState extends Application implements State {
         });
 
         window.addEventListener('resize', this.onResize);
+        window.addEventListener('blur', toggleMute);
+        window.addEventListener('focus', toggleMute);
 
         this._viewStateMachine.init(InitialViewState.TAG);
     }
@@ -76,6 +78,8 @@ class ApplicationState extends Application implements State {
             Events.BACK_TO_TOP_REQUEST
         ]);
         window.removeEventListener('resize', this.onResize);
+        window.removeEventListener('blur', toggleMute);
+        window.removeEventListener('focus', toggleMute);
     }
 
     private onResize = (event: Event): void => {
