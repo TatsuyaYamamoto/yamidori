@@ -44,12 +44,7 @@ class LoadViewState implements ViewState {
 
         this._loader = new AssetLoader();
         this._loader.onProgress.add(this._onLoadProgress);
-        this._loader.onComplete.add(this._onLoadComplete);
-        this._loader.load(function (loader: AssetLoader, resources: { string: loaders.Resource }) {
-            Object.keys(resources).forEach((key) => {
-                setAsset(resources[key]);
-            })
-        });
+        this._loader.load(this._onLoadComplete);
     }
 
     /**
@@ -78,9 +73,10 @@ class LoadViewState implements ViewState {
         this._container.updateLoadedProgress(event.progress);
     };
 
-    private _onLoadComplete = (): void => {
-        const resourceLength = Object.keys(this._loader.resources).length;
-        console.log(`Complete to load [${resourceLength}] resources.`);
+    private _onLoadComplete = (loader: AssetLoader, resources: { string: loaders.Resource }): void => {
+        console.log(`Complete to load [${Object.keys(resources).length}] resources.`);
+
+        Object.keys(resources).forEach((key) => setAsset(resources[key]));
         dispatchEvent(Events.COMPLETE_LOAD);
     };
 
