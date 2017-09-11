@@ -8,6 +8,7 @@ export default {
 
     logoTitle: `${IMAGE_BASE_DIR}logo_title.png`,
     logoGameOver: `${IMAGE_BASE_DIR}logo_gameover.png`,
+    logoGameOverImage: `${IMAGE_BASE_DIR}logo_gameover_image.png`,
 
     kotoriLeft: `${IMAGE_BASE_DIR}kotori_left.png`,
     kotoriRight: `${IMAGE_BASE_DIR}kotori_right.png`,

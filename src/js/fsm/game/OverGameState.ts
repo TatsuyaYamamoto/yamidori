@@ -44,22 +44,23 @@ class OverGameState implements GameState {
         this._container = new Container();
 
         this._gameOverLogo = new GameOverLogo();
-        this._gameOverLogo.position.set(width * 0.5, height * 0.2);
+        this._gameOverLogo.position.set(width * 0.5, height * 0.5);
 
         this._gameRestartButton = new GameRestartButton();
-        this._gameRestartButton.position.set(width * 0.3, height * 0.7);
+        this._gameRestartButton.position.set(width * 0.15, height * 0.45);
         this._gameRestartButton.setOnClickListener(this.handleTapRestartGame);
 
         this._goBackHomeButton = new GoBackHomeButton();
-        this._goBackHomeButton.position.set(width * 0.7, height * 0.7);
+        this._goBackHomeButton.position.set(width * 0.85, height * 0.45);
         this._goBackHomeButton.setOnClickListener(this.handleTapGoBackHome);
 
         this._resultTweetButton = new ResultTweetButton();
-        this._resultTweetButton.position.set(width * 0.8, height * 0.2);
+        this._resultTweetButton.position.set(width * 0.9, height * 0.1);
         this._resultTweetButton.setOnClickListener(this.handleTapResultTweet);
 
         this._gamePointCount = new GamePointCount();
-        this._gamePointCount.position.set(width * 0.5, height * 0.1);
+        this._gamePointCount.position.set(width * 0.22, height * 0.12);
+        this._gamePointCount.rotation = -1 * Math.PI * 0.02;
         this._gamePointCount.point = getGamePoint();
 
         this._container.addChild(
