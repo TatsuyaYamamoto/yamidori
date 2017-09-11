@@ -19,7 +19,7 @@ export default {
 
     [Ids.GAME_RESULT_TWEET1]: `ええええっ？！な、なんでことりちゃんお鍋に%s個もケーキ入れちゃったの？！`,
 
-    [Ids.GAME_RESULT_TWEET2]: `これはの,,,何でしょう,,,? 三角柱のような形状ですが,,,%s個のケーキだ！`,
+    [Ids.GAME_RESULT_TWEET2]: `これは,,,何でしょう,,,? 三角柱のような形状ですが,,,%s個のケーキだ！`,
 
     [Ids.GAME_RESULT_TWEET3]: `一度、%s個のチーズケーキでお鍋を食べてみたかったの〜！`,
 
