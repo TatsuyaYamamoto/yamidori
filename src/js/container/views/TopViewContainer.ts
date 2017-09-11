@@ -82,7 +82,7 @@ class TopViewContainer extends ViewContainer {
         this._usageTapTargetInfo = new UsageTapTargetInfo();
         this._usageTapTargetInfo.position.set(width * 0.8, height * 0.7);
 
-        this._usageModelKotori = new Kotori(false);
+        this._usageModelKotori = new Kotori();
         this._usageModelKotori.position.set(width * 0.8, height * 0.4);
 
         this._gameStartButton = new GameStartButton();

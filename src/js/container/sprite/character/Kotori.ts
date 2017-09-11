@@ -3,23 +3,38 @@ import {Sprite} from 'pixi.js';
 import manifest from '../../../resources/manifest';
 import ClickableSprite from "../ClickableSprite";
 
-enum Speed {
+export enum Speed {
     LOW = 0.2,
     MIDDLE = 0.5,
     HIGH = 1
 }
 
+export enum Direction {
+    RIGHT,
+    LEFT
+}
+
+interface ConstructorParams {
+    direction?: Direction,
+    speed?: Speed,
+}
+
+const DefaultConstructorParams: ConstructorParams = {
+    direction: Direction.RIGHT,
+    speed: Speed.LOW
+};
+
 class Kotori extends ClickableSprite {
-    // TODO implement direction enum.
-    private _isRight: boolean;
+    private _direction: Direction;
     private _id: number;
     private _speed: Speed;
 
-    public constructor(isRight: boolean = true) {
-        super(Sprite.fromImage(isRight ? manifest.kotoriRight : manifest.kotoriLeft).texture);
+    public constructor(params?: ConstructorParams) {
+        params = Object.assign({}, DefaultConstructorParams, params);
+        super(Sprite.fromImage(params.direction === Direction.RIGHT ? manifest.kotoriRight : manifest.kotoriLeft).texture);
 
         this.buttonMode = true;
-        this._isRight = isRight;
+        this._direction = params.direction;
         this._id = Date.now();
         this._speed = Speed.LOW
     }
@@ -34,12 +49,12 @@ class Kotori extends ClickableSprite {
     }
 
     /**
-     * Return true if these direction is right.
+     * Get direction of the instance.
      *
-     * @return {boolean}
+     * @return {Direction}
      */
-    public get isRight(): boolean {
-        return this._isRight;
+    public get direction(): Direction {
+        return this._direction;
     }
 
     /**
@@ -48,7 +63,7 @@ class Kotori extends ClickableSprite {
      * @param elapsedTime
      */
     public move(elapsedTime: number): void {
-        const direction = this._isRight ? 1 : -1;
+        const direction = this._direction === Direction.RIGHT ? 1 : -1;
 
         this.position.x += this._speed * elapsedTime * direction;
     }

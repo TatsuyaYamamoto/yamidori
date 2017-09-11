@@ -2,7 +2,7 @@ import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
 import GameState from "./GameState";
-import Kotori from "../../container/sprite/character/Kotori";
+import Kotori, {Direction} from "../../container/sprite/character/Kotori";
 import {Events as GameEvents} from '../view/GameViewState'
 import {dispatchEvent} from '../EventUtils';
 import {getCurrentViewSize} from "../../utils";
@@ -93,7 +93,7 @@ class PlayingGameState implements GameState {
         const {width} = getCurrentViewSize();
 
         const isRight = this.getRandomBool();
-        const kotori = new Kotori(isRight);
+        const kotori = new Kotori({direction: isRight ? Direction.RIGHT : Direction.LEFT});
         kotori.position.set(isRight ? 0 - kotori.width : width + kotori.width, this.getRandomNumber(50, 300));
         kotori.setOnClickListener(() => this.handleClickKotori(kotori));
         return kotori;
@@ -124,7 +124,7 @@ class PlayingGameState implements GameState {
     }
 
     private isOnDeadZone(kotori: Kotori): boolean {
-        if (kotori.isRight) {
+        if (kotori.direction == Direction.RIGHT) {
             return this._leftDeadLine < kotori.x
         } else {
             return kotori.x < this._rightDeadLine;
