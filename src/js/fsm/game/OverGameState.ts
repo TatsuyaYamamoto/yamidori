@@ -11,7 +11,7 @@ import GamePointCount from "../../container/components/GamePointCount";
 
 import {dispatchEvent} from "../EventUtils";
 import {getCurrentViewSize, getString, getRandomInteger} from "../../helper/utils";
-import {tweetGameResult} from '../../helper/network';
+import {postPlayLog, tweetGameResult} from '../../helper/network';
 import {loadSound} from "../../helper/SoundManager";
 import {getGamePoint} from "../../helper/GlobalState";
 import manifest from '../../resources/manifest';
@@ -76,6 +76,8 @@ class OverGameState implements GameState {
         this._cancelSound = loadSound(manifest.soundCancel);
 
         this._gameOverSound.play();
+
+        postPlayLog(getGamePoint());
     }
 
     onExit(): void {

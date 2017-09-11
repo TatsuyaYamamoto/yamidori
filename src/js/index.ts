@@ -7,6 +7,8 @@
 import ApplicationState from "./fsm/ApplicationState";
 import {getCurrentViewSize} from "./helper/utils";
 
+import 'whatwg-fetch';
+
 /**
  * Initial window size.
  */

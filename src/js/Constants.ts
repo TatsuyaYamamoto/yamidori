@@ -37,6 +37,12 @@ export const SKIP_COUNT_DOWN_FOR_GAME_START = false;
 export const SKIP_BRAND_LOGO_ANIMATION = false;
 
 /**
+ * Application server base URL
+ * @type {string}
+ */
+export const APP_SERVER_BASE_URL = "http://api.sokontokoro-factory.net/lovelive/";
+
+/**
  * External URLs.
  */
 export const URL = {
