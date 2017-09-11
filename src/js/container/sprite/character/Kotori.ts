@@ -4,9 +4,9 @@ import manifest from '../../../resources/manifest';
 import ClickableSprite from "../ClickableSprite";
 
 export enum Speed {
-    LOW = 0.2,
-    MIDDLE = 0.4,
-    HIGH = 0.6
+    LOW = 0.3,
+    MIDDLE = 0.45,
+    HIGH = 0.58
 }
 
 export enum Direction {
