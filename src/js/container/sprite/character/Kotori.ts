@@ -73,6 +73,8 @@ class Kotori extends ClickableSprite {
      * Before {@link this#destroy} decrement alpha.
      */
     public destroyByTap(): void {
+        this.interactive = false;
+
         Promise.resolve()
             .then(() => {
                 return new Promise((resolve) => {
