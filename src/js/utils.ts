@@ -10,7 +10,7 @@ import strings from "./resources/string";
  * @see https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
  */
 export function isIOS(): boolean {
-    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+    return !!navigator.userAgent && /iPad|iPhone|iPod/.test(navigator.userAgent);
 }
 
 
