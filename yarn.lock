@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/node@^8.0.28":
+  version "8.0.28"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.28.tgz#86206716f8d9251cf41692e384264cbd7058ad60"
+
 "@types/pixi.js@^4.5.3":
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/@types/pixi.js/-/pixi.js-4.5.3.tgz#fdd6821a55448f64489642b302b71d3e2b477268"

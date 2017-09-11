@@ -40,7 +40,9 @@ export const SKIP_BRAND_LOGO_ANIMATION = false;
  * Application server base URL
  * @type {string}
  */
-export const APP_SERVER_BASE_URL = "http://api.sokontokoro-factory.net/lovelive/";
+export const APP_SERVER_BASE_URL = process.env.NODE_ENV === 'production' ?
+    "http://api.sokontokoro-factory.net/lovelive/" :
+    "http://api.sokontokoro-factory.net/lovelive-test/";
 
 /**
  * External URLs.

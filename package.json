@@ -19,6 +19,7 @@
   "author": "Tatsuya Yamamoto",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^8.0.28",
     "@types/pixi.js": "^4.5.3",
     "copy-webpack-plugin": "^4.0.1",
     "html-webpack-plugin": "^2.30.1",
