@@ -92,7 +92,7 @@ class PlayingGameState implements GameState {
     }
 
     private createKotori(): Kotori {
-        const {width} = getCurrentViewSize();
+        const {width, height} = getCurrentViewSize();
         const params = {
             direction: this.getKotoriDirectionRandomly(),
             speed: this.getKotoriSpeedRandomly(),
@@ -101,7 +101,7 @@ class PlayingGameState implements GameState {
         const kotori = new Kotori(params);
         kotori.position.set(
             params.direction === Direction.RIGHT ? 0 - kotori.width : width + kotori.width,
-            getRandomInteger(50, 300));
+            height * 0.1 * getRandomInteger(1, 9));
         kotori.setOnClickListener(() => this.handleClickKotori(kotori));
         return kotori;
     }
