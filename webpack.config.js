@@ -7,6 +7,24 @@ const indexPugPath = process.env.NODE_ENV === 'production' ?
     'src/index.production.pug' :
     'src/index.pug';
 
+const plugins = [
+    new HtmlWebpackPlugin({
+        template: `!!pug-loader!${indexPugPath}`
+    }),
+    new CopyWebpackPlugin([
+        {context: 'src/assets', from: '**/*', to: 'assets'}
+    ]),
+    new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        },
+    })
+];
+
+if (process.env.NODE_ENV === 'production') {
+    plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
+
 const config = {
     entry: {
         bundle: path.resolve(__dirname, 'src/js/index.ts')
@@ -31,19 +49,7 @@ const config = {
     // https://github.com/pixijs/pixi-sound/issues/28
     // Resolve node fs module for pixi-sound.
     node: {fs: "empty"},
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: `!!pug-loader!${indexPugPath}`
-        }),
-        new CopyWebpackPlugin([
-            {context: 'src/assets', from: '**/*', to: 'assets'}
-        ]),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-            },
-        })
-    ],
+    plugins: plugins,
     devServer: {
         port: 8000
     },
