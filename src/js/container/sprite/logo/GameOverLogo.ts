@@ -1,6 +1,9 @@
+import {Container} from 'pixi.js';
+
 import Sprite from "../Sprite";
+
 import manifest from '../../../resources/manifest';
-import Container = PIXI.Container;
+import {getScale} from "../../../helper/utils";
 
 /**
  * @class
@@ -8,10 +11,11 @@ import Container = PIXI.Container;
 class GameOverLogo extends Container {
     public constructor() {
         super();
+        this.scale.set(getScale());
 
         const gameOverLogo = Sprite.fromImage(manifest.logoGameOver);
         gameOverLogo.anchor.set(0.5);
-        gameOverLogo.y = gameOverLogo.height * 1.3;
+        gameOverLogo.y = gameOverLogo.height * 1.6;
 
         const gameOverImage = Sprite.fromImage(manifest.logoGameOverImage);
         gameOverImage.anchor.set(0.5);

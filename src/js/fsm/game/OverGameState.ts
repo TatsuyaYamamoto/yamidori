@@ -55,11 +55,11 @@ class OverGameState implements GameState {
         this._goBackHomeButton.setOnClickListener(this.handleTapGoBackHome);
 
         this._resultTweetButton = new ResultTweetButton();
-        this._resultTweetButton.position.set(width * 0.9, height * 0.1);
+        this._resultTweetButton.position.set(width * 0.85, height * 0.15);
         this._resultTweetButton.setOnClickListener(this.handleTapResultTweet);
 
         this._gamePointCount = new GamePointCount();
-        this._gamePointCount.position.set(width * 0.22, height * 0.12);
+        this._gamePointCount.position.set(width * 0.22, height * 0.15);
         this._gamePointCount.rotation = -1 * Math.PI * 0.02;
         this._gamePointCount.point = getGamePoint();
 
