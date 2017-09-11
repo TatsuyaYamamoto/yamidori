@@ -14,6 +14,7 @@ class InitialViewState implements ViewState {
     public static TAG = "InitialViewState";
 
     private _container: InitialViewContainer;
+    private _tapInfo: Text;
 
     /**
      * @inheritDoc
@@ -32,9 +33,14 @@ class InitialViewState implements ViewState {
         // TODO: Check login?
 
         if (isIOS()) {
+            const {width, height} = getCurrentViewSize();
+
+            this._tapInfo = new Text(getString(Ids.TAP_DISPLAY_INFO));
+            this._tapInfo.position.set(width * 0.5, height * 0.5);
+            this._container.addChild(this._tapInfo);
+
             window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);
-        }
-        else {
+        } else {
             this._handleGoNextStateAction();
         }
     }
