@@ -1,6 +1,9 @@
 import {Container, Graphics} from 'pixi.js';
+
 import Text from "../sprite/text/Text";
-import {getCurrentViewSize} from "../../utils";
+
+import {getCurrentViewSize, getString} from "../../utils";
+import {Ids} from "../../resources/string";
 
 class UsageTextArea extends Container {
     private _text: Text;
@@ -10,15 +13,9 @@ class UsageTextArea extends Container {
         super();
         const {width, height} = getCurrentViewSize();
 
-        this._text = new Text(`再び鍋パーティーをすることになった、ことほのうみ一行。
-ことりちゃんが持ってきた食材はあのケーキ！！
-このままでは闇が再び訪れちゃう！
-            
-ことりちゃんをタップして、
-あのケーキが投入されることを阻止しよう！`,
-            {
-                fontSize: 16,
-            });
+        this._text = new Text(getString(Ids.HOW_TO_PLAY_INFORMATION), {
+            fontSize: 16,
+        });
 
         const rectWidth = width * 0.6;
         const rectHeight = height * 0.4;
