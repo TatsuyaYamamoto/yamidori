@@ -3,7 +3,11 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = {
+const indexPugPath = process.env.NODE_ENV === 'production' ?
+    'src/index.production.pug' :
+    'src/index.pug';
+
+const config = {
     entry: {
         bundle: path.resolve(__dirname, 'src/js/index.ts')
     },
@@ -29,7 +33,7 @@ module.exports = {
     node: {fs: "empty"},
     plugins: [
         new HtmlWebpackPlugin({
-            template: '!!pug-loader!src/index.pug'
+            template: `!!pug-loader!${indexPugPath}`
         }),
         new CopyWebpackPlugin([
             {context: 'src/assets', from: '**/*', to: 'assets'}
@@ -44,3 +48,5 @@ module.exports = {
         port: 8000
     },
 };
+
+module.exports = config;
