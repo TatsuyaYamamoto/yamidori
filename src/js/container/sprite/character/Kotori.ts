@@ -5,8 +5,8 @@ import ClickableSprite from "../ClickableSprite";
 
 export enum Speed {
     LOW = 0.2,
-    MIDDLE = 0.5,
-    HIGH = 1
+    MIDDLE = 0.4,
+    HIGH = 0.6
 }
 
 export enum Direction {
@@ -36,7 +36,7 @@ class Kotori extends ClickableSprite {
         this.buttonMode = true;
         this._direction = params.direction;
         this._id = Date.now();
-        this._speed = Speed.LOW
+        this._speed = params.speed;
     }
 
     /**

@@ -2,7 +2,7 @@ import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
 import GameState from "./GameState";
-import Kotori, {Direction} from "../../container/sprite/character/Kotori";
+import Kotori, {Direction, Speed} from "../../container/sprite/character/Kotori";
 import {Events as GameEvents} from '../view/GameViewState'
 import {dispatchEvent} from '../EventUtils';
 import {getCurrentViewSize} from "../../utils";
@@ -91,10 +91,15 @@ class PlayingGameState implements GameState {
 
     private createKotori(): Kotori {
         const {width} = getCurrentViewSize();
+        const params = {
+            direction: this.getKotoriDirectionRandomly(),
+            speed: this.getKotoriSpeedRandomly(),
+        };
 
-        const isRight = this.getRandomBool();
-        const kotori = new Kotori({direction: isRight ? Direction.RIGHT : Direction.LEFT});
-        kotori.position.set(isRight ? 0 - kotori.width : width + kotori.width, this.getRandomNumber(50, 300));
+        const kotori = new Kotori(params);
+        kotori.position.set(
+            params.direction === Direction.RIGHT ? 0 - kotori.width : width + kotori.width,
+            this.getRandomNumber(50, 300));
         kotori.setOnClickListener(() => this.handleClickKotori(kotori));
         return kotori;
     }
@@ -115,12 +120,30 @@ class PlayingGameState implements GameState {
         dispatchEvent(GameEvents.TAP_KOTORI);
     };
 
-    private getRandomNumber(min: number, max: number): number {
-        return Math.floor(Math.random() * (max + 1 - min)) + min;
+    private getKotoriDirectionRandomly(): Direction {
+        switch (this.getRandomNumber(0, 1)) {
+            case 0:
+                return Direction.RIGHT;
+            case 1:
+            default:
+                return Direction.LEFT;
+        }
     }
 
-    private getRandomBool(): boolean {
-        return Math.floor(Math.random() * 2) === 1;
+    private getKotoriSpeedRandomly(): Speed {
+        switch (this.getRandomNumber(0, 2)) {
+            case 0:
+                return Speed.LOW;
+            case 1:
+                return Speed.MIDDLE;
+            case 2:
+            default:
+                return Speed.HIGH;
+        }
+    }
+
+    private getRandomNumber(min: number, max: number): number {
+        return Math.floor(Math.random() * (max + 1 - min)) + min;
     }
 
     private isOnDeadZone(kotori: Kotori): boolean {
