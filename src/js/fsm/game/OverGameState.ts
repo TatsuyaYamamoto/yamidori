@@ -2,18 +2,20 @@ import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
 import GameState from "./GameState";
+import {Events as ApplicationEvents} from "../ApplicationState";
 import GameOverLogo from '../../container/sprite/logo/GameOverLogo';
 import GameRestartButton from "../../container/sprite/button/GameRestartButton";
-import {getCurrentViewSize} from "../../utils";
 import GoBackHomeButton from "../../container/sprite/button/GoBackHomeButton";
 import ResultTweetButton from "../../container/sprite/button/ResultTweetButton";
+import GamePointCount from "../../container/components/GamePointCount";
+
 import {dispatchEvent} from "../EventUtils";
-import {Events as ApplicationEvents} from "../ApplicationState";
+import {getCurrentViewSize, getString, getRandomInteger} from "../../utils";
 import {tweetGameResult} from '../../network';
 import {loadSound} from "../../helper/SoundManager";
-import manifest from '../../resources/manifest';
-import GamePointCount from "../../container/components/GamePointCount";
 import {getGamePoint} from "../../helper/GlobalState";
+import manifest from '../../resources/manifest';
+import {Ids} from '../../resources/string';
 
 class OverGameState implements GameState {
     public static TAG = "OverGameState";
@@ -94,9 +96,31 @@ class OverGameState implements GameState {
         dispatchEvent(ApplicationEvents.GAME_START_REQUEST);
     };
 
+    /**
+     * Request to tweet game result with game point.
+     *
+     * @private
+     */
     private handleTapResultTweet = () => {
-        // TODO: Get tweet text.
-        tweetGameResult("Dummy text");
+        let tweetText = getString(Ids.GAME_RESULT_TWEET_ZERO_POINT);
+
+        if (getGamePoint() !== 0) {
+            switch (getRandomInteger(0, 2)) {
+                case 0:
+                    tweetText = getString(Ids.GAME_RESULT_TWEET1);
+                    break;
+                case 1:
+                    tweetText = getString(Ids.GAME_RESULT_TWEET2);
+                    break;
+                case 2:
+                default:
+                    tweetText = getString(Ids.GAME_RESULT_TWEET3);
+                    break;
+            }
+            tweetText = tweetText.replace(/%s/, `${getGamePoint()}`);
+        }
+
+        tweetGameResult(tweetText);
     };
 }
 
