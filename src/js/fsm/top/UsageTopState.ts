@@ -79,6 +79,8 @@ class UsageTopState {
      */
     onExit(): void {
         console.log(`${UsageTopState.TAG}@onExit`);
+        this._usageTarget = null;
+        this._usageTapTargetInfo = null;
     }
 
     public getContainer(): Container {
@@ -87,7 +89,7 @@ class UsageTopState {
 
     private onUsageModelTargetClick = () => {
         this._tapKotoriSound.play();
-        
+
         if (this._usageTarget) {
             this._usageTarget.destroyByTap();
         }
