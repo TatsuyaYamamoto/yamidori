@@ -5,7 +5,7 @@ import GameState from "./GameState";
 import Kotori, {Direction, Speed} from "../../container/sprite/character/Kotori";
 import {Events as GameEvents} from '../view/GameViewState'
 import {dispatchEvent} from '../EventUtils';
-import {getCurrentViewSize} from "../../utils";
+import {getCurrentViewSize, getRandomInteger} from "../../utils";
 import GamePointCount from "../../container/components/GamePointCount";
 import {loadSound} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest';
@@ -101,7 +101,7 @@ class PlayingGameState implements GameState {
         const kotori = new Kotori(params);
         kotori.position.set(
             params.direction === Direction.RIGHT ? 0 - kotori.width : width + kotori.width,
-            this.getRandomNumber(50, 300));
+            getRandomInteger(50, 300));
         kotori.setOnClickListener(() => this.handleClickKotori(kotori));
         return kotori;
     }
@@ -126,7 +126,7 @@ class PlayingGameState implements GameState {
     };
 
     private getKotoriDirectionRandomly(): Direction {
-        switch (this.getRandomNumber(0, 1)) {
+        switch (getRandomInteger(0, 1)) {
             case 0:
                 return Direction.RIGHT;
             case 1:
@@ -136,7 +136,7 @@ class PlayingGameState implements GameState {
     }
 
     private getKotoriSpeedRandomly(): Speed {
-        switch (this.getRandomNumber(0, 2)) {
+        switch (getRandomInteger(0, 2)) {
             case 0:
                 return Speed.LOW;
             case 1:
@@ -145,10 +145,6 @@ class PlayingGameState implements GameState {
             default:
                 return Speed.HIGH;
         }
-    }
-
-    private getRandomNumber(min: number, max: number): number {
-        return Math.floor(Math.random() * (max + 1 - min)) + min;
     }
 
     private isOnDeadZone(kotori: Kotori): boolean {

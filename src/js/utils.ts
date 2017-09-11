@@ -94,3 +94,14 @@ export function setAsset(resource: loaders.Resource) {
 export function getAsset(url: string) {
     return AssetsCache[url];
 }
+
+/**
+ * Get integer. this value is generated randomly between min and max.
+ *
+ * @param min
+ * @param max
+ * @return {number}
+ */
+export function getRandomInteger(min: number, max: number): number {
+    return Math.floor(Math.random() * (max + 1 - min)) + min;
+}
