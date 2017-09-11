@@ -65,6 +65,7 @@ class ApplicationState extends Application implements State {
         window.addEventListener('focus', toggleMute);
 
         this._viewStateMachine.init(InitialViewState.TAG);
+        this.stage.addChild(this._initialViewState.getContainer());
     }
 
     /**

@@ -4,12 +4,13 @@ import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "./Constants";
 import strings from "./resources/string";
 
 /**
- * Return true if the device's OS is iOS. Otherwise false.
+ * Detecting iOS
+ * Return true if the user's device is iOS.
  *
- * TODO: implement
+ * @see https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
  */
 export function isIOS(): boolean {
-    return false;
+    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 }
 
 

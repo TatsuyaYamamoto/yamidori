@@ -1,10 +1,14 @@
 import {Container} from 'pixi.js';
 
-import {isIOS, isSupportTouchEvent} from "../../utils";
+import ViewState from "./ViewState";
+
+import Text from "../../container/sprite/text/Text";
+import InitialViewContainer from "../../container/views/InitialViewContainer";
+
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
-import ViewState from "./ViewState";
-import InitialViewContainer from "../../container/views/InitialViewContainer";
+import {getCurrentViewSize, getString, isIOS, isSupportTouchEvent} from "../../utils";
+import {Ids} from "../../resources/string";
 
 class InitialViewState implements ViewState {
     public static TAG = "InitialViewState";
@@ -12,29 +16,22 @@ class InitialViewState implements ViewState {
     private _container: InitialViewContainer;
 
     /**
-     *
-     * @param elapsedTime
-     * @override
+     * @inheritDoc
      */
     update(elapsedTime: number): void {
 
     }
 
     /**
-     * @override
+     * @inheritDoc
      */
     onEnter(): void {
         console.log(`${InitialViewState.TAG}@onEnter`);
 
         this._container = new InitialViewContainer();
-
         // TODO: Check login?
-        // TODO: Setup screen scale?
-        // TODO: Others.
 
         if (isIOS()) {
-            // TODO: Show information prompting to tap.
-
             window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);
         }
         else {
@@ -43,7 +40,7 @@ class InitialViewState implements ViewState {
     }
 
     /**
-     * @override
+     * @inheritDoc
      */
     onExit(): void {
         console.log(`${InitialViewState.TAG}@onExit`);

@@ -2,15 +2,21 @@ import {Container} from 'pixi.js';
 
 import Text from "../sprite/text/Text";
 
+import {getCurrentViewSize, getString} from "../../utils";
+import {Ids} from "../../resources/string";
+
 class InitialViewContainer extends Container {
-    private _initialInfoText;
+    private _tapInfo: Text;
 
     constructor() {
         super();
 
-        this._initialInfoText = new Text('Init!');
+        const {width, height} = getCurrentViewSize();
 
-        this.addChild(this._initialInfoText)
+        this._tapInfo = new Text(getString(Ids.TAP_DISPLAY_INFO));
+        this._tapInfo.position.set(width * 0.5, height * 0.5);
+
+        this.addChild(this._tapInfo)
     }
 }
 
