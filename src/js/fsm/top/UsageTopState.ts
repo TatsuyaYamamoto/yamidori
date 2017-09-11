@@ -5,6 +5,7 @@ import Kotori, {Direction} from "../../container/sprite/character/Kotori";
 import UsageTapTargetInfo from "../../container/components/UsageTapTargetInfo";
 import UsageTextArea from "../../container/components/UsageTextArea";
 import BackToTopButton from "../../container/sprite/button/BackToTopButton";
+import BackToMenuButton from "../../container/sprite/button/BackToMenuButton";
 
 import {getCurrentViewSize} from "../../helper/utils";
 import {Events} from "../view/TopViewState";
@@ -19,7 +20,7 @@ class UsageTopState {
 
     private _usageTextArea: UsageTextArea;
     private _usageTapTargetInfo: UsageTapTargetInfo;
-    private _backToTopButton: BackToTopButton;
+    private _backToMenuButton: BackToMenuButton;
     private _usageTarget: Kotori;
 
     private _tapKotoriSound: Sound;
@@ -61,12 +62,12 @@ class UsageTopState {
         this._usageTextArea = new UsageTextArea();
         this._usageTextArea.position.set(width * 0.35, height * 0.3);
 
-        this._backToTopButton = new BackToTopButton();
-        this._backToTopButton.position.set(width * 0.2, height * 0.9);
-        this._backToTopButton.setOnClickListener(this.onBackToTopButton);
+        this._backToMenuButton = new BackToMenuButton();
+        this._backToMenuButton.position.set(width * 0.15, height * 0.8);
+        this._backToMenuButton.setOnClickListener(this.onBackToMenuButtonClick);
 
         this._container.addChild(
-            this._backToTopButton,
+            this._backToMenuButton,
             this._usageTextArea,
         );
 
@@ -100,7 +101,7 @@ class UsageTopState {
         this._usageTapTargetInfo = null;
     };
 
-    private onBackToTopButton = () => {
+    private onBackToMenuButtonClick = () => {
         this._cancelSound.play();
         dispatchEvent(Events.REQUEST_BACK_TO_TOP);
     };

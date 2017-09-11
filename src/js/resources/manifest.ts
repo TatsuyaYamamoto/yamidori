@@ -16,6 +16,7 @@ export default {
     buttonGameStart: `${IMAGE_BASE_DIR}button_game_start.png`,
     buttonGameRestart: `${IMAGE_BASE_DIR}button_game_restart.png`,
     buttonGoBackHome: `${IMAGE_BASE_DIR}button_go_back_home.png`,
+    buttonGoBackMenu: `${IMAGE_BASE_DIR}button_go_back_menu.png`,
     buttonGoHowToPlay: `${IMAGE_BASE_DIR}button_go_how_to_play.png`,
     buttonGoCredit: `${IMAGE_BASE_DIR}button_go_credit.png`,
     buttonGoRanking: `${IMAGE_BASE_DIR}button_go_ranking.png`,

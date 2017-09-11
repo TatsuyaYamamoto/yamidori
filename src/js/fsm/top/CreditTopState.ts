@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 
 import CreditBackground from "../../container/sprite/background/CreditBackground";
 import CreditComponent from "../../container/components/CreditComponent";
-import BackToTopButton from "../../container/sprite/button/BackToTopButton";
+import BackToMenuButton from "../../container/sprite/button/BackToMenuButton";
 
 import {getCurrentViewSize} from "../../helper/utils";
 import {URL, NAME_AND_ROLE} from "../../Constants";
@@ -21,7 +21,7 @@ class CreditTopState {
     private _sanzashiCredit: CreditComponent;
     private _onjinCredit: CreditComponent;
     private _loveliveCredit: CreditComponent;
-    private _backToTopButton: BackToTopButton;
+    private _backToMenuButton: BackToMenuButton;
 
     private _cancelSound: Sound;
 
@@ -46,21 +46,21 @@ class CreditTopState {
         this._t28Credit.position.set(width * 0.3, height * 0.5);
 
         this._sanzashiCredit = new CreditComponent(NAME_AND_ROLE.SANZASHI, URL.TWITTER_HOME_SANZASHI);
-        this._sanzashiCredit.position.set(width * 0.3, height * 0.7);
+        this._sanzashiCredit.position.set(width * 0.5, height * 0.7);
 
         this._onjinCredit = new CreditComponent(NAME_AND_ROLE.ON_JIN, URL.ONJIN_TOP);
-        this._onjinCredit.position.set(width * 0.7, height * 0.6);
+        this._onjinCredit.position.set(width * 0.7, height * 0.9);
 
         this._loveliveCredit = new CreditComponent(NAME_AND_ROLE.LOVELIVE, URL.LOVELIVE_TOP);
-        this._loveliveCredit.position.set(width * 0.7, height * 0.8);
+        this._loveliveCredit.position.set(width * 0.8, height * 0.55);
 
-        this._backToTopButton = new BackToTopButton();
-        this._backToTopButton.position.set(width * 0.2, height * 0.9);
-        this._backToTopButton.setOnClickListener(this.onBackToTopButton);
+        this._backToMenuButton = new BackToMenuButton();
+        this._backToMenuButton.position.set(width * 0.15, height * 0.8);
+        this._backToMenuButton.setOnClickListener(this.onBackToMenuButtonClick);
 
         this._container.addChild(
             this._creditBackground,
-            this._backToTopButton,
+            this._backToMenuButton,
             this._t28Credit,
             this._sanzashiCredit,
             this._onjinCredit,
@@ -81,7 +81,7 @@ class CreditTopState {
         return this._container;
     }
 
-    private onBackToTopButton = () => {
+    private onBackToMenuButtonClick = () => {
         this._cancelSound.play();
         dispatchEvent(Events.REQUEST_BACK_TO_TOP);
     };
