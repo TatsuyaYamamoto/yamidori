@@ -2,7 +2,7 @@ import {Sprite} from 'pixi.js';
 
 import manifest from '../../../resources/manifest';
 import Button from "./Button";
-import {getCurrentViewSize} from "../../../utils";
+import {getCurrentViewSize} from "../../../helper/utils";
 
 class ResultTweetButton extends Button {
     constructor() {

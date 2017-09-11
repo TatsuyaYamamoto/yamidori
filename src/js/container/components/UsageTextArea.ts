@@ -2,7 +2,7 @@ import {Container, Graphics} from 'pixi.js';
 
 import Text from "../sprite/text/Text";
 
-import {getCurrentViewSize, getString} from "../../utils";
+import {getCurrentViewSize, getString} from "../../helper/utils";
 import {Ids} from "../../resources/string";
 
 class UsageTextArea extends Container {

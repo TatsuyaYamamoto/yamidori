@@ -1,6 +1,6 @@
 import {Sprite} from 'pixi.js';
 import manifest from '../../../resources/manifest';
-import {getCurrentViewSize, getScale} from "../../../utils";
+import {getCurrentViewSize, getScale} from "../../../helper/utils";
 
 /**
  * @class

@@ -5,7 +5,7 @@ import CreditBackground from "../../container/sprite/background/CreditBackground
 import CreditComponent from "../../container/components/CreditComponent";
 import BackToTopButton from "../../container/sprite/button/BackToTopButton";
 
-import {getCurrentViewSize} from "../../utils";
+import {getCurrentViewSize} from "../../helper/utils";
 import {URL, NAME_AND_ROLE} from "../../Constants";
 import {Events} from "../view/TopViewState";
 import {dispatchEvent} from '../EventUtils';

@@ -6,7 +6,7 @@ import UsageTapTargetInfo from "../../container/components/UsageTapTargetInfo";
 import UsageTextArea from "../../container/components/UsageTextArea";
 import BackToTopButton from "../../container/sprite/button/BackToTopButton";
 
-import {getCurrentViewSize} from "../../utils";
+import {getCurrentViewSize} from "../../helper/utils";
 import {Events} from "../view/TopViewState";
 import {dispatchEvent} from '../EventUtils';
 import {loadSound} from "../../helper/SoundManager";

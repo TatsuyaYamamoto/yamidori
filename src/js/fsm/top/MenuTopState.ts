@@ -9,10 +9,10 @@ import GoCreditButton from "../../container/sprite/button/GoCreditButton";
 import GoTwitterHomeButton from "../../container/sprite/button/GoTwitterHomeButton";
 import SoundButton from "../../container/sprite/button/SoundButton";
 
-import {getCurrentViewSize} from "../../utils";
+import {getCurrentViewSize} from "../../helper/utils";
 import {Events} from "../view/TopViewState";
 import {dispatchEvent} from '../EventUtils';
-import {goTo} from "../../network";
+import {goTo} from "../../helper/network";
 import {toggleMute} from "../../helper/SoundManager";
 import {URL} from '../../Constants';
 import {loadSound} from "../../helper/SoundManager";

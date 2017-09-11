@@ -7,7 +7,7 @@ import {Events} from '../view/GameViewState';
 import manifest from '../../resources/manifest';
 import {loadSound} from "../../helper/SoundManager";
 import CountDownText from "../../container/components/CountDownText";
-import {getCurrentViewSize} from "../../utils";
+import {getCurrentViewSize} from "../../helper/utils";
 
 class CountGameState implements GameState {
     public static TAG = "CountGameState";

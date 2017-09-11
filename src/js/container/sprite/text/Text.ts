@@ -1,5 +1,5 @@
 import {Text as PixiText, TextStyle} from 'pixi.js';
-import {getScale} from "../../../utils";
+import {getScale} from "../../../helper/utils";
 
 export const basicTextStyle = {
     fontFamily: 'Arial',

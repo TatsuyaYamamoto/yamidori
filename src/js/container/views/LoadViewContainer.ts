@@ -4,7 +4,7 @@ import Text from "../sprite/text/Text";
 import BrandLogoAnimation from "../BrandLogoAnimation.js";
 import LoadKotoriAnimation from "../LoadKotoriAnimation.js";
 import {Events} from '../../fsm/view/LoadViewState'
-import {getCurrentViewSize} from "../../utils";
+import {getCurrentViewSize} from "../../helper/utils";
 import {dispatchEvent} from '../../fsm/EventUtils';
 
 class LoadViewContainer extends Container {

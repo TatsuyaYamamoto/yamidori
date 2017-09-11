@@ -1,6 +1,6 @@
 import {Container} from 'pixi.js';
 
-import {getCurrentViewSize} from "../../utils";
+import {getCurrentViewSize} from "../../helper/utils";
 
 abstract class ViewContainer extends Container {
     private _backGroundLayer: Container;

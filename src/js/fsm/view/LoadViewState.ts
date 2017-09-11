@@ -6,7 +6,7 @@ import ViewState from "./ViewState";
 import AssetLoader from '../../helper/AssetLoader';
 import LoadViewContainer from "../../container/views/LoadViewContainer";
 import {SKIP_BRAND_LOGO_ANIMATION} from "../../Constants";
-import {setAsset} from "../../utils";
+import {setAsset} from "../../helper/utils";
 
 export enum Events {
     COMPLETE_LOAD = "LoadViewState@COMPLETE_LOAD",

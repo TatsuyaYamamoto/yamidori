@@ -7,7 +7,7 @@ import InitialViewContainer from "../../container/views/InitialViewContainer";
 
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
-import {getCurrentViewSize, getString, isIOS, isSupportTouchEvent} from "../../utils";
+import {getCurrentViewSize, getString, isIOS, isSupportTouchEvent} from "../../helper/utils";
 import {Ids} from "../../resources/string";
 
 class InitialViewState implements ViewState {

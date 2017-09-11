@@ -1,6 +1,6 @@
 import {Sprite as PixiSprite, Texture} from 'pixi.js';
 
-import {getScale} from "../../utils";
+import {getScale} from "../../helper/utils";
 
 abstract class Sprite extends PixiSprite {
     public constructor(texture: Texture) {

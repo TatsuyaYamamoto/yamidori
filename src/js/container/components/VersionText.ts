@@ -1,6 +1,6 @@
 import {Container} from 'pixi.js';
 import Text from "../sprite/text/Text";
-import {getCurrentViewSize} from "../../utils";
+import {getCurrentViewSize} from "../../helper/utils";
 
 import * as packageJson from '../../../../package.json';
 

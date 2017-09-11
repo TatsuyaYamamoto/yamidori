@@ -2,7 +2,7 @@ import {Container, Graphics} from 'pixi.js';
 import Sprite from "../sprite/Sprite";
 import Kotori from "../sprite/character/Kotori";
 import Text from "../sprite/text/Text";
-import {getCurrentViewSize} from "../../utils";
+import {getCurrentViewSize} from "../../helper/utils";
 
 class GamePointCount extends Container {
     private _point: number = 0;

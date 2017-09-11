@@ -1,7 +1,7 @@
 import {loaders} from 'pixi.js';
 
-import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "./Constants";
-import strings from "./resources/string";
+import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "../Constants";
+import strings from "../resources/string";
 
 /**
  * Detecting iOS

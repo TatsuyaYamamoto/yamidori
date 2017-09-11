@@ -5,7 +5,7 @@
  * @author Tatsuya Yamamoto
  */
 import ApplicationState from "./fsm/ApplicationState";
-import {getCurrentViewSize} from "./utils";
+import {getCurrentViewSize} from "./helper/utils";
 
 /**
  * Initial window size.

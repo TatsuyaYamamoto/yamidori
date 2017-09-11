@@ -6,7 +6,7 @@ import {addEvents, removeEvents} from './EventUtils';
 import InitialViewState from "./view/InitialViewState";
 import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";
-import {getCurrentViewSize} from "../utils";
+import {getCurrentViewSize} from "../helper/utils";
 import GameViewState from "./view/GameViewState";
 import {toggleMute} from '../helper/SoundManager';
 

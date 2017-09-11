@@ -10,7 +10,7 @@ import Text from '../../container/sprite/text/Text';
 import {Events} from '../view/TopViewState';
 import {dispatchEvent} from '../EventUtils';
 
-import {getCurrentViewSize, getString, isSupportTouchEvent} from "../../utils";
+import {getCurrentViewSize, getString, isSupportTouchEvent} from "../../helper/utils";
 import {Ids} from "../../resources/string";
 import {loadSound} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest';

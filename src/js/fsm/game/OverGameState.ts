@@ -10,8 +10,8 @@ import ResultTweetButton from "../../container/sprite/button/ResultTweetButton";
 import GamePointCount from "../../container/components/GamePointCount";
 
 import {dispatchEvent} from "../EventUtils";
-import {getCurrentViewSize, getString, getRandomInteger} from "../../utils";
-import {tweetGameResult} from '../../network';
+import {getCurrentViewSize, getString, getRandomInteger} from "../../helper/utils";
+import {tweetGameResult} from '../../helper/network';
 import {loadSound} from "../../helper/SoundManager";
 import {getGamePoint} from "../../helper/GlobalState";
 import manifest from '../../resources/manifest';

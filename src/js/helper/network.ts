@@ -1,4 +1,4 @@
-import {URL} from './Constants';
+import {URL} from '../Constants';
 
 export function goTo(href: string): void {
     window.location.href = href;

@@ -5,7 +5,7 @@ import GameState from "./GameState";
 import Kotori, {Direction, Speed} from "../../container/sprite/character/Kotori";
 import {Events as GameEvents} from '../view/GameViewState'
 import {dispatchEvent} from '../EventUtils';
-import {getCurrentViewSize, getRandomInteger} from "../../utils";
+import {getCurrentViewSize, getRandomInteger} from "../../helper/utils";
 import GamePointCount from "../../container/components/GamePointCount";
 import {loadSound} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest';
