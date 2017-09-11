@@ -53,26 +53,26 @@ class MenuTopState {
         this._menuBackground = new MenuBackground();
 
         this._gameStartButton = new GameStartButton();
-        this._gameStartButton.position.set(width * 0.2, height * 0.5);
+        this._gameStartButton.position.set(width * 0.2, height * 0.65);
         this._gameStartButton.setOnClickListener(this.onGameStartButtonClick);
 
         this._goHowToPlayButton = new GoHowToPlayButton();
-        this._goHowToPlayButton.position.set(width * 0.4, height * 0.5);
+        this._goHowToPlayButton.position.set(width * 0.45, height * 0.65);
         this._goHowToPlayButton.setOnClickListener(this.onHowToUseButtonClick);
 
         this._goRankingButton = new GoRankingButton();
-        this._goRankingButton.position.set(width * 0.6, height * 0.5);
+        this._goRankingButton.position.set(width * 0.7, height * 0.65);
 
         this._goCreditButton = new GoCreditButton();
-        this._goCreditButton.position.set(width * 0.8, height * 0.5);
+        this._goCreditButton.position.set(width * 0.9, height * 0.8);
         this._goCreditButton.setOnClickListener(this.onCreditButtonClick);
 
         this._goTwitterHomeButton = new GoTwitterHomeButton();
-        this._goTwitterHomeButton.position.set(width * 0.9, height * 0.9);
+        this._goTwitterHomeButton.position.set(width * 0.9, height * 0.15);
         this._goTwitterHomeButton.setOnClickListener(this.onTwitterHomeButtonClick);
 
         this._soundButton = new SoundButton();
-        this._soundButton.position.set(width * 0.8, height * 0.9);
+        this._soundButton.position.set(width * 0.8, height * 0.15);
         this._soundButton.setOnClickListener(this.onSoundButtonClick);
 
         this._container.addChild(
