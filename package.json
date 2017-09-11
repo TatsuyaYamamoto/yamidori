@@ -32,6 +32,7 @@
   "dependencies": {
     "animejs": "^2.0.2",
     "pixi-sound": "^1.4.2",
-    "pixi.js": "^4.5.4"
+    "pixi.js": "^4.5.4",
+    "whatwg-fetch": "^2.0.3"
   }
 }
