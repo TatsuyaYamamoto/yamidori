@@ -26,6 +26,7 @@ class PlayingGameState implements GameState {
     private _leftDeadLine: number;
 
     private _gameLoopSound: Sound;
+    private _tapKotoriSound: Sound;
 
     update(elapsedTime: number): void {
         this._elapsedTimeMillis += elapsedTime;
@@ -72,6 +73,7 @@ class PlayingGameState implements GameState {
 
         this._gameLoopSound = loadSound(manifest.soundGameLoop);
         this._gameLoopSound.play({loop: true});
+        this._tapKotoriSound = loadSound(manifest.soundTapKotori);
     }
 
     onExit(): void {
@@ -105,6 +107,9 @@ class PlayingGameState implements GameState {
     }
 
     private handleClickKotori = (targetSprite: Kotori) => {
+        // sound
+        this._tapKotoriSound.play();
+
         // remove touched kotori.
         targetSprite.destroyByTap();
         this._kotoriMap.delete(targetSprite.id);

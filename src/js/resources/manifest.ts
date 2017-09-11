@@ -30,4 +30,5 @@ export default {
     soundToggleSound: `${SOUND_BASE_DIR}toggle_sound.mp3`,
     soundCountHigh: `${SOUND_BASE_DIR}count_high.mp3`,
     soundCountLow: `${SOUND_BASE_DIR}count_low.mp3`,
+    soundTapKotori: `${SOUND_BASE_DIR}tap_kotori.mp3`,
 }
