@@ -33,5 +33,8 @@ module.exports = {
         new CopyWebpackPlugin([
             {context: 'src/assets', from: '**/*', to: 'assets'}
         ])
-    ]
+    ],
+    devServer: {
+        port: 8000
+    },
 };
