@@ -9,6 +9,7 @@ import {getCurrentViewSize} from "../../utils";
 import GamePointCount from "../../container/components/GamePointCount";
 import {loadSound} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest';
+import {clearGamePoint, getGamePoint, saveGamePoint} from "../../helper/GlobalState";
 
 export const DEAD_ZONE_WIDTH_RATE = 0.4;
 
@@ -50,6 +51,9 @@ class PlayingGameState implements GameState {
 
     onEnter(): void {
         console.log(`${PlayingGameState.TAG}@onEnter`);
+
+        // reset prev game point.
+        clearGamePoint();
 
         // Set deadline position.
         const {width, height} = getCurrentViewSize();
@@ -99,9 +103,14 @@ class PlayingGameState implements GameState {
         // remove touched kotori.
         targetSprite.destroyByTap();
         this._kotoriMap.delete(targetSprite.id);
-        
+
         // increment game point.
-        this._gamePointCount.point = this._gamePointCount.point + 1;
+        const newPoint = getGamePoint() + 1;
+        // increment game point.
+        this._gamePointCount.point = newPoint;
+
+        // store point
+        saveGamePoint(newPoint);
 
         dispatchEvent(GameEvents.TAP_KOTORI);
     };

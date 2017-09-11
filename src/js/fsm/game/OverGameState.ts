@@ -12,6 +12,8 @@ import {Events as ApplicationEvents} from "../ApplicationState";
 import {tweetGameResult} from '../../network';
 import {loadSound} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest';
+import GamePointCount from "../../container/components/GamePointCount";
+import {getGamePoint} from "../../helper/GlobalState";
 
 class OverGameState implements GameState {
     public static TAG = "OverGameState";
@@ -22,6 +24,8 @@ class OverGameState implements GameState {
     private _gameRestartButton: GameRestartButton;
     private _goBackHomeButton: GoBackHomeButton;
     private _resultTweetButton: ResultTweetButton;
+
+    private _gamePointCount: GamePointCount;
 
     private _gameOverSound: Sound;
     private _okSound: Sound;
@@ -52,11 +56,16 @@ class OverGameState implements GameState {
         this._resultTweetButton.position.set(width * 0.8, height * 0.2);
         this._resultTweetButton.setOnClickListener(this.handleTapResultTweet);
 
+        this._gamePointCount = new GamePointCount();
+        this._gamePointCount.position.set(width * 0.5, height * 0.1);
+        this._gamePointCount.point = getGamePoint();
+
         this._container.addChild(
             this._gameOverLogo,
             this._gameRestartButton,
             this._goBackHomeButton,
-            this._resultTweetButton
+            this._resultTweetButton,
+            this._gamePointCount
         );
 
         this._gameOverSound = loadSound(manifest.soundGameEnd);
