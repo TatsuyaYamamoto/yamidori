@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const indexPugPath = process.env.NODE_ENV === 'production' ?
     'src/index.production.pug' :
@@ -22,7 +23,12 @@ const plugins = [
 ];
 
 if (process.env.NODE_ENV === 'production') {
-    plugins.push(new webpack.optimize.UglifyJsPlugin())
+    plugins.push(new UglifyJsPlugin({
+        compress: {
+            drop_console: true
+        },
+        comments: false,
+    }));
 }
 
 const config = {
