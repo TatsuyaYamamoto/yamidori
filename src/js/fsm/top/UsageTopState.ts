@@ -23,6 +23,9 @@ class UsageTopState {
     private _backToMenuButton: BackToMenuButton;
     private _usageTarget: Kotori;
 
+    private _viewWidth: number;
+    private _viewHeight: number;
+
     private _tapKotoriSound: Sound;
     private _cancelSound: Sound;
 
@@ -30,21 +33,19 @@ class UsageTopState {
      * @inheritDoc
      */
     update(elapsedTimeMillis: number): void {
-        const {width, height} = getCurrentViewSize();
-
         if (!this._usageTarget) {
             this._usageTarget = new Kotori({direction: Direction.LEFT});
-            this._usageTarget.position.set(width * 1.1, height * 0.4);
+            this._usageTarget.position.set(this._viewWidth * 1.1, this._viewHeight * 0.4);
             this._container.addChild(this._usageTarget);
         }
 
-        if (this._usageTarget && width * 0.8 < this._usageTarget.x) {
-            this._usageTarget.move(elapsedTimeMillis);
+        if (this._usageTarget && this._viewWidth * 0.8 < this._usageTarget.x) {
+            this.move(this._usageTarget, elapsedTimeMillis);
         } else {
             if (!this._usageTapTargetInfo) {
                 this._usageTarget.setOnClickListener(this.onUsageModelTargetClick);
                 this._usageTapTargetInfo = new UsageTapTargetInfo();
-                this._usageTapTargetInfo.position.set(width * 0.8, height * 0.7);
+                this._usageTapTargetInfo.position.set(this._viewWidth * 0.8, this._viewHeight * 0.7);
                 this._container.addChild(this._usageTapTargetInfo);
             }
         }
@@ -57,6 +58,9 @@ class UsageTopState {
         console.log(`${UsageTopState.TAG}@onEnter`);
 
         const {width, height} = getCurrentViewSize();
+        this._viewWidth = width;
+        this._viewHeight = height;
+
         this._container = new Container();
 
         this._usageTextArea = new UsageTextArea();
@@ -105,6 +109,13 @@ class UsageTopState {
         this._cancelSound.play();
         dispatchEvent(Events.REQUEST_BACK_TO_TOP);
     };
+
+
+    private move(kotori: Kotori, elapsedTime: number): void {
+        const direction = kotori.direction === Direction.RIGHT ? 1 : -1;
+        const speed = kotori.speed;
+        kotori.position.x += this._viewWidth * kotori.speed * elapsedTime * direction;
+    }
 }
 
 export default UsageTopState;

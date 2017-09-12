@@ -22,6 +22,9 @@ class PlayingGameState implements GameState {
     private _kotoriMap: Map<number, Kotori>;
     private _elapsedTimeMillis = 0;
     private _nextAppearTimeMillis = 0;
+
+    private _viewWidth: number;
+    private _viewHeight: number;
     private _rightDeadLine: number;
     private _leftDeadLine: number;
 
@@ -41,7 +44,7 @@ class PlayingGameState implements GameState {
         }
 
         this._kotoriMap.forEach((k: Kotori) => {
-            k.move(elapsedTime);
+            this.move(k, elapsedTime);
 
             if (this.isOnDeadZone(k)) {
                 console.log("Gameover!!");
@@ -58,6 +61,8 @@ class PlayingGameState implements GameState {
 
         // Set deadline position.
         const {width, height} = getCurrentViewSize();
+        this._viewWidth = width;
+        this._viewHeight = height;
         this._leftDeadLine = width * (1 - DEAD_ZONE_WIDTH_RATE) / 2;
         this._rightDeadLine = width * (1 + DEAD_ZONE_WIDTH_RATE) / 2;
 
@@ -92,7 +97,6 @@ class PlayingGameState implements GameState {
     }
 
     private createKotori(): Kotori {
-        const {width, height} = getCurrentViewSize();
         const params = {
             direction: this.getKotoriDirectionRandomly(),
             speed: this.getKotoriSpeedRandomly(),
@@ -100,8 +104,8 @@ class PlayingGameState implements GameState {
 
         const kotori = new Kotori(params);
         kotori.position.set(
-            params.direction === Direction.RIGHT ? 0 - kotori.width : width + kotori.width,
-            height * 0.1 * getRandomInteger(1, 9));
+            params.direction === Direction.RIGHT ? 0 - kotori.width : this._viewWidth + kotori.width,
+            this._viewHeight * 0.1 * getRandomInteger(1, 9));
         kotori.setOnClickListener(() => this.handleClickKotori(kotori));
         return kotori;
     }
@@ -153,6 +157,11 @@ class PlayingGameState implements GameState {
         } else {
             return kotori.x < this._rightDeadLine;
         }
+    }
+
+    private move(kotori: Kotori, elapsedTime: number): void {
+        const direction = kotori.direction === Direction.RIGHT ? 1 : -1;
+        kotori.position.x += this._viewWidth * kotori.speed * elapsedTime * direction;
     }
 }
 

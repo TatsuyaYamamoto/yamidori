@@ -4,9 +4,9 @@ import manifest from '../../../resources/manifest';
 import ClickableSprite from "../ClickableSprite";
 
 export enum Speed {
-    LOW = 0.3,
-    MIDDLE = 0.45,
-    HIGH = 0.58
+    LOW = 0.0003,
+    MIDDLE = 0.00045,
+    HIGH = 0.00058
 }
 
 export enum Direction {
@@ -58,14 +58,12 @@ class Kotori extends ClickableSprite {
     }
 
     /**
-     * Move to the direction of x axis.
+     * Get speed of the instance.
      *
-     * @param elapsedTime
+     * @return {Speed}
      */
-    public move(elapsedTime: number): void {
-        const direction = this._direction === Direction.RIGHT ? 1 : -1;
-
-        this.position.x += this._speed * elapsedTime * direction;
+    public get speed(): Speed {
+        return this._speed;
     }
 
     /**
