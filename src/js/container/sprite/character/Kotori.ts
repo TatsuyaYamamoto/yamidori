@@ -3,10 +3,12 @@ import {Sprite} from 'pixi.js';
 import manifest from '../../../resources/manifest';
 import ClickableSprite from "../ClickableSprite";
 
+import {GAME_PARAMETERS} from '../../../Constants';
+
 export enum Speed {
-    LOW = 0.0003,
-    MIDDLE = 0.00045,
-    HIGH = 0.00058
+    LOW = GAME_PARAMETERS.KOTORI_SPEED_LOW,
+    MIDDLE = GAME_PARAMETERS.KOTORI_SPEED_MIDDLE,
+    HIGH = GAME_PARAMETERS.KOTORI_SPEED_HIGH,
 }
 
 export enum Direction {
@@ -19,7 +21,7 @@ interface ConstructorParams {
     speed?: Speed,
 }
 
-const DefaultConstructorParams: ConstructorParams = {
+const defaultConstructorParams: ConstructorParams = {
     direction: Direction.RIGHT,
     speed: Speed.LOW
 };
@@ -30,7 +32,7 @@ class Kotori extends ClickableSprite {
     private _speed: Speed;
 
     public constructor(params?: ConstructorParams) {
-        params = Object.assign({}, DefaultConstructorParams, params);
+        params = Object.assign({}, defaultConstructorParams, params);
         super(Sprite.fromImage(params.direction === Direction.RIGHT ? manifest.kotoriRight : manifest.kotoriLeft).texture);
 
         this.buttonMode = true;
