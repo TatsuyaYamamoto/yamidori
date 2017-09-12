@@ -10,6 +10,7 @@ import GamePointCount from "../../container/components/GamePointCount";
 import {loadSound} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest';
 import {clearGamePoint, getGamePoint, saveGamePoint} from "../../helper/GlobalState";
+import {GAME_PARAMETERS} from "../../Constants";
 
 export const DEAD_ZONE_WIDTH_RATE = 0.4;
 
@@ -93,7 +94,10 @@ class PlayingGameState implements GameState {
     }
 
     private getNextAppearTimeMillis(): number {
-        return 2000;
+        const min = GAME_PARAMETERS.KOTORI_APPEARANCE_INTERVAL_MIN;
+        const max = GAME_PARAMETERS.KOTORI_APPEARANCE_INTERVAL_MAX;
+
+        return min + getRandomInteger(0, max - min);
     }
 
     private createKotori(): Kotori {

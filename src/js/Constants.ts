@@ -19,6 +19,16 @@ export const GAME_PARAMETERS = {
      * @see GAME_PARAMETERS.KOTORI_SPEED_HIGH
      */
     KOTORI_SPEED_LOW: 0.0003,
+
+    /**
+     * Min interval time [milliseconds] that Kotori is appearing.
+     */
+    KOTORI_APPEARANCE_INTERVAL_MIN: 200,
+
+    /**
+     * @see GAME_PARAMETERS.KOTORI_APPEARANCE_INTERVAL_MIN
+     */
+    KOTORI_APPEARANCE_INTERVAL_MAX: 2000,
 };
 
 /**
