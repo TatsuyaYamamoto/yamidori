@@ -6,19 +6,18 @@ export const GAME_PARAMETERS = {
      * Coefficient of Kotori speed in 1/second.
      * A distance of Kotori's moving in pixel/second can be calculated with the following.
      * screen width[pixel] * elapsedTime[sec.] * this coefficient.
-     * .
      */
-    KOTORI_SPEED_HIGH: 0.00058,
+    KOTORI_SPEED_HIGH: 0.00065,
 
     /**
      * @see GAME_PARAMETERS.KOTORI_SPEED_HIGH
      */
-    KOTORI_SPEED_MIDDLE: 0.00045,
+    KOTORI_SPEED_MIDDLE: 0.00055,
 
     /**
      * @see GAME_PARAMETERS.KOTORI_SPEED_HIGH
      */
-    KOTORI_SPEED_LOW: 0.0003,
+    KOTORI_SPEED_LOW: 0.00045,
 
     /**
      * Min interval time [milliseconds] that Kotori is appearing.
