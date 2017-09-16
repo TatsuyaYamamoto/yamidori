@@ -7,6 +7,9 @@ abstract class ViewContainer extends Container {
     private _applicationLayer: Container;
     private _informationLayer: Container;
 
+    private _viewWidth: number;
+    private _viewHeight: number;
+
     constructor() {
         super();
 
@@ -18,7 +21,19 @@ abstract class ViewContainer extends Container {
             this._backGroundLayer,
             this._applicationLayer,
             this._informationLayer
-        )
+        );
+
+        const {width, height} = getCurrentViewSize();
+        this._viewWidth = width;
+        this._viewHeight = height;
+    }
+
+    protected get viewWidth(): number {
+        return this._viewWidth;
+    }
+
+    protected get viewHeight(): number {
+        return this._viewHeight;
     }
 
     public get backGroundLayer(): Container {

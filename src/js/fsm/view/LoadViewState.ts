@@ -10,7 +10,7 @@ import LoadKotoriAnimation from '../../container/LoadKotoriAnimation';
 
 import {addEvents, removeEvents, dispatchEvent} from '../EventUtils';
 import AssetLoader from '../../helper/AssetLoader';
-import {getCurrentViewSize, setAsset} from "../../helper/utils";
+import {setAsset} from "../../helper/utils";
 
 import {SKIP_BRAND_LOGO_ANIMATION} from "../../Constants";
 
@@ -50,16 +50,14 @@ class LoadViewState extends ViewContainer implements ViewState {
             [Events.COMPLETE_LOGO_ANIMATION]: this._handleLogoAnimCompleteEvent,
         });
 
-        const {width, height} = getCurrentViewSize();
-
         this._loadingInfoText = new Text(`Now loading... ${this._loadedProgressPercentage}%`);
-        this._loadingInfoText.position.set(width * 0.6, height * 0.8);
+        this._loadingInfoText.position.set(this.viewWidth * 0.6, this.viewHeight * 0.8);
 
         this._brandLogoAnimation = new BrandLogoAnimation();
-        this._brandLogoAnimation.position.set(width / 2, height / 2);
+        this._brandLogoAnimation.position.set(this.viewWidth / 2, this.viewHeight / 2);
 
         this._loadKotoriAnimation = new LoadKotoriAnimation(100);
-        this._loadKotoriAnimation.position.set(width * 0.2, height * 0.8);
+        this._loadKotoriAnimation.position.set(this.viewWidth * 0.2, this.viewHeight * 0.8);
         this._loadKotoriAnimation.scale.set(0.2);
 
         this.addChild(

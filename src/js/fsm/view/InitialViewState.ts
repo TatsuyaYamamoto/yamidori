@@ -7,7 +7,7 @@ import Text from "../../container/sprite/text/Text";
 
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
-import {getCurrentViewSize, getString, isIOS, isSupportTouchEvent} from "../../helper/utils";
+import {getString, isIOS, isSupportTouchEvent} from "../../helper/utils";
 import {Ids} from "../../resources/string";
 
 class InitialViewState extends ViewContainer implements ViewState {
@@ -31,10 +31,8 @@ class InitialViewState extends ViewContainer implements ViewState {
         // TODO: Check login?
 
         if (isIOS()) {
-            const {width, height} = getCurrentViewSize();
-
             this._tapInfo = new Text(getString(Ids.TAP_DISPLAY_INFO));
-            this._tapInfo.position.set(width * 0.5, height * 0.5);
+            this._tapInfo.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
             this.addChild(this._tapInfo);
 
             window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);
