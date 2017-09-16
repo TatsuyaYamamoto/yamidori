@@ -2,18 +2,17 @@ import {Container} from 'pixi.js';
 
 import ViewState from "./ViewState";
 
+import ViewContainer from "../../container/views/ViewContainer";
 import Text from "../../container/sprite/text/Text";
-import InitialViewContainer from "../../container/views/InitialViewContainer";
 
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
 import {getCurrentViewSize, getString, isIOS, isSupportTouchEvent} from "../../helper/utils";
 import {Ids} from "../../resources/string";
 
-class InitialViewState implements ViewState {
+class InitialViewState extends ViewContainer implements ViewState {
     public static TAG = "InitialViewState";
 
-    private _container: InitialViewContainer;
     private _tapInfo: Text;
 
     /**
@@ -29,7 +28,6 @@ class InitialViewState implements ViewState {
     onEnter(): void {
         console.log(`${InitialViewState.TAG}@onEnter`);
 
-        this._container = new InitialViewContainer();
         // TODO: Check login?
 
         if (isIOS()) {
@@ -37,7 +35,7 @@ class InitialViewState implements ViewState {
 
             this._tapInfo = new Text(getString(Ids.TAP_DISPLAY_INFO));
             this._tapInfo.position.set(width * 0.5, height * 0.5);
-            this._container.addChild(this._tapInfo);
+            this.addChild(this._tapInfo);
 
             window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);
         } else {
@@ -57,13 +55,10 @@ class InitialViewState implements ViewState {
     }
 
     /**
-     * Get pixi container.
-     *
-     * @return {TopViewContainer}
-     * @override
+     * @deprecated
      */
     public getContainer = (): Container => {
-        return this._container;
+        return this;
     };
 
     private _handleGoNextStateAction(): void {
