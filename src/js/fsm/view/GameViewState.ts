@@ -1,6 +1,6 @@
 import {Container} from 'pixi.js';
 
-import ViewState from "./ViewState";
+import State from "../internal/State";
 import StateMachine from "../internal/StateMachine";
 import {addEvents, removeEvents} from "../EventUtils";
 import CountGameState from "../game/CountGameState";
@@ -19,7 +19,7 @@ export enum Events {
     TAP_KOTORI = "GameViewState@TAP_KOTORI"
 }
 
-class GameViewState extends ViewContainer implements ViewState {
+class GameViewState extends ViewContainer implements State {
     public static TAG = "GameViewState";
 
     private _gameStateMachine: StateMachine;
@@ -78,13 +78,6 @@ class GameViewState extends ViewContainer implements ViewState {
             Events.TAP_KOTORI
         ]);
     }
-
-    /**
-     * @deprecated
-     */
-    public getContainer = (): Container => {
-        return this;
-    };
 
     private _changeToCountState = (): void => {
 

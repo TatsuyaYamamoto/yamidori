@@ -1,6 +1,6 @@
 import {Container} from 'pixi.js';
 
-import ViewState from "./ViewState";
+import State from "../internal/State";
 
 import ViewContainer from "../internal/ViewContainer";
 import Text from "../../container/sprite/text/Text";
@@ -10,7 +10,7 @@ import {dispatchEvent} from '../EventUtils';
 import {getString, isIOS, isSupportTouchEvent} from "../../helper/utils";
 import {Ids} from "../../resources/string";
 
-class InitialViewState extends ViewContainer implements ViewState {
+class InitialViewState extends ViewContainer implements State {
     public static TAG = "InitialViewState";
 
     private _tapInfo: Text;
@@ -51,13 +51,6 @@ class InitialViewState extends ViewContainer implements ViewState {
             window.removeEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);
         }
     }
-
-    /**
-     * @deprecated
-     */
-    public getContainer = (): Container => {
-        return this;
-    };
 
     private _handleGoNextStateAction(): void {
         dispatchEvent(Events.INITIALIZED);

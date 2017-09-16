@@ -1,7 +1,7 @@
 import {Container, loaders} from 'pixi.js';
 
 import {Events as ApplicationEvents} from "../ApplicationState";
-import ViewState from "./ViewState";
+import State from "../internal/State";
 
 import ViewContainer from "../internal/ViewContainer";
 import Text from "../../container/sprite/text/Text";
@@ -19,7 +19,7 @@ export enum Events {
     COMPLETE_LOGO_ANIMATION = "LoadViewState@COMPLETE_LOGO_ANIMATION",
 }
 
-class LoadViewState extends ViewContainer implements ViewState {
+class LoadViewState extends ViewContainer implements State {
     public static TAG = "LoadViewState";
 
     private _loader: AssetLoader;
@@ -86,13 +86,6 @@ class LoadViewState extends ViewContainer implements ViewState {
             Events.COMPLETE_LOGO_ANIMATION,
         ]);
     }
-
-    /**
-     * @deprecated
-     */
-    public getContainer = (): Container => {
-        return this;
-    };
 
     private _onLoadProgress = (event: loaders.Loader): void => {
         const percentage = event.progress;

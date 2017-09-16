@@ -65,7 +65,7 @@ class ApplicationState extends Application implements State {
         window.addEventListener('focus', toggleMute);
 
         this._viewStateMachine.init(InitialViewState.TAG);
-        this.stage.addChild(this._initialViewState.getContainer());
+        this.stage.addChild(this._initialViewState);
     }
 
     /**
@@ -91,19 +91,19 @@ class ApplicationState extends Application implements State {
     private _changeToLoadViewState = () => {
         this._viewStateMachine.change(LoadViewState.TAG);
         this.stage.removeChildren();
-        this.stage.addChild(this._loadViewState.getContainer());
+        this.stage.addChild(this._loadViewState);
     };
 
     private _changeToTopViewState = () => {
         this._viewStateMachine.change(TopViewState.TAG);
         this.stage.removeChildren();
-        this.stage.addChild(this._topViewState.getContainer());
+        this.stage.addChild(this._topViewState);
     };
 
     private _changeToGameViewState = () => {
         this._viewStateMachine.change(GameViewState.TAG);
         this.stage.removeChildren();
-        this.stage.addChild(this._gameViewState.getContainer());
+        this.stage.addChild(this._gameViewState);
     };
 }
 

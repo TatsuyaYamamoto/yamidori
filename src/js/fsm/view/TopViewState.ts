@@ -1,7 +1,7 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import ViewState from "./ViewState";
+import State from "../internal/State";
 import TitleTopState from "../top/TitleTopState";
 import CreditTopState from "../top/CreditTopState";
 import UsageTopState from "../top/UsageTopState";
@@ -25,7 +25,7 @@ export enum Events {
     REQUEST_BACK_TO_TOP = "TopViewState@REQUEST_BACK_TO_TOP"
 }
 
-class TopViewState extends ViewContainer implements ViewState {
+class TopViewState extends ViewContainer implements State {
     public static TAG = "TopViewState";
 
     private _topViewStateMachine: StateMachine;
@@ -96,14 +96,7 @@ class TopViewState extends ViewContainer implements ViewState {
             Events.REQUEST_BACK_TO_TOP,
         ]);
     }
-
-    /**
-     * @deprecated
-     */
-    public getContainer = (): Container => {
-        return this;
-    };
-
+    
     private _requestGameStart = (): void => {
         dispatchEvent(ApplicationEvents.GAME_START_REQUEST);
     };
