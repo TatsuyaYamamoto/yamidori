@@ -1,25 +1,25 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../internal/State";
+import State from "../../internal/State";
 
-import {Events as ApplicationEvents} from "../ApplicationState";
-import {dispatchEvent} from "../EventUtils";
+import {Events as ApplicationEvents} from "../../ApplicationState";
+import {dispatchEvent} from "../../EventUtils";
 
-import ViewSectionContainer from "../internal/ViewSectionContainer";
-import GameOverLogo from '../../container/sprite/logo/GameOverLogo';
-import GameRestartButton from "../../container/sprite/button/GameRestartButton";
-import GoBackHomeButton from "../../container/sprite/button/GoBackHomeButton";
-import ResultTweetButton from "../../container/sprite/button/ResultTweetButton";
-import GamePointCount from "../../container/components/GamePointCount";
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import GameOverLogo from '../../../container/sprite/logo/GameOverLogo';
+import GameRestartButton from "../../../container/sprite/button/GameRestartButton";
+import GoBackHomeButton from "../../../container/sprite/button/GoBackHomeButton";
+import ResultTweetButton from "../../../container/sprite/button/ResultTweetButton";
+import GamePointCount from "../../../container/components/GamePointCount";
 
-import {getCurrentViewSize, getString, getRandomInteger} from "../../helper/utils";
-import {postPlayLog, tweetGameResult} from '../../helper/network';
-import {loadSound} from "../../helper/SoundManager";
-import {getGamePoint} from "../../helper/GlobalState";
+import {getCurrentViewSize, getString, getRandomInteger} from "../../../helper/utils";
+import {postPlayLog, tweetGameResult} from '../../../helper/network';
+import {loadSound} from "../../../helper/SoundManager";
+import {getGamePoint} from "../../../helper/GlobalState";
 
-import manifest from '../../resources/manifest';
-import {Ids} from '../../resources/string';
+import manifest from '../../../resources/manifest';
+import {Ids} from '../../../resources/string';
 
 class OverGameState extends ViewSectionContainer implements State {
     public static TAG = "OverGameState";

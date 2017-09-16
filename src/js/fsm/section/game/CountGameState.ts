@@ -1,16 +1,16 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../internal/State";
+import State from "../../internal/State";
 
-import ViewSectionContainer from "../internal/ViewSectionContainer";
-import CountDownText from "../../container/components/CountDownText";
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import CountDownText from "../../../container/components/CountDownText";
 
-import {dispatchEvent} from '../EventUtils';
-import {Events} from '../view/GameViewState';
+import {dispatchEvent} from '../../EventUtils';
+import {Events} from '../../view/GameViewState';
 
-import manifest from '../../resources/manifest';
-import {loadSound} from "../../helper/SoundManager";
+import manifest from '../../../resources/manifest';
+import {loadSound} from "../../../helper/SoundManager";
 
 class CountGameState extends ViewSectionContainer implements State {
     public static TAG = "CountGameState";

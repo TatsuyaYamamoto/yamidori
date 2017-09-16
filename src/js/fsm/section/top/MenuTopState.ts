@@ -1,25 +1,25 @@
 import {Container, interaction} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../internal/State";
-import {Events} from "../view/TopViewState";
-import {dispatchEvent} from '../EventUtils';
+import State from "../../internal/State";
+import {Events} from "../../view/TopViewState";
+import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../internal/ViewSectionContainer";
-import MenuBackground from "../../container/sprite/background/MenuBackground";
-import GameStartButton from "../../container/sprite/button/GameStartButton";
-import GoHowToPlayButton from "../../container/sprite/button/GoHowToPlayButton";
-import GoRankingButton from "../../container/sprite/button/GoRankingButton";
-import GoCreditButton from "../../container/sprite/button/GoCreditButton";
-import GoTwitterHomeButton from "../../container/sprite/button/GoTwitterHomeButton";
-import SoundButton from "../../container/sprite/button/SoundButton";
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import MenuBackground from "../../../container/sprite/background/MenuBackground";
+import GameStartButton from "../../../container/sprite/button/GameStartButton";
+import GoHowToPlayButton from "../../../container/sprite/button/GoHowToPlayButton";
+import GoRankingButton from "../../../container/sprite/button/GoRankingButton";
+import GoCreditButton from "../../../container/sprite/button/GoCreditButton";
+import GoTwitterHomeButton from "../../../container/sprite/button/GoTwitterHomeButton";
+import SoundButton from "../../../container/sprite/button/SoundButton";
 
-import {goTo} from "../../helper/network";
-import {toggleMute} from "../../helper/SoundManager";
-import {loadSound} from "../../helper/SoundManager";
-import manifest from '../../resources/manifest';
+import {goTo} from "../../../helper/network";
+import {toggleMute} from "../../../helper/SoundManager";
+import {loadSound} from "../../../helper/SoundManager";
+import manifest from '../../../resources/manifest';
 
-import {URL} from '../../Constants';
+import {URL} from '../../../Constants';
 
 class MenuTopState extends ViewSectionContainer implements State {
     public static TAG = "MenuTopState";

@@ -1,22 +1,22 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../internal/State";
+import State from "../../internal/State";
 
-import ViewSectionContainer from "../internal/ViewSectionContainer";
-import Kotori, {Direction, Speed} from "../../container/sprite/character/Kotori";
-import GamePointCount from "../../container/components/GamePointCount";
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import Kotori, {Direction, Speed} from "../../../container/sprite/character/Kotori";
+import GamePointCount from "../../../container/components/GamePointCount";
 
-import {Events as GameEvents} from '../view/GameViewState'
-import {dispatchEvent} from '../EventUtils';
+import {Events as GameEvents} from '../../view/GameViewState'
+import {dispatchEvent} from '../../EventUtils';
 
-import {getCurrentViewSize, getRandomInteger} from "../../helper/utils";
+import {getCurrentViewSize, getRandomInteger} from "../../../helper/utils";
 
-import {loadSound} from "../../helper/SoundManager";
-import {clearGamePoint, getGamePoint, saveGamePoint} from "../../helper/GlobalState";
+import {loadSound} from "../../../helper/SoundManager";
+import {clearGamePoint, getGamePoint, saveGamePoint} from "../../../helper/GlobalState";
 
-import manifest from '../../resources/manifest';
-import {GAME_PARAMETERS} from "../../Constants";
+import manifest from '../../../resources/manifest';
+import {GAME_PARAMETERS} from "../../../Constants";
 
 export const DEAD_ZONE_WIDTH_RATE = 0.4;
 

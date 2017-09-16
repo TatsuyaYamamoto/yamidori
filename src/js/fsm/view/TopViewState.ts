@@ -2,10 +2,10 @@ import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
 import State from "../internal/State";
-import TitleTopState from "../top/TitleTopState";
-import CreditTopState from "../top/CreditTopState";
-import UsageTopState from "../top/UsageTopState";
-import MenuTopState from "../top/MenuTopState";
+import TitleTopState from "../section/top/TitleTopState";
+import CreditTopState from "../section/top/CreditTopState";
+import UsageTopState from "../section/top/UsageTopState";
+import MenuTopState from "../section/top/MenuTopState";
 
 import ViewContainer from "../internal/ViewContainer";
 import Background from "../../container/sprite/background/Background";

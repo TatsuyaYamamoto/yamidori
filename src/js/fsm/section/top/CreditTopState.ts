@@ -1,18 +1,18 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../internal/State";
-import {Events} from "../view/TopViewState";
-import {dispatchEvent} from '../EventUtils';
+import State from "../../internal/State";
+import {Events} from "../../view/TopViewState";
+import {dispatchEvent} from '../../EventUtils';
 
-import CreditBackground from "../../container/sprite/background/CreditBackground";
-import CreditComponent from "../../container/components/CreditComponent";
-import BackToMenuButton from "../../container/sprite/button/BackToMenuButton";
+import CreditBackground from "../../../container/sprite/background/CreditBackground";
+import CreditComponent from "../../../container/components/CreditComponent";
+import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
-import {loadSound} from "../../helper/SoundManager";
-import manifest from '../../resources/manifest';
-import {URL, NAME_AND_ROLE} from "../../Constants";
-import ViewSectionContainer from "../internal/ViewSectionContainer";
+import {loadSound} from "../../../helper/SoundManager";
+import manifest from '../../../resources/manifest';
+import {URL, NAME_AND_ROLE} from "../../../Constants";
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
 
 class CreditTopState extends ViewSectionContainer implements State {
     public static TAG = "CreditTopState";

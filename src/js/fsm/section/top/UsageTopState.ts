@@ -1,19 +1,19 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import {Events} from "../view/TopViewState";
-import {dispatchEvent} from '../EventUtils';
-import State from "../internal/State";
+import {Events} from "../../view/TopViewState";
+import {dispatchEvent} from '../../EventUtils';
+import State from "../../internal/State";
 
-import ViewSectionContainer from "../internal/ViewSectionContainer";
-import Kotori, {Direction} from "../../container/sprite/character/Kotori";
-import UsageTapTargetInfo from "../../container/components/UsageTapTargetInfo";
-import UsageTextArea from "../../container/components/UsageTextArea";
-import BackToMenuButton from "../../container/sprite/button/BackToMenuButton";
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import Kotori, {Direction} from "../../../container/sprite/character/Kotori";
+import UsageTapTargetInfo from "../../../container/components/UsageTapTargetInfo";
+import UsageTextArea from "../../../container/components/UsageTextArea";
+import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
-import {getCurrentViewSize} from "../../helper/utils";
-import {loadSound} from "../../helper/SoundManager";
-import manifest from '../../resources/manifest';
+import {getCurrentViewSize} from "../../../helper/utils";
+import {loadSound} from "../../../helper/SoundManager";
+import manifest from '../../../resources/manifest';
 
 class UsageTopState extends ViewSectionContainer implements State{
     public static TAG = "UsageTopState";

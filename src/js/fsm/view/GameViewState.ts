@@ -3,9 +3,9 @@ import {Container} from 'pixi.js';
 import State from "../internal/State";
 import StateMachine from "../internal/StateMachine";
 import {addEvents, removeEvents} from "../EventUtils";
-import CountGameState from "../game/CountGameState";
-import OverGameState from "../game/OverGameState";
-import PlayingGameState from "../game/PlayingGameState";
+import CountGameState from "../section/game/CountGameState";
+import OverGameState from "../section/game/OverGameState";
+import PlayingGameState from "../section/game/PlayingGameState";
 
 import ViewContainer from "../internal/ViewContainer";
 import Background from "../../container/sprite/background/Background";

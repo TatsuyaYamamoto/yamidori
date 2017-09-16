@@ -1,19 +1,19 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../internal/State";
-import {Events} from '../view/TopViewState';
-import {dispatchEvent} from '../EventUtils';
+import State from "../../internal/State";
+import {Events} from '../../view/TopViewState';
+import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../internal/ViewSectionContainer";
-import TitleLogo from "../../container/sprite/logo/TitleLogo";
-import VersionText from "../../container/components/VersionText";
-import Text from '../../container/sprite/text/Text';
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import TitleLogo from "../../../container/sprite/logo/TitleLogo";
+import VersionText from "../../../container/components/VersionText";
+import Text from '../../../container/sprite/text/Text';
 
-import {getCurrentViewSize, getString, isSupportTouchEvent} from "../../helper/utils";
-import {Ids} from "../../resources/string";
-import {loadSound} from "../../helper/SoundManager";
-import manifest from '../../resources/manifest';
+import {getCurrentViewSize, getString, isSupportTouchEvent} from "../../../helper/utils";
+import {Ids} from "../../../resources/string";
+import {loadSound} from "../../../helper/SoundManager";
+import manifest from '../../../resources/manifest';
 
 
 class TitleTopState extends ViewSectionContainer implements State {
