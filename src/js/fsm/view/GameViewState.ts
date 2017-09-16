@@ -1,12 +1,15 @@
 import {Container} from 'pixi.js';
 
 import ViewState from "./ViewState";
-import GameViewContainer from "../../container/views/GameViewContainer";
 import StateMachine from "../internal/StateMachine";
 import {addEvents, removeEvents} from "../EventUtils";
 import CountGameState from "../game/CountGameState";
 import OverGameState from "../game/OverGameState";
 import PlayingGameState from "../game/PlayingGameState";
+
+import ViewContainer from "../../container/views/ViewContainer";
+import Background from "../../container/sprite/background/Background";
+
 import {SKIP_COUNT_DOWN_FOR_GAME_START} from "../../Constants";
 
 export enum Events {
@@ -16,14 +19,15 @@ export enum Events {
     TAP_KOTORI = "GameViewState@TAP_KOTORI"
 }
 
-class GameViewState implements ViewState {
+class GameViewState extends ViewContainer implements ViewState {
     public static TAG = "GameViewState";
-    private _container: GameViewContainer;
 
     private _gameStateMachine: StateMachine;
     private _countGameState: CountGameState;
     private _overGameState: OverGameState;
     private _playingGameState: PlayingGameState;
+
+    private _gameBackground: Background;
 
     private _gamePoint: number;
 
@@ -33,7 +37,6 @@ class GameViewState implements ViewState {
 
     onEnter(): void {
         console.log(`${GameViewState.TAG}@onEnter`);
-        this._container = new GameViewContainer();
 
         this._countGameState = new CountGameState();
         this._overGameState = new OverGameState();
@@ -56,7 +59,10 @@ class GameViewState implements ViewState {
 
         this._gamePoint = 0;
 
-        this._container.applicationLayer.addChild(this._countGameState.getContainer());
+        this._gameBackground = new Background();
+
+        this.backGroundLayer.addChild(this._gameBackground);
+        this.applicationLayer.addChild(this._countGameState.getContainer());
 
         if (SKIP_COUNT_DOWN_FOR_GAME_START) {
             this._changeToPlayingGameState();
@@ -74,14 +80,10 @@ class GameViewState implements ViewState {
     }
 
     /**
-     * Get pixi container.
-     *
-     * {@see ViewState#getContainer}
-     * @return {GameViewContainer}
-     * @override
+     * @deprecated
      */
     public getContainer = (): Container => {
-        return this._container;
+        return this;
     };
 
     private _changeToCountState = (): void => {
@@ -90,15 +92,15 @@ class GameViewState implements ViewState {
 
     private _changeToPlayingGameState = (): void => {
         this._gameStateMachine.change(PlayingGameState.TAG);
-        this._container.applicationLayer.removeChildren();
-        this._container.applicationLayer.addChild(this._playingGameState.getContainer());
+        this.applicationLayer.removeChildren();
+        this.applicationLayer.addChild(this._playingGameState.getContainer());
     };
 
     private _changeToOverGameState = (): void => {
         this._gameStateMachine.change(OverGameState.TAG);
-        this._container.applicationLayer.removeChildren();
-        this._container.applicationLayer.addChild(this._overGameState.getContainer());
-    }
+        this.applicationLayer.removeChildren();
+        this.applicationLayer.addChild(this._overGameState.getContainer());
+    };
 
     private _incrementGamePoint = (): void => {
         this._gamePoint++;
