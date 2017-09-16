@@ -94,14 +94,6 @@ class MenuTopState extends ViewSectionContainer implements State {
         console.log(`${MenuTopState.TAG}@onExit`);
     }
 
-    /**
-     * @deprecated
-     * @return {any}
-     */
-    public getContainer(): Container {
-        return this;
-    }
-
     private onGameStartButtonClick = (event: interaction.InteractionEvent): void => {
         this._okSound.play();
         dispatchEvent(Events.REQUEST_GAME_START);

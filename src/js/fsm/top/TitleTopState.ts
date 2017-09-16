@@ -64,14 +64,6 @@ class TitleTopState extends ViewSectionContainer implements State {
         console.log(`${TitleTopState.TAG}@onExit`);
     }
 
-    /**
-     * @deprecated
-     * @return {any}
-     */
-    public getContainer(): Container {
-        return this;
-    }
-
     private onWindowTap = (): void => {
         this._okSound.play();
         dispatchEvent(Events.REQUEST_GO_TO_MENU);

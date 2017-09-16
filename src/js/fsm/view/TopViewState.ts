@@ -79,7 +79,7 @@ class TopViewState extends ViewContainer implements State {
         this._background = new Background();
 
         this.backGroundLayer.addChild(this._background);
-        this.applicationLayer.addChild(this._titleTopState.getContainer());
+        this.applicationLayer.addChild(this._titleTopState);
     }
 
     /**
@@ -105,21 +105,21 @@ class TopViewState extends ViewContainer implements State {
         this._topViewStateMachine.change(MenuTopState.TAG);
 
         this.applicationLayer.removeChildren();
-        this.applicationLayer.addChild(this._menuTopState.getContainer());
+        this.applicationLayer.addChild(this._menuTopState);
     };
 
     private _changeToUsageState = (): void => {
         this._topViewStateMachine.change(UsageTopState.TAG);
 
         this.applicationLayer.removeChildren();
-        this.applicationLayer.addChild(this._usageTopState.getContainer());
+        this.applicationLayer.addChild(this._usageTopState);
     };
 
     private _changeToCredit = (): void => {
         this._topViewStateMachine.change(CreditTopState.TAG);
 
         this.applicationLayer.removeChildren();
-        this.applicationLayer.addChild(this._creditTopState.getContainer());
+        this.applicationLayer.addChild(this._creditTopState);
     };
 }
 

@@ -78,15 +78,7 @@ class UsageTopState extends ViewSectionContainer implements State{
         this._usageTarget = null;
         this._usageTapTargetInfo = null;
     }
-
-    /**
-     * @deprecated
-     * @return {any}
-     */
-    public getContainer(): Container {
-        return this;
-    }
-
+    
     private onUsageModelTargetClick = () => {
         this._tapKotoriSound.play();
 

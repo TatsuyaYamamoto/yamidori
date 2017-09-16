@@ -75,13 +75,6 @@ class CreditTopState extends ViewSectionContainer implements State {
         console.log(`${CreditTopState.TAG}@onExit`);
     }
 
-    /**
-     * @deprecated
-     */
-    public getContainer(): Container {
-        return this;
-    }
-
     private onBackToMenuButtonClick = () => {
         this._cancelSound.play();
         dispatchEvent(Events.REQUEST_BACK_TO_TOP);
