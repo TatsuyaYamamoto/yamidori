@@ -1,21 +1,22 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
+import State from "../internal/State";
+import {Events} from "../view/TopViewState";
+import {dispatchEvent} from '../EventUtils';
+
 import CreditBackground from "../../container/sprite/background/CreditBackground";
 import CreditComponent from "../../container/components/CreditComponent";
 import BackToMenuButton from "../../container/sprite/button/BackToMenuButton";
 
-import {getCurrentViewSize} from "../../helper/utils";
-import {URL, NAME_AND_ROLE} from "../../Constants";
-import {Events} from "../view/TopViewState";
-import {dispatchEvent} from '../EventUtils';
 import {loadSound} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest';
+import {URL, NAME_AND_ROLE} from "../../Constants";
+import ViewSectionContainer from "../internal/ViewSectionContainer";
 
-class CreditTopState {
+class CreditTopState extends ViewSectionContainer implements State {
     public static TAG = "CreditTopState";
 
-    private _container: Container;
     private _creditBackground: CreditBackground;
     private _t28Credit: CreditComponent;
     private _sanzashiCredit: CreditComponent;
@@ -37,28 +38,25 @@ class CreditTopState {
     onEnter(): void {
         console.log(`${CreditTopState.TAG}@onEnter`);
 
-        const {width, height} = getCurrentViewSize();
-        this._container = new Container();
-
         this._creditBackground = new CreditBackground();
 
         this._t28Credit = new CreditComponent(NAME_AND_ROLE.T28, URL.SOKONTOKORO_HOME);
-        this._t28Credit.position.set(width * 0.3, height * 0.5);
+        this._t28Credit.position.set(this.viewWidth * 0.3, this.viewHeight * 0.5);
 
         this._sanzashiCredit = new CreditComponent(NAME_AND_ROLE.SANZASHI, URL.TWITTER_HOME_SANZASHI);
-        this._sanzashiCredit.position.set(width * 0.5, height * 0.7);
+        this._sanzashiCredit.position.set(this.viewWidth * 0.5, this.viewHeight * 0.7);
 
         this._onjinCredit = new CreditComponent(NAME_AND_ROLE.ON_JIN, URL.ONJIN_TOP);
-        this._onjinCredit.position.set(width * 0.7, height * 0.9);
+        this._onjinCredit.position.set(this.viewWidth * 0.7, this.viewHeight * 0.9);
 
         this._loveliveCredit = new CreditComponent(NAME_AND_ROLE.LOVELIVE, URL.LOVELIVE_TOP);
-        this._loveliveCredit.position.set(width * 0.8, height * 0.55);
+        this._loveliveCredit.position.set(this.viewWidth * 0.8, this.viewHeight * 0.55);
 
         this._backToMenuButton = new BackToMenuButton();
-        this._backToMenuButton.position.set(width * 0.15, height * 0.8);
+        this._backToMenuButton.position.set(this.viewWidth * 0.15, this.viewHeight * 0.8);
         this._backToMenuButton.setOnClickListener(this.onBackToMenuButtonClick);
 
-        this._container.addChild(
+        this.addChild(
             this._creditBackground,
             this._backToMenuButton,
             this._t28Credit,
@@ -77,8 +75,11 @@ class CreditTopState {
         console.log(`${CreditTopState.TAG}@onExit`);
     }
 
+    /**
+     * @deprecated
+     */
     public getContainer(): Container {
-        return this._container;
+        return this;
     }
 
     private onBackToMenuButtonClick = () => {

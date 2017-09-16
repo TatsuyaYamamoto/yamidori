@@ -96,7 +96,7 @@ class TopViewState extends ViewContainer implements State {
             Events.REQUEST_BACK_TO_TOP,
         ]);
     }
-    
+
     private _requestGameStart = (): void => {
         dispatchEvent(ApplicationEvents.GAME_START_REQUEST);
     };
