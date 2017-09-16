@@ -2,13 +2,13 @@ import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
 import State from "../internal/State";
+import {Events} from '../view/TopViewState';
+import {dispatchEvent} from '../EventUtils';
 
+import ViewSectionContainer from "../internal/ViewSectionContainer";
 import TitleLogo from "../../container/sprite/logo/TitleLogo";
 import VersionText from "../../container/components/VersionText";
 import Text from '../../container/sprite/text/Text';
-
-import {Events} from '../view/TopViewState';
-import {dispatchEvent} from '../EventUtils';
 
 import {getCurrentViewSize, getString, isSupportTouchEvent} from "../../helper/utils";
 import {Ids} from "../../resources/string";
@@ -16,10 +16,8 @@ import {loadSound} from "../../helper/SoundManager";
 import manifest from '../../resources/manifest';
 
 
-class TitleTopState implements State {
+class TitleTopState extends ViewSectionContainer implements State {
     public static TAG = "TitleTopState";
-
-    private _container: Container;
 
     private _titleLog: TitleLogo;
     private _appVersion: VersionText;
@@ -39,19 +37,16 @@ class TitleTopState implements State {
     onEnter(): void {
         console.log(`${TitleTopState.TAG}@onEnter`);
 
-        const {width, height} = getCurrentViewSize();
-        this._container = new Container();
-
         this._titleLog = new TitleLogo();
-        this._titleLog.position.set(width * 0.5, height * 0.5);
+        this._titleLog.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
 
         this._appVersion = new VersionText();
-        this._appVersion.position.set(width * 0.1, height * 0.95);
+        this._appVersion.position.set(this.viewWidth * 0.1, this.viewHeight * 0.95);
 
         this._tapInfoText = new Text(getString(Ids.TAP_DISPLAY_INFO));
-        this._tapInfoText.position.set(width * 0.5, height * 0.9);
+        this._tapInfoText.position.set(this.viewWidth * 0.5, this.viewHeight * 0.9);
 
-        this._container.addChild(
+        this.addChild(
             this._titleLog,
             this._appVersion,
             this._tapInfoText
@@ -69,8 +64,12 @@ class TitleTopState implements State {
         console.log(`${TitleTopState.TAG}@onExit`);
     }
 
+    /**
+     * @deprecated
+     * @return {any}
+     */
     public getContainer(): Container {
-        return this._container;
+        return this;
     }
 
     private onWindowTap = (): void => {
