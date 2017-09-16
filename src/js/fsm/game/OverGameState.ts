@@ -84,14 +84,6 @@ class OverGameState extends ViewSectionContainer implements State {
         this._gameOverSound.stop();
     }
 
-    /**
-     * @deprecated
-     * @return {OverGameState}
-     */
-    public getContainer(): Container {
-        return this;
-    }
-
     private handleTapGoBackHome = () => {
         this._cancelSound.play();
         dispatchEvent(ApplicationEvents.BACK_TO_TOP_REQUEST);

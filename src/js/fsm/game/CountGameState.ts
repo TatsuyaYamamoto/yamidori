@@ -64,14 +64,6 @@ class CountGameState extends ViewSectionContainer implements State {
     onExit(): void {
         console.log(`${CountGameState.TAG}@onExit`);
     }
-
-    /**
-     * @deprecated
-     * @return {any}
-     */
-    public getContainer(): Container {
-        return this;
-    }
 }
 
 export default CountGameState;

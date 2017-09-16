@@ -62,7 +62,7 @@ class GameViewState extends ViewContainer implements State {
         this._gameBackground = new Background();
 
         this.backGroundLayer.addChild(this._gameBackground);
-        this.applicationLayer.addChild(this._countGameState.getContainer());
+        this.applicationLayer.addChild(this._countGameState);
 
         if (SKIP_COUNT_DOWN_FOR_GAME_START) {
             this._changeToPlayingGameState();
@@ -86,13 +86,13 @@ class GameViewState extends ViewContainer implements State {
     private _changeToPlayingGameState = (): void => {
         this._gameStateMachine.change(PlayingGameState.TAG);
         this.applicationLayer.removeChildren();
-        this.applicationLayer.addChild(this._playingGameState.getContainer());
+        this.applicationLayer.addChild(this._playingGameState);
     };
 
     private _changeToOverGameState = (): void => {
         this._gameStateMachine.change(OverGameState.TAG);
         this.applicationLayer.removeChildren();
-        this.applicationLayer.addChild(this._overGameState.getContainer());
+        this.applicationLayer.addChild(this._overGameState);
     };
 
     private _incrementGamePoint = (): void => {

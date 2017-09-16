@@ -88,14 +88,6 @@ class PlayingGameState extends ViewSectionContainer implements State {
         this._gameLoopSound.stop();
     }
 
-    /**
-     * @deprecated
-     * @return {PlayingGameState}
-     */
-    public getContainer(): Container {
-        return this;
-    }
-
     private getNextAppearTimeMillis(): number {
         const min = GAME_PARAMETERS.KOTORI_APPEARANCE_INTERVAL_MIN;
         const max = GAME_PARAMETERS.KOTORI_APPEARANCE_INTERVAL_MAX;
