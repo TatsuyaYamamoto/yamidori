@@ -1,23 +1,26 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import GameState from "./GameState";
+import State from "../internal/State";
+
 import {Events as ApplicationEvents} from "../ApplicationState";
+import {dispatchEvent} from "../EventUtils";
+
 import GameOverLogo from '../../container/sprite/logo/GameOverLogo';
 import GameRestartButton from "../../container/sprite/button/GameRestartButton";
 import GoBackHomeButton from "../../container/sprite/button/GoBackHomeButton";
 import ResultTweetButton from "../../container/sprite/button/ResultTweetButton";
 import GamePointCount from "../../container/components/GamePointCount";
 
-import {dispatchEvent} from "../EventUtils";
 import {getCurrentViewSize, getString, getRandomInteger} from "../../helper/utils";
 import {postPlayLog, tweetGameResult} from '../../helper/network';
 import {loadSound} from "../../helper/SoundManager";
 import {getGamePoint} from "../../helper/GlobalState";
+
 import manifest from '../../resources/manifest';
 import {Ids} from '../../resources/string';
 
-class OverGameState implements GameState {
+class OverGameState implements State {
     public static TAG = "OverGameState";
 
     private _container: Container;

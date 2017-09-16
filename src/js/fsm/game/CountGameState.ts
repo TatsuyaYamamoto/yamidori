@@ -1,19 +1,21 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import GameState from "./GameState";
+import State from "../internal/State";
+
+import ViewSectionContainer from "../internal/ViewSectionContainer";
+import CountDownText from "../../container/components/CountDownText";
+
 import {dispatchEvent} from '../EventUtils';
 import {Events} from '../view/GameViewState';
+
 import manifest from '../../resources/manifest';
 import {loadSound} from "../../helper/SoundManager";
-import CountDownText from "../../container/components/CountDownText";
-import {getCurrentViewSize} from "../../helper/utils";
 
-class CountGameState implements GameState {
+class CountGameState extends ViewSectionContainer implements State {
     public static TAG = "CountGameState";
     private _initialTimeMillis: number;
 
-    private _container: Container;
     private _countInfo: CountDownText;
 
     private _isCountedOne: boolean = false;
@@ -28,7 +30,7 @@ class CountGameState implements GameState {
         if (1000 < this._initialTimeMillis && !this._isCountedTwo) {
             console.log("Count down, 2!");
             this._countInfo.count = 2;
-            this._container.addChild(this._countInfo);
+            this.addChild(this._countInfo);
             this._countLowSound.play();
             this._isCountedTwo = true;
         }
@@ -55,18 +57,20 @@ class CountGameState implements GameState {
         this._countLowSound = loadSound(manifest.soundCountLow);
 
         // Set deadline position.
-        const {width, height} = getCurrentViewSize();
-        this._container = new Container();
         this._countInfo = new CountDownText();
-        this._countInfo.position.set(width * 0.5, height * 0.5);
+        this._countInfo.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
     }
 
     onExit(): void {
         console.log(`${CountGameState.TAG}@onExit`);
     }
 
+    /**
+     * @deprecated
+     * @return {any}
+     */
     public getContainer(): Container {
-        return this._container;
+        return this;
     }
 }
 

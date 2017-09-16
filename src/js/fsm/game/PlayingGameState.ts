@@ -1,20 +1,26 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import GameState from "./GameState";
+import State from "../internal/State";
+
 import Kotori, {Direction, Speed} from "../../container/sprite/character/Kotori";
+import GamePointCount from "../../container/components/GamePointCount";
+
 import {Events as GameEvents} from '../view/GameViewState'
 import {dispatchEvent} from '../EventUtils';
+
 import {getCurrentViewSize, getRandomInteger} from "../../helper/utils";
-import GamePointCount from "../../container/components/GamePointCount";
+
 import {loadSound} from "../../helper/SoundManager";
-import manifest from '../../resources/manifest';
 import {clearGamePoint, getGamePoint, saveGamePoint} from "../../helper/GlobalState";
+
+import manifest from '../../resources/manifest';
 import {GAME_PARAMETERS} from "../../Constants";
+
 
 export const DEAD_ZONE_WIDTH_RATE = 0.4;
 
-class PlayingGameState implements GameState {
+class PlayingGameState implements State {
     public static TAG = "PlayingGameState";
 
     private _container: Container;
