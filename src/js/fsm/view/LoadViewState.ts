@@ -3,7 +3,7 @@ import {Container, loaders} from 'pixi.js';
 import {Events as ApplicationEvents} from "../ApplicationState";
 import ViewState from "./ViewState";
 
-import ViewContainer from "../../container/views/ViewContainer";
+import ViewContainer from "../internal/ViewContainer";
 import Text from "../../container/sprite/text/Text";
 import BrandLogoAnimation from '../../container/BrandLogoAnimation';
 import LoadKotoriAnimation from '../../container/LoadKotoriAnimation';

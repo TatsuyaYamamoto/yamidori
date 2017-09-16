@@ -7,7 +7,7 @@ import CountGameState from "../game/CountGameState";
 import OverGameState from "../game/OverGameState";
 import PlayingGameState from "../game/PlayingGameState";
 
-import ViewContainer from "../../container/views/ViewContainer";
+import ViewContainer from "../internal/ViewContainer";
 import Background from "../../container/sprite/background/Background";
 
 import {SKIP_COUNT_DOWN_FOR_GAME_START} from "../../Constants";

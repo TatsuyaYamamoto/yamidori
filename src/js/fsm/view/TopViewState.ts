@@ -7,7 +7,7 @@ import CreditTopState from "../top/CreditTopState";
 import UsageTopState from "../top/UsageTopState";
 import MenuTopState from "../top/MenuTopState";
 
-import ViewContainer from "../../container/views/ViewContainer";
+import ViewContainer from "../internal/ViewContainer";
 import Background from "../../container/sprite/background/Background";
 
 import manifest from '../../resources/manifest';

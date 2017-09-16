@@ -2,7 +2,7 @@ import {Container} from 'pixi.js';
 
 import ViewState from "./ViewState";
 
-import ViewContainer from "../../container/views/ViewContainer";
+import ViewContainer from "../internal/ViewContainer";
 import Text from "../../container/sprite/text/Text";
 
 import {Events} from "../ApplicationState";
