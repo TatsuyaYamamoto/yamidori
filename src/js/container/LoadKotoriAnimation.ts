@@ -4,6 +4,9 @@ const KOTORI_IMAGE_BASE64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAScAA
 
 
 class LoadKotoriAnimation extends Container {
+    private _max: number;
+    private _kotoriImage: Sprite;
+
     constructor(max) {
         super();
 

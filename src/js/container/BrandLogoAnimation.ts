@@ -16,7 +16,19 @@ const TIMELINE = {
 const DURATION_SCALE = 1;
 
 class BrandLogoAnimation extends Container {
-    constructor(width, height) {
+    private _width: number;
+    private _height: number;
+    private _timeoutAfterComplete: number;
+
+    private _hammer: Sprite;
+    private _characters: Text[];
+
+    private _hammerTimeLine;
+    private _charTimeLine;
+
+    private _promise: Promise<any>;
+
+    constructor(width?, height?) {
         super();
 
         this._width = width || 400;
@@ -29,7 +41,7 @@ class BrandLogoAnimation extends Container {
             text.anchor.set(0.5, 1);
             return text;
         });
-        
+
         this._hammer = Sprite.fromImage(HAMMER_IMAGE);
         this._hammer.anchor.set(0.5, 1);
         this._hammer.position.set(

@@ -1,8 +1,8 @@
 import {Container} from 'pixi.js';
 
 import Text from "../sprite/text/Text";
-import BrandLogoAnimation from "../BrandLogoAnimation.js";
-import LoadKotoriAnimation from "../LoadKotoriAnimation.js";
+import BrandLogoAnimation from "../BrandLogoAnimation";
+import LoadKotoriAnimation from "../LoadKotoriAnimation";
 import {Events} from '../../fsm/view/LoadViewState'
 import {getCurrentViewSize} from "../../helper/utils";
 import {dispatchEvent} from '../../fsm/EventUtils';
