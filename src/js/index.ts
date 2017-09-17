@@ -6,35 +6,30 @@
  */
 import ApplicationState from "./fsm/ApplicationState";
 import {getCurrentViewSize} from "./helper/utils";
+import {initI18n} from './helper/i18n';
 
 import 'whatwg-fetch';
 
-/**
- * Initial window size.
- */
-const {width, height} = getCurrentViewSize();
-
-/**
- * Root application state;
- * @type {any}
- */
-const rootState = new ApplicationState({width, height});
-
-/**
- * Main game element.
- *
- * @type {HTMLElement|any}
- */
-const mainElement: HTMLElement = document.getElementById('main');
 
 /**
  * Initialize the application.
  */
 function init() {
     console.info("Welcome Toridori!");
-    mainElement.appendChild(<Node>rootState.view);
 
+    // Initialize internationalization.
+    initI18n();
+
+    const mainElement: HTMLElement = document.getElementById('main');
+    const rootState = new ApplicationState(getCurrentViewSize());
+
+    // set application viewer.
+    mainElement.appendChild(<HTMLElement>rootState.view);
+
+    // start application.
     rootState.onEnter();
+
+    // start application tick.
     rootState.ticker.add((deltaTime: number) => {
         rootState.update(rootState.ticker.elapsedMS);
     });
