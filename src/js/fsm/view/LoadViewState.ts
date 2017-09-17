@@ -8,8 +8,7 @@ import BrandLogoAnimation from '../../container/BrandLogoAnimation';
 import LoadKotoriAnimation from '../../container/LoadKotoriAnimation';
 
 import {addEvents, removeEvents, dispatchEvent} from '../EventUtils';
-import AssetLoader from '../../helper/AssetLoader';
-import {setAsset} from "../../helper/utils";
+import AssetLoader, {Asset} from '../../helper/AssetLoader';
 
 import {SKIP_BRAND_LOGO_ANIMATION} from "../../Constants";
 
@@ -86,7 +85,7 @@ class LoadViewState extends ViewContainer {
         ]);
     }
 
-    private _onLoadProgress = (event: loaders.Loader): void => {
+    private _onLoadProgress = (event: AssetLoader): void => {
         const percentage = event.progress;
 
         this._loadedProgressPercentage = percentage;
@@ -94,10 +93,9 @@ class LoadViewState extends ViewContainer {
         this._loadKotoriAnimation.progress(percentage);
     };
 
-    private _onLoadComplete = (loader: AssetLoader, resources: { string: loaders.Resource }): void => {
+    private _onLoadComplete = (loader: AssetLoader, resources: { string: Asset }): void => {
         console.log(`Complete to load [${Object.keys(resources).length}] resources.`);
 
-        Object.keys(resources).forEach((key) => setAsset(resources[key]));
         dispatchEvent(Events.COMPLETE_LOAD);
     };
 

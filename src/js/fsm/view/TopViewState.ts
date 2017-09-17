@@ -9,7 +9,7 @@ import ViewContainer from "../internal/ViewContainer";
 import Background from "../../container/sprite/background/Background";
 
 import manifest from '../../resources/manifest';
-import {loadSound} from "../../helper/SoundManager";
+import {loadSound} from "../../helper/AssetLoader";
 import StateMachine from "../internal/StateMachine";
 
 import {Events as ApplicationEvents} from "../ApplicationState";

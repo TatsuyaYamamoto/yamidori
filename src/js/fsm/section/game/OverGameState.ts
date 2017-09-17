@@ -12,7 +12,7 @@ import GamePointCount from "../../../container/components/GamePointCount";
 
 import {getRandomInteger} from "../../../helper/utils";
 import {postPlayLog, tweetGameResult} from '../../../helper/network';
-import {loadSound} from "../../../helper/SoundManager";
+import {loadSound} from "../../../helper/AssetLoader";
 import {getGamePoint} from "../../../helper/GlobalState";
 import {t} from "../../../helper/i18n";
 

@@ -9,7 +9,7 @@ import CreditComponent from "../../../container/components/CreditComponent";
 import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
 import {t} from "../../../helper/i18n";
-import {loadSound} from "../../../helper/SoundManager";
+import {loadSound} from "../../../helper/AssetLoader";
 
 import manifest from '../../../resources/manifest';
 import {Ids} from "../../../resources/string";

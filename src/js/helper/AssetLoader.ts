@@ -1,23 +1,29 @@
 import {loaders} from 'pixi.js';
+import Sound from "pixi-sound/lib/Sound";
+
+import {getAsset, setAsset} from "./utils";
 
 import manifest from '../resources/manifest';
 
-class AssetLoader extends loaders.Loader {
-    /**
-     * Load assets written in manifest files.
-     *
-     * @see ../resources/manifest.ts
-     * @param cb
-     * @return {PIXI.loaders.Loader}
-     * @override
-     */
-    load(cb?: Function): this {
-        Object.keys(manifest).forEach((key) => {
-            this.add(key, manifest[key]);
-        });
+export interface Asset extends loaders.Resource {
+    sound: Sound
+}
 
-        return super.load(cb);
+class AssetLoader extends loaders.Loader {
+    constructor() {
+        super();
+
+        Object.keys(manifest).forEach((key) => this.add(key, manifest[key]));
+
+        this.on("complete", function (loader: AssetLoader, resources: { string: Asset }) {
+            Object.keys(resources).forEach((key) => setAsset(resources[key]));
+        })
     }
 }
+
+export function loadSound(url: string): Sound {
+    return getAsset(url).sound;
+}
+
 
 export default AssetLoader;

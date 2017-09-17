@@ -17,7 +17,7 @@ import ChangeLanguageButton from "../../../container/sprite/button/ChangeLanguag
 
 import {goTo} from "../../../helper/network";
 import {toggleMute} from "../../../helper/utils";
-import {loadSound} from "../../../helper/SoundManager";
+import {loadSound} from "../../../helper/AssetLoader";
 import {changeLanguage, getCurrentLanguage, SupportedLanguages, t} from "../../../helper/i18n";
 
 import manifest from '../../../resources/manifest';

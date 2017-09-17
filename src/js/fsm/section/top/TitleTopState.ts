@@ -9,7 +9,7 @@ import VersionText from "../../../container/components/VersionText";
 import Text from '../../../container/sprite/text/Text';
 
 import {isSupportTouchEvent} from "../../../helper/utils";
-import {loadSound} from "../../../helper/SoundManager";
+import {loadSound} from "../../../helper/AssetLoader";
 import {t} from "../../../helper/i18n";
 
 import {Ids} from "../../../resources/string";

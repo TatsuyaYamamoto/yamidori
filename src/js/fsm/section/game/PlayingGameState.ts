@@ -11,7 +11,7 @@ import {dispatchEvent} from '../../EventUtils';
 
 import {getRandomInteger} from "../../../helper/utils";
 
-import {loadSound} from "../../../helper/SoundManager";
+import {loadSound} from "../../../helper/AssetLoader";
 import {clearGamePoint, getGamePoint, saveGamePoint} from "../../../helper/GlobalState";
 
 import manifest from '../../../resources/manifest';
