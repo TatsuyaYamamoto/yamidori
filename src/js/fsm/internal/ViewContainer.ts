@@ -1,8 +1,10 @@
 import {Container} from 'pixi.js';
 
+import State from "./State";
+
 import {BASIC_IMAGE_HEIGHT, BASIC_IMAGE_WIDTH} from "../../Constants";
 
-abstract class ViewContainer extends Container {
+abstract class ViewContainer extends Container implements State {
     private _backGroundLayer: Container;
     private _applicationLayer: Container;
     private _informationLayer: Container;
@@ -45,6 +47,30 @@ abstract class ViewContainer extends Container {
 
     public get informationLayer(): Container {
         return this._informationLayer;
+    }
+
+    /**
+     * @inheritDoc
+     * @see State#update
+     */
+    update(elapsedTime: number): void {
+
+    }
+
+    /**
+     * @inheritDoc
+     * @see State#onEnter
+     */
+    onEnter(): void {
+        console.log(`${this.constructor.name}@onEnter`);
+    }
+
+    /**
+     * @inheritDoc
+     * @see State#onExit
+     */
+    onExit(): void {
+        console.log(`${this.constructor.name}@onExit`);
     }
 }
 

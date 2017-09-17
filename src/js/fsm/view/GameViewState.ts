@@ -1,8 +1,6 @@
-import {Container} from 'pixi.js';
-
-import State from "../internal/State";
 import StateMachine from "../internal/StateMachine";
 import {addEvents, removeEvents} from "../EventUtils";
+
 import CountGameState from "../section/game/CountGameState";
 import OverGameState from "../section/game/OverGameState";
 import PlayingGameState from "../section/game/PlayingGameState";
@@ -19,7 +17,7 @@ export enum Events {
     TAP_KOTORI = "GameViewState@TAP_KOTORI"
 }
 
-class GameViewState extends ViewContainer implements State {
+class GameViewState extends ViewContainer {
     public static TAG = "GameViewState";
 
     private _gameStateMachine: StateMachine;
@@ -36,7 +34,7 @@ class GameViewState extends ViewContainer implements State {
     }
 
     onEnter(): void {
-        console.log(`${GameViewState.TAG}@onEnter`);
+        super.onEnter();
 
         this._countGameState = new CountGameState();
         this._overGameState = new OverGameState();
@@ -70,7 +68,8 @@ class GameViewState extends ViewContainer implements State {
     }
 
     onExit(): void {
-        console.log(`${GameViewState.TAG}@onExit`);
+        super.onExit();
+
         removeEvents([
             Events.COUNT_START,
             Events.GAME_START,

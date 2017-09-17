@@ -1,7 +1,6 @@
-import {Container, loaders} from 'pixi.js';
+import {loaders} from 'pixi.js';
 
 import {Events as ApplicationEvents} from "../ApplicationState";
-import State from "../internal/State";
 
 import ViewContainer from "../internal/ViewContainer";
 import Text from "../../container/sprite/text/Text";
@@ -19,7 +18,7 @@ export enum Events {
     COMPLETE_LOGO_ANIMATION = "LoadViewState@COMPLETE_LOGO_ANIMATION",
 }
 
-class LoadViewState extends ViewContainer implements State {
+class LoadViewState extends ViewContainer {
     public static TAG = "LoadViewState";
 
     private _loader: AssetLoader;
@@ -43,7 +42,7 @@ class LoadViewState extends ViewContainer implements State {
      * @override
      */
     onEnter(): void {
-        console.log(`${LoadViewState.TAG}@onEnter`);
+        super.onEnter();
 
         addEvents({
             [Events.COMPLETE_LOAD]: this._handleLoadCompleteEvent,
@@ -79,7 +78,7 @@ class LoadViewState extends ViewContainer implements State {
      * @override
      */
     onExit(): void {
-        console.log(`${LoadViewState.TAG}@onExit`);
+        super.onExit();
 
         removeEvents([
             Events.COMPLETE_LOAD,

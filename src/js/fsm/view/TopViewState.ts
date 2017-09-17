@@ -1,7 +1,5 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../internal/State";
 import TitleTopState from "../section/top/TitleTopState";
 import CreditTopState from "../section/top/CreditTopState";
 import UsageTopState from "../section/top/UsageTopState";
@@ -25,7 +23,7 @@ export enum Events {
     REQUEST_BACK_TO_TOP = "TopViewState@REQUEST_BACK_TO_TOP"
 }
 
-class TopViewState extends ViewContainer implements State {
+class TopViewState extends ViewContainer {
     public static TAG = "TopViewState";
 
     private _topViewStateMachine: StateMachine;
@@ -49,7 +47,7 @@ class TopViewState extends ViewContainer implements State {
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${TopViewState.TAG}@onEnter`);
+        super.onEnter();
 
         this._titleTopState = new TitleTopState();
         this._menuTopState = new MenuTopState();
@@ -86,7 +84,8 @@ class TopViewState extends ViewContainer implements State {
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${TopViewState.TAG}@onExit`);
+        super.onEnter();
+
         this._zenkaiSound.stop();
         removeEvents([
             Events.REQUEST_GO_TO_MENU,
