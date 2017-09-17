@@ -1,8 +1,6 @@
 import {loaders} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import {getAsset, setAsset} from "./utils";
-
 import manifest from '../resources/manifest';
 
 export interface Asset extends loaders.Resource {
@@ -21,9 +19,41 @@ class AssetLoader extends loaders.Loader {
     }
 }
 
+/**
+ * Preloaded resources with Pixi loader.
+ *
+ * @type {any}
+ * @private
+ */
+const AssetsCache: { string: Asset } = Object.create(null);
+
+/**
+ * Cache asset resource.
+ *
+ * @param resource
+ */
+function setAsset(resource: Asset) {
+    AssetsCache[resource.url] = resource;
+}
+
+/**
+ * Get cached asset resource.
+ *
+ * @param url
+ * @return {any}
+ */
+function getAsset(url: string): Asset {
+    return AssetsCache[url];
+}
+
+/**
+ * Get cached sound asset.
+ *
+ * @param {string} url
+ * @return {Sound}
+ */
 export function loadSound(url: string): Sound {
     return getAsset(url).sound;
 }
-
 
 export default AssetLoader;
