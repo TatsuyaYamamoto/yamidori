@@ -2,8 +2,11 @@ import {Container, Graphics} from 'pixi.js';
 
 import Text from "../sprite/text/Text";
 
-import {getCurrentViewSize, getString} from "../../helper/utils";
+import {getCurrentViewSize} from "../../helper/utils";
+import {t} from "../../helper/i18n";
+
 import {Ids} from "../../resources/string";
+
 
 class UsageTextArea extends Container {
     private _text: Text;
@@ -13,7 +16,7 @@ class UsageTextArea extends Container {
         super();
         const {width, height} = getCurrentViewSize();
 
-        this._text = new Text(getString(Ids.HOW_TO_PLAY_INFORMATION), {
+        this._text = new Text(t(Ids.HOW_TO_PLAY_INFORMATION), {
             fontSize: 16,
         });
 

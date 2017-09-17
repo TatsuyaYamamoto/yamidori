@@ -7,8 +7,9 @@ import Text from "../../container/sprite/text/Text";
 
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
-import {getString, isIOS, isSupportTouchEvent} from "../../helper/utils";
+import {isIOS, isSupportTouchEvent} from "../../helper/utils";
 import {Ids} from "../../resources/string";
+import {t} from "../../helper/i18n";
 
 class InitialViewState extends ViewContainer implements State {
     public static TAG = "InitialViewState";
@@ -31,7 +32,7 @@ class InitialViewState extends ViewContainer implements State {
         // TODO: Check login?
 
         if (isIOS()) {
-            this._tapInfo = new Text(getString(Ids.TAP_DISPLAY_INFO));
+            this._tapInfo = new Text(t(Ids.TAP_DISPLAY_INFO));
             this._tapInfo.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
             this.addChild(this._tapInfo);
 

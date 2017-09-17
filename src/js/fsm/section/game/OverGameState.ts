@@ -1,4 +1,3 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
 import State from "../../internal/State";
@@ -13,10 +12,11 @@ import GoBackHomeButton from "../../../container/sprite/button/GoBackHomeButton"
 import ResultTweetButton from "../../../container/sprite/button/ResultTweetButton";
 import GamePointCount from "../../../container/components/GamePointCount";
 
-import {getCurrentViewSize, getString, getRandomInteger} from "../../../helper/utils";
+import {getRandomInteger} from "../../../helper/utils";
 import {postPlayLog, tweetGameResult} from '../../../helper/network';
 import {loadSound} from "../../../helper/SoundManager";
 import {getGamePoint} from "../../../helper/GlobalState";
+import {t} from "../../../helper/i18n";
 
 import manifest from '../../../resources/manifest';
 import {Ids} from '../../../resources/string';
@@ -100,19 +100,19 @@ class OverGameState extends ViewSectionContainer implements State {
      * @private
      */
     private handleTapResultTweet = () => {
-        let tweetText = getString(Ids.GAME_RESULT_TWEET_ZERO_POINT);
+        let tweetText = t(Ids.GAME_RESULT_TWEET_ZERO_POINT);
 
         if (getGamePoint() !== 0) {
             switch (getRandomInteger(0, 2)) {
                 case 0:
-                    tweetText = getString(Ids.GAME_RESULT_TWEET1);
+                    tweetText = t(Ids.GAME_RESULT_TWEET1);
                     break;
                 case 1:
-                    tweetText = getString(Ids.GAME_RESULT_TWEET2);
+                    tweetText = t(Ids.GAME_RESULT_TWEET2);
                     break;
                 case 2:
                 default:
-                    tweetText = getString(Ids.GAME_RESULT_TWEET3);
+                    tweetText = t(Ids.GAME_RESULT_TWEET3);
                     break;
             }
             tweetText = tweetText.replace(/%s/, `${getGamePoint()}`);

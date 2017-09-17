@@ -40,27 +40,6 @@ export function getScale(): number {
 }
 
 /**
- * Get string resource with ID.
- *
- * @param id
- * @return {any}
- */
-export function getString(id: string): string {
-    const text = strings[id];
-
-    if (typeof text === 'string') {
-        return text;
-    }
-
-    if (typeof text === 'object') {
-        // TODO: handle value in accordance with user lang.
-        return text['en']
-    }
-
-    throw new Error('Could not find a string resource with provided id.');
-}
-
-/**
  * Return true if running browser is supporting touch events.
  * @see https://github.com/Modernizr/Modernizr/blob/v3.3.1/feature-detects/touchevents.js
  * @return {boolean}
