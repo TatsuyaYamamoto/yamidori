@@ -12,14 +12,16 @@ import GoRankingButton from "../../../container/sprite/button/GoRankingButton";
 import GoCreditButton from "../../../container/sprite/button/GoCreditButton";
 import GoTwitterHomeButton from "../../../container/sprite/button/GoTwitterHomeButton";
 import SoundButton from "../../../container/sprite/button/SoundButton";
+import ChangeLanguageButton from "../../../container/sprite/button/ChangeLanguageButton";
 
 import {goTo} from "../../../helper/network";
 import {toggleMute} from "../../../helper/SoundManager";
 import {loadSound} from "../../../helper/SoundManager";
+import {changeLanguage, getCurrentLanguage, SupportedLanguages} from "../../../helper/i18n";
+
 import manifest from '../../../resources/manifest';
 
 import {URL} from '../../../Constants';
-import ChangeLanguageButton from "../../../container/sprite/button/ChangeLanguageButton";
 
 class MenuTopState extends ViewSectionContainer {
     public static TAG = "MenuTopState";
@@ -127,7 +129,10 @@ class MenuTopState extends ViewSectionContainer {
     private onChangeLanguageButtonClick = () => {
         this._okSound.play();
         if (confirm("言語を変更します。")) {
-            console.log("hgoehoge english!")
+            const nextLang = getCurrentLanguage() === SupportedLanguages.EN ?
+                SupportedLanguages.JA :
+                SupportedLanguages.EN;
+            changeLanguage(nextLang);
         }
     }
 }
