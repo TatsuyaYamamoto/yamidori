@@ -18,9 +18,10 @@ import ChangeLanguageButton from "../../../container/sprite/button/ChangeLanguag
 import {goTo} from "../../../helper/network";
 import {toggleMute} from "../../../helper/SoundManager";
 import {loadSound} from "../../../helper/SoundManager";
-import {changeLanguage, getCurrentLanguage, SupportedLanguages} from "../../../helper/i18n";
+import {changeLanguage, getCurrentLanguage, SupportedLanguages, t} from "../../../helper/i18n";
 
 import manifest from '../../../resources/manifest';
+import {Ids} from "../../../resources/string";
 
 import {URL} from '../../../Constants';
 
@@ -129,16 +130,18 @@ class MenuTopState extends ViewSectionContainer {
 
     private onChangeLanguageButtonClick = () => {
         this._okSound.play();
-        swal("言語を変更します。", {buttons: true})
+        swal(t(Ids.CHANGE_LANGUAGE_INFO), {buttons: true})
             .then((willChange) => {
                 if (willChange) {
-                    const nextLang = getCurrentLanguage() === SupportedLanguages.EN ?
-                        SupportedLanguages.JA :
-                        SupportedLanguages.EN;
-                    changeLanguage(nextLang);
+                    swal(t(Ids.RELOAD_APP_INFO))
+                        .then(() => {
+                            const nextLang = getCurrentLanguage() === SupportedLanguages.EN ?
+                                SupportedLanguages.JA :
+                                SupportedLanguages.EN;
+                            changeLanguage(nextLang);
 
-                    swal("再起動します。")
-                        .then(() => location.reload());
+                            location.reload()
+                        });
                 }
             });
     }

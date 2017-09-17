@@ -1,6 +1,9 @@
 export const Ids = {
     TAP_DISPLAY_INFO: 'TAP_DISPLAY_INFO',
     HOW_TO_PLAY_INFORMATION: 'HOW_TO_PLAY_INFORMATION',
+    CHANGE_LANGUAGE_INFO: 'CHANGE_LANGUAGE_INFO',
+    RELOAD_APP_INFO: 'RELOAD_APP_INFO',
+
     GAME_RESULT_TWEET1: 'GAME_RESULT_TWEET1',
     GAME_RESULT_TWEET2: 'GAME_RESULT_TWEET2',
     GAME_RESULT_TWEET3: 'GAME_RESULT_TWEET3',
@@ -23,6 +26,10 @@ It will be a mystery pot again like this!
 
 Tap kotori-chan,
 and prevent that she puts it!`,
+
+            [Ids.CHANGE_LANGUAGE_INFO]: 'Change language.',
+
+            [Ids.RELOAD_APP_INFO]: 'Reload application.',
 
             [Ids.GAME_RESULT_TWEET1]: `ほのか「ええええっ？！な、なんでことりちゃんお鍋に%s個もケーキ入れちゃったの？！」`,
 
@@ -49,6 +56,10 @@ and prevent that she puts it!`,
 
 ことりちゃんをタップして、
 あのケーキが投入されることを阻止しよう！`,
+
+            [Ids.CHANGE_LANGUAGE_INFO]: '言語を変更します。',
+
+            [Ids.RELOAD_APP_INFO]: 'アプリをリロードします。',
 
             [Ids.CREDIT_T28]: '思いつき, プラグラム, 音楽: T28',
 
