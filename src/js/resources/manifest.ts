@@ -23,6 +23,7 @@ export default {
     buttonGoTwitterHome: `${IMAGE_BASE_DIR}button_go_twitter_home.png`,
     buttonResultTweet: `${IMAGE_BASE_DIR}button_result_tweet.png`,
     buttonSound: `${IMAGE_BASE_DIR}button_sound.png`,
+    buttonChangeLanguage: `${IMAGE_BASE_DIR}button_change_language.png`,
 
     soundZenkai: `${SOUND_BASE_DIR}zenkai.mp3`,
     soundGameLoop: `${SOUND_BASE_DIR}game_loop.mp3`,

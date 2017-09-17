@@ -19,6 +19,7 @@ import {loadSound} from "../../../helper/SoundManager";
 import manifest from '../../../resources/manifest';
 
 import {URL} from '../../../Constants';
+import ChangeLanguageButton from "../../../container/sprite/button/ChangeLanguageButton";
 
 class MenuTopState extends ViewSectionContainer {
     public static TAG = "MenuTopState";
@@ -31,6 +32,7 @@ class MenuTopState extends ViewSectionContainer {
     private _goRankingButton: GoRankingButton;
     private _goTwitterHomeButton: GoTwitterHomeButton;
     private _soundButton: SoundButton;
+    private _changeLanguageButton: ChangeLanguageButton;
 
     private _okSound: Sound;
     private _toggleSound: Sound;
@@ -72,6 +74,10 @@ class MenuTopState extends ViewSectionContainer {
         this._soundButton.position.set(this.viewWidth * 0.8, this.viewHeight * 0.15);
         this._soundButton.setOnClickListener(this.onSoundButtonClick);
 
+        this._changeLanguageButton = new ChangeLanguageButton();
+        this._changeLanguageButton.position.set(this.viewWidth * 0.2, this.viewHeight * 0.15);
+        this._changeLanguageButton.setOnClickListener(this.onChangeLanguageButtonClick);
+
         this.addChild(
             this._menuBackground,
             this._gameStartButton,
@@ -79,7 +85,8 @@ class MenuTopState extends ViewSectionContainer {
             this._goHowToPlayButton,
             this._goRankingButton,
             this._goTwitterHomeButton,
-            this._soundButton
+            this._soundButton,
+            this._changeLanguageButton
         );
 
         this._okSound = loadSound(manifest.soundOk);
@@ -116,6 +123,13 @@ class MenuTopState extends ViewSectionContainer {
         this._toggleSound.play();
         toggleMute();
     };
+
+    private onChangeLanguageButtonClick = () => {
+        this._okSound.play();
+        if (confirm("言語を変更します。")) {
+            console.log("hgoehoge english!")
+        }
+    }
 }
 
 export default MenuTopState;
