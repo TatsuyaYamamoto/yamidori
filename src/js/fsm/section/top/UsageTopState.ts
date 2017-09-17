@@ -1,30 +1,27 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import Kotori, {Direction} from "../../container/sprite/character/Kotori";
-import UsageTapTargetInfo from "../../container/components/UsageTapTargetInfo";
-import UsageTextArea from "../../container/components/UsageTextArea";
-import BackToTopButton from "../../container/sprite/button/BackToTopButton";
-import BackToMenuButton from "../../container/sprite/button/BackToMenuButton";
+import {Events} from "../../view/TopViewState";
+import {dispatchEvent} from '../../EventUtils';
+import State from "../../internal/State";
 
-import {getCurrentViewSize} from "../../helper/utils";
-import {Events} from "../view/TopViewState";
-import {dispatchEvent} from '../EventUtils';
-import {loadSound} from "../../helper/SoundManager";
-import manifest from '../../resources/manifest';
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import Kotori, {Direction} from "../../../container/sprite/character/Kotori";
+import UsageTapTargetInfo from "../../../container/components/UsageTapTargetInfo";
+import UsageTextArea from "../../../container/components/UsageTextArea";
+import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
-class UsageTopState {
+import {getCurrentViewSize} from "../../../helper/utils";
+import {loadSound} from "../../../helper/SoundManager";
+import manifest from '../../../resources/manifest';
+
+class UsageTopState extends ViewSectionContainer implements State{
     public static TAG = "UsageTopState";
-
-    private _container: Container;
 
     private _usageTextArea: UsageTextArea;
     private _usageTapTargetInfo: UsageTapTargetInfo;
     private _backToMenuButton: BackToMenuButton;
     private _usageTarget: Kotori;
-
-    private _viewWidth: number;
-    private _viewHeight: number;
 
     private _tapKotoriSound: Sound;
     private _cancelSound: Sound;
@@ -35,18 +32,18 @@ class UsageTopState {
     update(elapsedTimeMillis: number): void {
         if (!this._usageTarget) {
             this._usageTarget = new Kotori({direction: Direction.LEFT});
-            this._usageTarget.position.set(this._viewWidth * 1.1, this._viewHeight * 0.4);
-            this._container.addChild(this._usageTarget);
+            this._usageTarget.position.set(this.viewWidth * 1.1, this.viewHeight * 0.4);
+            this.addChild(this._usageTarget);
         }
 
-        if (this._usageTarget && this._viewWidth * 0.8 < this._usageTarget.x) {
+        if (this._usageTarget && this.viewWidth * 0.8 < this._usageTarget.x) {
             this.move(this._usageTarget, elapsedTimeMillis);
         } else {
             if (!this._usageTapTargetInfo) {
                 this._usageTarget.setOnClickListener(this.onUsageModelTargetClick);
                 this._usageTapTargetInfo = new UsageTapTargetInfo();
-                this._usageTapTargetInfo.position.set(this._viewWidth * 0.8, this._viewHeight * 0.7);
-                this._container.addChild(this._usageTapTargetInfo);
+                this._usageTapTargetInfo.position.set(this.viewWidth * 0.8, this.viewHeight * 0.7);
+                this.addChild(this._usageTapTargetInfo);
             }
         }
     }
@@ -57,20 +54,14 @@ class UsageTopState {
     onEnter(): void {
         console.log(`${UsageTopState.TAG}@onEnter`);
 
-        const {width, height} = getCurrentViewSize();
-        this._viewWidth = width;
-        this._viewHeight = height;
-
-        this._container = new Container();
-
         this._usageTextArea = new UsageTextArea();
-        this._usageTextArea.position.set(width * 0.35, height * 0.3);
+        this._usageTextArea.position.set(this.viewWidth * 0.35, this.viewHeight * 0.3);
 
         this._backToMenuButton = new BackToMenuButton();
-        this._backToMenuButton.position.set(width * 0.15, height * 0.8);
+        this._backToMenuButton.position.set(this.viewWidth * 0.15, this.viewHeight * 0.8);
         this._backToMenuButton.setOnClickListener(this.onBackToMenuButtonClick);
 
-        this._container.addChild(
+        this.addChild(
             this._backToMenuButton,
             this._usageTextArea,
         );
@@ -86,10 +77,6 @@ class UsageTopState {
         console.log(`${UsageTopState.TAG}@onExit`);
         this._usageTarget = null;
         this._usageTapTargetInfo = null;
-    }
-
-    public getContainer(): Container {
-        return this._container;
     }
 
     private onUsageModelTargetClick = () => {
@@ -114,7 +101,7 @@ class UsageTopState {
     private move(kotori: Kotori, elapsedTime: number): void {
         const direction = kotori.direction === Direction.RIGHT ? 1 : -1;
         const speed = kotori.speed;
-        kotori.position.x += this._viewWidth * kotori.speed * elapsedTime * direction;
+        kotori.position.x += this.viewWidth * kotori.speed * elapsedTime * direction;
     }
 }
 

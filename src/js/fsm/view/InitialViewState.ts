@@ -1,19 +1,18 @@
 import {Container} from 'pixi.js';
 
-import ViewState from "./ViewState";
+import State from "../internal/State";
 
+import ViewContainer from "../internal/ViewContainer";
 import Text from "../../container/sprite/text/Text";
-import InitialViewContainer from "../../container/views/InitialViewContainer";
 
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
-import {getCurrentViewSize, getString, isIOS, isSupportTouchEvent} from "../../helper/utils";
+import {getString, isIOS, isSupportTouchEvent} from "../../helper/utils";
 import {Ids} from "../../resources/string";
 
-class InitialViewState implements ViewState {
+class InitialViewState extends ViewContainer implements State {
     public static TAG = "InitialViewState";
 
-    private _container: InitialViewContainer;
     private _tapInfo: Text;
 
     /**
@@ -29,15 +28,12 @@ class InitialViewState implements ViewState {
     onEnter(): void {
         console.log(`${InitialViewState.TAG}@onEnter`);
 
-        this._container = new InitialViewContainer();
         // TODO: Check login?
 
         if (isIOS()) {
-            const {width, height} = getCurrentViewSize();
-
             this._tapInfo = new Text(getString(Ids.TAP_DISPLAY_INFO));
-            this._tapInfo.position.set(width * 0.5, height * 0.5);
-            this._container.addChild(this._tapInfo);
+            this._tapInfo.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
+            this.addChild(this._tapInfo);
 
             window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);
         } else {
@@ -55,16 +51,6 @@ class InitialViewState implements ViewState {
             window.removeEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);
         }
     }
-
-    /**
-     * Get pixi container.
-     *
-     * @return {TopViewContainer}
-     * @override
-     */
-    public getContainer = (): Container => {
-        return this._container;
-    };
 
     private _handleGoNextStateAction(): void {
         dispatchEvent(Events.INITIALIZED);

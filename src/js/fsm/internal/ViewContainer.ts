@@ -1,11 +1,14 @@
 import {Container} from 'pixi.js';
 
-import {getCurrentViewSize} from "../../helper/utils";
+import {BASIC_IMAGE_HEIGHT, BASIC_IMAGE_WIDTH} from "../../Constants";
 
 abstract class ViewContainer extends Container {
     private _backGroundLayer: Container;
     private _applicationLayer: Container;
     private _informationLayer: Container;
+
+    private _viewWidth: number;
+    private _viewHeight: number;
 
     constructor() {
         super();
@@ -18,7 +21,18 @@ abstract class ViewContainer extends Container {
             this._backGroundLayer,
             this._applicationLayer,
             this._informationLayer
-        )
+        );
+
+        this._viewWidth = BASIC_IMAGE_WIDTH;
+        this._viewHeight = BASIC_IMAGE_HEIGHT;
+    }
+
+    protected get viewWidth(): number {
+        return this._viewWidth;
+    }
+
+    protected get viewHeight(): number {
+        return this._viewHeight;
     }
 
     public get backGroundLayer(): Container {
@@ -31,35 +45,6 @@ abstract class ViewContainer extends Container {
 
     public get informationLayer(): Container {
         return this._informationLayer;
-    }
-
-    /**
-     * Fire on opening the view.
-     */
-    protected onOpen(): void {
-        window.addEventListener('resize', this.onResize);
-
-    }
-
-    /**
-     * Fire on closing the view
-     */
-    protected onClose(): void {
-        window.removeEventListener('resize', this.onResize);
-    }
-
-    /**
-     * Fire on resizing window.
-     *
-     * @param newWidth
-     * @param newheight
-     */
-    protected onRendererSizeChange(newWidth: number, newheight: number): void {
-    }
-
-    private onResize = (event: Event): void => {
-        const {width, height} = getCurrentViewSize();
-        this.onRendererSizeChange(width, height);
     }
 }
 

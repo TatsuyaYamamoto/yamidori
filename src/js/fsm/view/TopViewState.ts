@@ -1,15 +1,18 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import ViewState from "./ViewState";
-import TopViewContainer from "../../container/views/TopViewContainer";
+import State from "../internal/State";
+import TitleTopState from "../section/top/TitleTopState";
+import CreditTopState from "../section/top/CreditTopState";
+import UsageTopState from "../section/top/UsageTopState";
+import MenuTopState from "../section/top/MenuTopState";
+
+import ViewContainer from "../internal/ViewContainer";
+import Background from "../../container/sprite/background/Background";
+
 import manifest from '../../resources/manifest';
 import {loadSound} from "../../helper/SoundManager";
 import StateMachine from "../internal/StateMachine";
-import TitleTopState from "../top/TitleTopState";
-import CreditTopState from "../top/CreditTopState";
-import UsageTopState from "../top/UsageTopState";
-import MenuTopState from "../top/MenuTopState";
 
 import {Events as ApplicationEvents} from "../ApplicationState";
 import {dispatchEvent, addEvents, removeEvents} from "../EventUtils";
@@ -22,16 +25,16 @@ export enum Events {
     REQUEST_BACK_TO_TOP = "TopViewState@REQUEST_BACK_TO_TOP"
 }
 
-class TopViewState implements ViewState {
+class TopViewState extends ViewContainer implements State {
     public static TAG = "TopViewState";
-
-    private _container: TopViewContainer;
 
     private _topViewStateMachine: StateMachine;
     private _titleTopState: TitleTopState;
     private _menuTopState: MenuTopState;
     private _creditTopState: CreditTopState;
     private _usageTopState: UsageTopState;
+
+    private _background: Background;
 
     private _zenkaiSound: Sound;
 
@@ -47,7 +50,6 @@ class TopViewState implements ViewState {
      */
     onEnter(): void {
         console.log(`${TopViewState.TAG}@onEnter`);
-        this._container = new TopViewContainer();
 
         this._titleTopState = new TitleTopState();
         this._menuTopState = new MenuTopState();
@@ -73,7 +75,11 @@ class TopViewState implements ViewState {
         this._zenkaiSound.play({loop: true});
 
         this._topViewStateMachine.init(TitleTopState.TAG);
-        this._container.applicationLayer.addChild(this._titleTopState.getContainer());
+
+        this._background = new Background();
+
+        this.backGroundLayer.addChild(this._background);
+        this.applicationLayer.addChild(this._titleTopState);
     }
 
     /**
@@ -91,17 +97,6 @@ class TopViewState implements ViewState {
         ]);
     }
 
-    /**
-     * Get pixi container.
-     *
-     * {@see ViewState#getContainer}
-     * @return {TopViewContainer}
-     * @override
-     */
-    public getContainer = (): Container => {
-        return this._container;
-    };
-
     private _requestGameStart = (): void => {
         dispatchEvent(ApplicationEvents.GAME_START_REQUEST);
     };
@@ -109,22 +104,22 @@ class TopViewState implements ViewState {
     private _changeToMenuTopState = (): void => {
         this._topViewStateMachine.change(MenuTopState.TAG);
 
-        this._container.applicationLayer.removeChildren();
-        this._container.applicationLayer.addChild(this._menuTopState.getContainer());
+        this.applicationLayer.removeChildren();
+        this.applicationLayer.addChild(this._menuTopState);
     };
 
     private _changeToUsageState = (): void => {
         this._topViewStateMachine.change(UsageTopState.TAG);
 
-        this._container.applicationLayer.removeChildren();
-        this._container.applicationLayer.addChild(this._usageTopState.getContainer());
+        this.applicationLayer.removeChildren();
+        this.applicationLayer.addChild(this._usageTopState);
     };
 
     private _changeToCredit = (): void => {
         this._topViewStateMachine.change(CreditTopState.TAG);
 
-        this._container.applicationLayer.removeChildren();
-        this._container.applicationLayer.addChild(this._creditTopState.getContainer());
+        this.applicationLayer.removeChildren();
+        this.applicationLayer.addChild(this._creditTopState);
     };
 }
 

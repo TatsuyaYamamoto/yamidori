@@ -1,31 +1,34 @@
 import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import GameState from "./GameState";
-import Kotori, {Direction, Speed} from "../../container/sprite/character/Kotori";
-import {Events as GameEvents} from '../view/GameViewState'
-import {dispatchEvent} from '../EventUtils';
-import {getCurrentViewSize, getRandomInteger} from "../../helper/utils";
-import GamePointCount from "../../container/components/GamePointCount";
-import {loadSound} from "../../helper/SoundManager";
-import manifest from '../../resources/manifest';
-import {clearGamePoint, getGamePoint, saveGamePoint} from "../../helper/GlobalState";
-import {GAME_PARAMETERS} from "../../Constants";
+import State from "../../internal/State";
+
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import Kotori, {Direction, Speed} from "../../../container/sprite/character/Kotori";
+import GamePointCount from "../../../container/components/GamePointCount";
+
+import {Events as GameEvents} from '../../view/GameViewState'
+import {dispatchEvent} from '../../EventUtils';
+
+import {getCurrentViewSize, getRandomInteger} from "../../../helper/utils";
+
+import {loadSound} from "../../../helper/SoundManager";
+import {clearGamePoint, getGamePoint, saveGamePoint} from "../../../helper/GlobalState";
+
+import manifest from '../../../resources/manifest';
+import {GAME_PARAMETERS} from "../../../Constants";
 
 export const DEAD_ZONE_WIDTH_RATE = 0.4;
 
-class PlayingGameState implements GameState {
+class PlayingGameState extends ViewSectionContainer implements State {
     public static TAG = "PlayingGameState";
 
-    private _container: Container;
     private _gamePointCount: GamePointCount;
 
     private _kotoriMap: Map<number, Kotori>;
     private _elapsedTimeMillis = 0;
     private _nextAppearTimeMillis = 0;
 
-    private _viewWidth: number;
-    private _viewHeight: number;
     private _rightDeadLine: number;
     private _leftDeadLine: number;
 
@@ -40,7 +43,7 @@ class PlayingGameState implements GameState {
             this._nextAppearTimeMillis += this.getNextAppearTimeMillis();
 
             const kotori = this.createKotori();
-            this._container.addChild(kotori);
+            this.addChild(kotori);
             this._kotoriMap.set(kotori.id, kotori);
         }
 
@@ -61,17 +64,13 @@ class PlayingGameState implements GameState {
         clearGamePoint();
 
         // Set deadline position.
-        const {width, height} = getCurrentViewSize();
-        this._viewWidth = width;
-        this._viewHeight = height;
-        this._leftDeadLine = width * (1 - DEAD_ZONE_WIDTH_RATE) / 2;
-        this._rightDeadLine = width * (1 + DEAD_ZONE_WIDTH_RATE) / 2;
+        this._leftDeadLine = this.viewWidth * (1 - DEAD_ZONE_WIDTH_RATE) / 2;
+        this._rightDeadLine = this.viewWidth * (1 + DEAD_ZONE_WIDTH_RATE) / 2;
 
         // set container
-        this._container = new Container();
         this._gamePointCount = new GamePointCount();
-        this._gamePointCount.position.set(width * 0.5, height * 0.1);
-        this._container.addChild(this._gamePointCount);
+        this._gamePointCount.position.set(this.viewWidth * 0.5, this.viewHeight * 0.1);
+        this.addChild(this._gamePointCount);
 
         this._kotoriMap = new Map();
         this._elapsedTimeMillis = 0;
@@ -89,10 +88,6 @@ class PlayingGameState implements GameState {
         this._gameLoopSound.stop();
     }
 
-    public getContainer(): Container {
-        return this._container;
-    }
-
     private getNextAppearTimeMillis(): number {
         const min = GAME_PARAMETERS.KOTORI_APPEARANCE_INTERVAL_MIN;
         const max = GAME_PARAMETERS.KOTORI_APPEARANCE_INTERVAL_MAX;
@@ -108,8 +103,8 @@ class PlayingGameState implements GameState {
 
         const kotori = new Kotori(params);
         kotori.position.set(
-            params.direction === Direction.RIGHT ? 0 - kotori.width : this._viewWidth + kotori.width,
-            this._viewHeight * 0.1 * getRandomInteger(1, 9));
+            params.direction === Direction.RIGHT ? 0 - kotori.width : this.viewWidth + kotori.width,
+            this.viewHeight * 0.1 * getRandomInteger(1, 9));
         kotori.setOnClickListener(() => this.handleClickKotori(kotori));
         return kotori;
     }
@@ -165,7 +160,7 @@ class PlayingGameState implements GameState {
 
     private move(kotori: Kotori, elapsedTime: number): void {
         const direction = kotori.direction === Direction.RIGHT ? 1 : -1;
-        kotori.position.x += this._viewWidth * kotori.speed * elapsedTime * direction;
+        kotori.position.x += this.viewWidth * kotori.speed * elapsedTime * direction;
     }
 }
 
