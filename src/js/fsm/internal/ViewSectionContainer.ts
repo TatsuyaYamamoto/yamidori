@@ -45,6 +45,8 @@ abstract class ViewSectionContainer extends Container implements State {
      */
     onExit(): void {
         console.log(`${this.constructor.name}@onExit`);
+
+        this.removeChildren();
     }
 }
 
