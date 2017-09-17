@@ -1,6 +1,6 @@
 import {Container} from 'pixi.js';
 
-import {getCurrentViewSize} from "../../helper/utils";
+import {BASIC_IMAGE_HEIGHT, BASIC_IMAGE_WIDTH} from "../../Constants";
 
 abstract class ViewSectionContainer extends Container {
     private _viewWidth: number;
@@ -9,9 +9,8 @@ abstract class ViewSectionContainer extends Container {
     constructor() {
         super();
 
-        const {width, height} = getCurrentViewSize();
-        this._viewWidth = width;
-        this._viewHeight = height;
+        this._viewWidth = BASIC_IMAGE_WIDTH;
+        this._viewHeight = BASIC_IMAGE_HEIGHT;
     }
 
     protected get viewWidth(): number {

@@ -6,7 +6,7 @@ import {addEvents, removeEvents} from './EventUtils';
 import InitialViewState from "./view/InitialViewState";
 import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";
-import {getCurrentViewSize} from "../helper/utils";
+import {getCurrentViewSize, getScale} from "../helper/utils";
 import GameViewState from "./view/GameViewState";
 import {toggleMute} from '../helper/SoundManager';
 
@@ -41,6 +41,9 @@ class ApplicationState extends Application implements State {
      * @override
      */
     onEnter(): void {
+        this._updateRendererSize();
+        this._updateStageScale();
+
         this._initialViewState = new InitialViewState();
         this._loadViewState = new LoadViewState();
         this._topViewState = new TopViewState();
@@ -83,9 +86,18 @@ class ApplicationState extends Application implements State {
         window.removeEventListener('focus', toggleMute);
     }
 
-    private onResize = (event: Event): void => {
+    private onResize = (event?: Event): void => {
+        this._updateRendererSize();
+        this._updateStageScale();
+    };
+
+    private _updateRendererSize = () => {
         const {width, height} = getCurrentViewSize();
         this.renderer.resize(width, height);
+    };
+
+    private _updateStageScale = () => {
+        this.stage.scale.x = this.stage.scale.y = getScale();
     };
 
     private _changeToLoadViewState = () => {
