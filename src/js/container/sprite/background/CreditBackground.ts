@@ -1,6 +1,5 @@
 import {Sprite} from 'pixi.js';
 import manifest from '../../../resources/manifest';
-import {getCurrentViewSize, getScale} from "../../../helper/utils";
 
 /**
  * @class
@@ -8,9 +7,6 @@ import {getCurrentViewSize, getScale} from "../../../helper/utils";
 class CreditBackground extends Sprite {
     public constructor() {
         super(Sprite.fromImage(manifest.backgroundCredit).texture);
-
-        const scale = getScale();
-        this.scale.set(scale, scale);
     }
 }
 
