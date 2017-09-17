@@ -1,7 +1,5 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../../internal/State";
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
 
@@ -14,7 +12,7 @@ import manifest from '../../../resources/manifest';
 import {URL, NAME_AND_ROLE} from "../../../Constants";
 import ViewSectionContainer from "../../internal/ViewSectionContainer";
 
-class CreditTopState extends ViewSectionContainer implements State {
+class CreditTopState extends ViewSectionContainer {
     public static TAG = "CreditTopState";
 
     private _creditBackground: CreditBackground;
@@ -36,7 +34,7 @@ class CreditTopState extends ViewSectionContainer implements State {
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${CreditTopState.TAG}@onEnter`);
+        super.onEnter();
 
         this._creditBackground = new CreditBackground();
 
@@ -72,7 +70,7 @@ class CreditTopState extends ViewSectionContainer implements State {
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${CreditTopState.TAG}@onExit`);
+        super.onExit();
     }
 
     private onBackToMenuButtonClick = () => {

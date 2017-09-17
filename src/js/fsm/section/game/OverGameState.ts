@@ -1,7 +1,5 @@
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../../internal/State";
-
 import {Events as ApplicationEvents} from "../../ApplicationState";
 import {dispatchEvent} from "../../EventUtils";
 
@@ -21,7 +19,7 @@ import {t} from "../../../helper/i18n";
 import manifest from '../../../resources/manifest';
 import {Ids} from '../../../resources/string';
 
-class OverGameState extends ViewSectionContainer implements State {
+class OverGameState extends ViewSectionContainer {
     public static TAG = "OverGameState";
 
     private _gameOverLogo: GameOverLogo;
@@ -40,7 +38,7 @@ class OverGameState extends ViewSectionContainer implements State {
     }
 
     onEnter(): void {
-        console.log(`${OverGameState.TAG}@onEnter`);
+        super.onEnter();
 
         this._gameOverLogo = new GameOverLogo();
         this._gameOverLogo.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
@@ -80,7 +78,7 @@ class OverGameState extends ViewSectionContainer implements State {
     }
 
     onExit(): void {
-        console.log(`${OverGameState.TAG}@onExit`);
+        super.onExit();
         this._gameOverSound.stop();
     }
 

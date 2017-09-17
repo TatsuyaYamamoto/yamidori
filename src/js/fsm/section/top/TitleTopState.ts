@@ -1,6 +1,5 @@
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../../internal/State";
 import {Events} from '../../view/TopViewState';
 import {dispatchEvent} from '../../EventUtils';
 
@@ -17,7 +16,7 @@ import {Ids} from "../../../resources/string";
 import manifest from '../../../resources/manifest';
 
 
-class TitleTopState extends ViewSectionContainer implements State {
+class TitleTopState extends ViewSectionContainer {
     public static TAG = "TitleTopState";
 
     private _titleLog: TitleLogo;
@@ -36,7 +35,7 @@ class TitleTopState extends ViewSectionContainer implements State {
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${TitleTopState.TAG}@onEnter`);
+        super.onEnter();
 
         this._titleLog = new TitleLogo();
         this._titleLog.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
@@ -62,7 +61,7 @@ class TitleTopState extends ViewSectionContainer implements State {
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${TitleTopState.TAG}@onExit`);
+        super.onExit();
     }
 
     private onWindowTap = (): void => {

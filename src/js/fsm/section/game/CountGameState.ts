@@ -1,7 +1,4 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
-
-import State from "../../internal/State";
 
 import ViewSectionContainer from "../../internal/ViewSectionContainer";
 import CountDownText from "../../../container/components/CountDownText";
@@ -12,7 +9,7 @@ import {Events} from '../../view/GameViewState';
 import manifest from '../../../resources/manifest';
 import {loadSound} from "../../../helper/SoundManager";
 
-class CountGameState extends ViewSectionContainer implements State {
+class CountGameState extends ViewSectionContainer {
     public static TAG = "CountGameState";
     private _initialTimeMillis: number;
 
@@ -51,7 +48,8 @@ class CountGameState extends ViewSectionContainer implements State {
     }
 
     onEnter(): void {
-        console.log(`${CountGameState.TAG}@onEnter`);
+        super.onEnter();
+
         this._initialTimeMillis = 0;
         this._countHighSound = loadSound(manifest.soundCountHigh);
         this._countLowSound = loadSound(manifest.soundCountLow);
@@ -62,7 +60,7 @@ class CountGameState extends ViewSectionContainer implements State {
     }
 
     onExit(): void {
-        console.log(`${CountGameState.TAG}@onExit`);
+        super.onExit();
     }
 }
 

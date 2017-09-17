@@ -1,4 +1,3 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
 import {Events} from "../../view/TopViewState";
@@ -11,7 +10,6 @@ import UsageTapTargetInfo from "../../../container/components/UsageTapTargetInfo
 import UsageTextArea from "../../../container/components/UsageTextArea";
 import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
-import {getCurrentViewSize} from "../../../helper/utils";
 import {loadSound} from "../../../helper/SoundManager";
 import manifest from '../../../resources/manifest';
 
@@ -52,7 +50,7 @@ class UsageTopState extends ViewSectionContainer implements State{
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${UsageTopState.TAG}@onEnter`);
+        super.onEnter();
 
         this._usageTextArea = new UsageTextArea();
         this._usageTextArea.position.set(this.viewWidth * 0.35, this.viewHeight * 0.3);
@@ -74,7 +72,8 @@ class UsageTopState extends ViewSectionContainer implements State{
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${UsageTopState.TAG}@onExit`);
+        super.onExit();
+
         this._usageTarget = null;
         this._usageTapTargetInfo = null;
     }

@@ -1,7 +1,6 @@
-import {Container, interaction} from 'pixi.js';
+import {interaction} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../../internal/State";
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
 
@@ -21,7 +20,7 @@ import manifest from '../../../resources/manifest';
 
 import {URL} from '../../../Constants';
 
-class MenuTopState extends ViewSectionContainer implements State {
+class MenuTopState extends ViewSectionContainer {
     public static TAG = "MenuTopState";
 
     private _menuBackground: MenuBackground;
@@ -46,7 +45,7 @@ class MenuTopState extends ViewSectionContainer implements State {
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${MenuTopState.TAG}@onEnter`);
+        super.onEnter();
 
         this._menuBackground = new MenuBackground();
 
@@ -91,7 +90,7 @@ class MenuTopState extends ViewSectionContainer implements State {
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${MenuTopState.TAG}@onExit`);
+        super.onExit();
     }
 
     private onGameStartButtonClick = (event: interaction.InteractionEvent): void => {

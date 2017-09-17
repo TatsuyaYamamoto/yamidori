@@ -1,4 +1,3 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
 import State from "../../internal/State";
@@ -10,7 +9,7 @@ import GamePointCount from "../../../container/components/GamePointCount";
 import {Events as GameEvents} from '../../view/GameViewState'
 import {dispatchEvent} from '../../EventUtils';
 
-import {getCurrentViewSize, getRandomInteger} from "../../../helper/utils";
+import {getRandomInteger} from "../../../helper/utils";
 
 import {loadSound} from "../../../helper/SoundManager";
 import {clearGamePoint, getGamePoint, saveGamePoint} from "../../../helper/GlobalState";
@@ -58,7 +57,7 @@ class PlayingGameState extends ViewSectionContainer implements State {
     }
 
     onEnter(): void {
-        console.log(`${PlayingGameState.TAG}@onEnter`);
+        super.onEnter();
 
         // reset prev game point.
         clearGamePoint();
@@ -82,7 +81,8 @@ class PlayingGameState extends ViewSectionContainer implements State {
     }
 
     onExit(): void {
-        console.log(`${PlayingGameState.TAG}@onExit`);
+        super.onExit();
+
         this._kotoriMap.forEach((k: Kotori) => k.destroy());
         this._kotoriMap.clear();
         this._gameLoopSound.stop();
