@@ -16,7 +16,7 @@ import SoundButton from "../../../container/sprite/button/SoundButton";
 import ChangeLanguageButton from "../../../container/sprite/button/ChangeLanguageButton";
 
 import {goTo} from "../../../helper/network";
-import {toggleMute} from "../../../helper/SoundManager";
+import {toggleMute} from "../../../helper/utils";
 import {loadSound} from "../../../helper/SoundManager";
 import {changeLanguage, getCurrentLanguage, SupportedLanguages, t} from "../../../helper/i18n";
 

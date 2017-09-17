@@ -8,7 +8,7 @@ import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";
 import {getCurrentViewSize, getScale} from "../helper/utils";
 import GameViewState from "./view/GameViewState";
-import {toggleMute} from '../helper/SoundManager';
+import {toggleMute} from '../helper/utils';
 
 export enum Events {
     INITIALIZED = "ApplicationState@INITIALIZED",

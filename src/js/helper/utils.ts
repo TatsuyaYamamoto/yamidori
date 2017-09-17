@@ -1,7 +1,7 @@
 import {loaders} from 'pixi.js';
+import PixiSound from 'pixi-sound/lib';
 
 import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "../Constants";
-import strings from "../resources/string";
 
 /**
  * Detecting iOS
@@ -84,4 +84,19 @@ export function getAsset(url: string) {
  */
 export function getRandomInteger(min: number, max: number): number {
     return Math.floor(Math.random() * (max + 1 - min)) + min;
+}
+
+/**
+ * Toggle muted property for all sounds.
+ *
+ * @return {boolean} if all sounds are muted.
+ */
+export function toggleMute(): boolean {
+    if (PixiSound.context.muted) {
+        PixiSound.unmuteAll();
+    } else {
+        PixiSound.muteAll();
+    }
+
+    return PixiSound.context.muted;
 }
