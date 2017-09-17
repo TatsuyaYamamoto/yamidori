@@ -1,5 +1,5 @@
 import * as i18next from 'i18next';
-import * as i18nextLngDetector from 'i18next-browser-languagedetector';
+import * as Detector from 'i18next-browser-languagedetector';
 
 import resources from '../resources/string';
 
@@ -20,19 +20,25 @@ export enum SupportedLanguages {
 export const DEFAULT_LANGUAGE = SupportedLanguages.EN;
 
 /**
+ * Single instance to be set with {@link initI18n}.
+ *
+ * @type {i18next.i18n}
+ */
+let i18n: i18next.i18n = null;
+
+/**
  * Initialize i18next module.
  *
  * @param {i18next.InitOptions} options
  * @param {i18next.Callback} callback
- * @return {i18next.i18n}
  */
-export function initI18n(options?: i18next.InitOptions, callback?: i18next.Callback): i18next.i18n {
-    return i18next
-        .use(i18nextLngDetector)
+export function initI18n(options?: i18next.InitOptions, callback?: i18next.Callback): void {
+    i18n = i18next
+        .use(Detector)
         .init({
             fallbackLng: DEFAULT_LANGUAGE,
             debug: false,
-            resources
+            resources,
         });
 }
 
@@ -45,7 +51,7 @@ export function initI18n(options?: i18next.InitOptions, callback?: i18next.Callb
  * @see i18n#t
  */
 export function t(key, options?): string {
-    return i18next.t(key, options);
+    return i18n.t(key, options);
 }
 
 /**
@@ -56,7 +62,7 @@ export function t(key, options?): string {
  * @see i18next#changeLanguage
  */
 export function changeLanguage(lng: SupportedLanguages, callback?: i18next.Callback): void {
-    i18next.changeLanguage(lng, callback);
+    i18n.changeLanguage(lng, callback);
 }
 
 /**
@@ -66,6 +72,13 @@ export function changeLanguage(lng: SupportedLanguages, callback?: i18next.Callb
  * @return {SupportedLanguages}
  */
 export function getCurrentLanguage(): SupportedLanguages {
-    const lang = SupportedLanguages[i18next.language];
-    return lang || DEFAULT_LANGUAGE;
+    // convert string to enum.
+    for (const lang in SupportedLanguages) {
+        if (SupportedLanguages[lang] === i18n.language) {
+            return (<any>SupportedLanguages)[lang];
+        }
+    }
+
+    // not found from supported.
+    return DEFAULT_LANGUAGE;
 }
