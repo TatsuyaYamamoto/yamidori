@@ -12,12 +12,12 @@ export default {
         translation: {
             [Ids.TAP_DISPLAY_INFO]: "- Please tap on the display! -",
 
-            [Ids.HOW_TO_PLAY_INFORMATION]: `再び鍋パーティーをすることになった、ことほのうみ一行。
-ことりちゃんが持ってきた食材はあのケーキ！！
-このままでは闇が再び訪れちゃう！
+            [Ids.HOW_TO_PLAY_INFORMATION]: `Koto-Hono-Umi is planing a hot pot party.
+Kotori-chan brought THAT CAKE as ingredients! 
+It will be a mystery pot again like this!
 
-ことりちゃんをタップして、
-あのケーキが投入されることを阻止しよう！`,
+Tap kotori-chan,
+and prevent that she puts it!`,
 
             [Ids.GAME_RESULT_TWEET1]: `ほのか「ええええっ？！な、なんでことりちゃんお鍋に%s個もケーキ入れちゃったの？！」`,
 
