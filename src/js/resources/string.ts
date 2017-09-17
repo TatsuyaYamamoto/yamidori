@@ -8,20 +8,34 @@ export const Ids = {
 };
 
 export default {
-    [Ids.TAP_DISPLAY_INFO]: "- Please tap on the display! -",
+    en: {
+        translation: {
+            [Ids.TAP_DISPLAY_INFO]: "- Please tap on the display! -",
 
-    [Ids.HOW_TO_PLAY_INFORMATION]: `再び鍋パーティーをすることになった、ことほのうみ一行。
+            [Ids.HOW_TO_PLAY_INFORMATION]: `再び鍋パーティーをすることになった、ことほのうみ一行。
 ことりちゃんが持ってきた食材はあのケーキ！！
 このままでは闇が再び訪れちゃう！
 
 ことりちゃんをタップして、
 あのケーキが投入されることを阻止しよう！`,
 
-    [Ids.GAME_RESULT_TWEET1]: `ほのか「ええええっ？！な、なんでことりちゃんお鍋に%s個もケーキ入れちゃったの？！」`,
+            [Ids.GAME_RESULT_TWEET1]: `ほのか「ええええっ？！な、なんでことりちゃんお鍋に%s個もケーキ入れちゃったの？！」`,
 
-    [Ids.GAME_RESULT_TWEET2]: `うみ「これは,,,何でしょう,,,? 三角柱のような形状ですが,,,%s個のケーキだ！」`,
+            [Ids.GAME_RESULT_TWEET2]: `うみ「これは,,,何でしょう,,,? 三角柱のような形状ですが,,,%s個のケーキだ！」`,
 
-    [Ids.GAME_RESULT_TWEET3]: `ことり「一度、%s個のチーズケーキでお鍋を食べてみたかったの〜！」`,
+            [Ids.GAME_RESULT_TWEET3]: `ことり「一度、%s個のチーズケーキでお鍋を食べてみたかったの〜！」`,
 
-    [Ids.GAME_RESULT_TWEET_ZERO_POINT]: `ことり「お鍋をするなら、一度食べてみたかったの〜！」`,
+            [Ids.GAME_RESULT_TWEET_ZERO_POINT]: `ことり「お鍋をするなら、一度食べてみたかったの〜！」`,
+        }
+    },
+    ja: {
+        translation: {
+            [Ids.HOW_TO_PLAY_INFORMATION]: `再び鍋パーティーをすることになった、ことほのうみ一行。
+ことりちゃんが持ってきた食材はあのケーキ！！
+このままでは闇が再び訪れちゃう！
+
+ことりちゃんをタップして、
+あのケーキが投入されることを阻止しよう！`,
+        }
+    }
 }
