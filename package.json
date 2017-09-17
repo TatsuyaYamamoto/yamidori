@@ -1,6 +1,6 @@
 {
   "name": "yamidori",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "LoveLive fun game! Darkside nabe with cheese cake.",
   "main": "index.js",
   "scripts": {
