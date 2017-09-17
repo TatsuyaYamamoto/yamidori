@@ -1,5 +1,6 @@
 import {interaction} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
+import * as swal from 'sweetalert';
 
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
@@ -128,12 +129,18 @@ class MenuTopState extends ViewSectionContainer {
 
     private onChangeLanguageButtonClick = () => {
         this._okSound.play();
-        if (confirm("言語を変更します。")) {
-            const nextLang = getCurrentLanguage() === SupportedLanguages.EN ?
-                SupportedLanguages.JA :
-                SupportedLanguages.EN;
-            changeLanguage(nextLang);
-        }
+        swal("言語を変更します。", {buttons: true})
+            .then((willChange) => {
+                if (willChange) {
+                    const nextLang = getCurrentLanguage() === SupportedLanguages.EN ?
+                        SupportedLanguages.JA :
+                        SupportedLanguages.EN;
+                    changeLanguage(nextLang);
+
+                    swal("再起動します。")
+                        .then(() => location.reload());
+                }
+            });
     }
 }
 
