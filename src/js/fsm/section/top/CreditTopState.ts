@@ -3,14 +3,17 @@ import Sound from "pixi-sound/lib/Sound";
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
 
+import ViewSectionContainer from "../../internal/ViewSectionContainer";
 import CreditBackground from "../../../container/sprite/background/CreditBackground";
 import CreditComponent from "../../../container/components/CreditComponent";
 import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
+import {t} from "../../../helper/i18n";
 import {loadSound} from "../../../helper/SoundManager";
+
 import manifest from '../../../resources/manifest';
-import {URL, NAME_AND_ROLE} from "../../../Constants";
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import {Ids} from "../../../resources/string";
+import {URL} from "../../../Constants";
 
 class CreditTopState extends ViewSectionContainer {
     public static TAG = "CreditTopState";
@@ -38,16 +41,16 @@ class CreditTopState extends ViewSectionContainer {
 
         this._creditBackground = new CreditBackground();
 
-        this._t28Credit = new CreditComponent(NAME_AND_ROLE.T28, URL.SOKONTOKORO_HOME);
+        this._t28Credit = new CreditComponent(t(Ids.CREDIT_T28), URL.SOKONTOKORO_HOME);
         this._t28Credit.position.set(this.viewWidth * 0.3, this.viewHeight * 0.5);
 
-        this._sanzashiCredit = new CreditComponent(NAME_AND_ROLE.SANZASHI, URL.TWITTER_HOME_SANZASHI);
+        this._sanzashiCredit = new CreditComponent(t(Ids.CREDIT_SANZASHI), URL.TWITTER_HOME_SANZASHI);
         this._sanzashiCredit.position.set(this.viewWidth * 0.5, this.viewHeight * 0.7);
 
-        this._onjinCredit = new CreditComponent(NAME_AND_ROLE.ON_JIN, URL.ONJIN_TOP);
+        this._onjinCredit = new CreditComponent(t(Ids.CREDIT_ON_JIN), URL.ONJIN_TOP);
         this._onjinCredit.position.set(this.viewWidth * 0.7, this.viewHeight * 0.9);
 
-        this._loveliveCredit = new CreditComponent(NAME_AND_ROLE.LOVELIVE, URL.LOVELIVE_TOP);
+        this._loveliveCredit = new CreditComponent(t(Ids.CREDIT_LOVELIVE), URL.LOVELIVE_TOP);
         this._loveliveCredit.position.set(this.viewWidth * 0.8, this.viewHeight * 0.55);
 
         this._backToMenuButton = new BackToMenuButton();

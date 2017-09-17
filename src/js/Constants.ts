@@ -88,10 +88,3 @@ export const URL = {
     ONJIN_TOP: 'https://on-jin.com/',
     LOVELIVE_TOP: 'http://www.lovelive-anime.jp/',
 };
-
-export const NAME_AND_ROLE = {
-    T28: 'プラグラム, 音楽, 思いつき: T28',
-    SANZASHI: 'イラスト: さんざし',
-    ON_JIN: '効果音: フリー効果音 On-Jin ～音人～',
-    LOVELIVE: 'プロジェクト ラブライブ！'
-};
