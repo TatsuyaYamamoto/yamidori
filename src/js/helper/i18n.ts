@@ -4,23 +4,32 @@ import * as Detector from 'i18next-browser-languagedetector';
 /**
  * Supported languages.
  */
-export enum SupportedLanguages {
-    EN = "en",
-    JA = "ja"
+export interface SupportedLanguages {
+    [language: string]: string;
 }
+
+/**
+ * Languages that this i18n module supports.
+ *
+ * @type {SupportedLanguages}
+ * @private
+ */
+let supportedLanguages: SupportedLanguages = null;
 
 /**
  * Default language.
  * This is fallback when user required unsupported language.
  *
- * @type {SupportedLanguages}
+ * @type {string}
+ * @private
  */
-export const DEFAULT_LANGUAGE = SupportedLanguages.EN;
+let defaultLanguage: string = null;
 
 /**
  * Single instance to be set with {@link initI18n}.
  *
  * @type {i18next.i18n}
+ * @private
  */
 let i18n: i18next.i18n = null;
 
@@ -28,15 +37,22 @@ let i18n: i18next.i18n = null;
  * Initialize i18next module.
  *
  * @param {i18next.Resource} resources
+ * @param {SupportedLanguages} supportedLangs
+ * @param {string} defaultLang
  * @param {i18next.InitOptions} options
  * @param {i18next.Callback} callback
  */
 export function initI18n(resources: i18next.Resource,
+                         supportedLangs: SupportedLanguages,
+                         defaultLang: string,
                          options?: i18next.InitOptions,
                          callback?: i18next.Callback): void {
 
+    supportedLanguages = supportedLangs;
+    defaultLanguage = defaultLang;
+
     const opts = Object.assign({}, {
-        fallbackLng: DEFAULT_LANGUAGE,
+        fallbackLng: defaultLanguage,
         debug: false,
         resources,
     }, options);
@@ -61,28 +77,43 @@ export function t(key, options?): string {
 /**
  * Changes the language.
  *
- * @param {SupportedLanguages} lng
+ * @param {string} language
  * @param {i18next.Callback} callback
  * @see i18next#changeLanguage
  */
-export function changeLanguage(lng: SupportedLanguages, callback?: i18next.Callback): void {
-    i18n.changeLanguage(lng, callback);
+export function changeLanguage(language: string, callback?: i18next.Callback): void {
+    if (isDefinedLanguage(language)) {
+        i18n.changeLanguage(language, callback);
+    } else {
+        i18n.changeLanguage(defaultLanguage, callback);
+    }
 }
 
 /**
  * Return the current detected or set language.
  *
  * @see i18n#language
- * @return {SupportedLanguages}
+ * @return {string}
  */
-export function getCurrentLanguage(): SupportedLanguages {
-    // convert string to enum.
-    for (const lang in SupportedLanguages) {
-        if (SupportedLanguages[lang] === i18n.language) {
-            return (<any>SupportedLanguages)[lang];
+export function getCurrentLanguage(): string {
+    return isDefinedLanguage(i18n.language) ?
+        i18n.language :
+        defaultLanguage;
+}
+
+/**
+ * Return true if targetLanguage is prop that {@link supportedLanguages} has.
+ *
+ * @param {string} targetLanguage
+ * @returns {boolean}
+ * @private
+ */
+function isDefinedLanguage(targetLanguage: string): boolean {
+    for (const key in supportedLanguages) {
+        if (supportedLanguages[key] === targetLanguage) {
+            return true;
         }
     }
 
-    // not found from supported.
-    return DEFAULT_LANGUAGE;
+    return false;
 }

@@ -23,7 +23,7 @@ import {changeLanguage, getCurrentLanguage, SupportedLanguages, t} from "../../.
 import soundManifest from '../../../resources/sound';
 import {Ids} from "../../../resources/string";
 
-import {URL} from '../../../Constants';
+import {SUPPORTED_LANGUAGES, URL} from '../../../Constants';
 
 class MenuTopState extends ViewSectionContainer {
     public static TAG = "MenuTopState";
@@ -135,9 +135,9 @@ class MenuTopState extends ViewSectionContainer {
                 if (willChange) {
                     swal(t(Ids.RELOAD_APP_INFO))
                         .then(() => {
-                            const nextLang = getCurrentLanguage() === SupportedLanguages.EN ?
-                                SupportedLanguages.JA :
-                                SupportedLanguages.EN;
+                            const nextLang = getCurrentLanguage() === SUPPORTED_LANGUAGES.EN ?
+                                SUPPORTED_LANGUAGES.JA :
+                                SUPPORTED_LANGUAGES.EN;
                             changeLanguage(nextLang);
 
                             location.reload()

@@ -1,3 +1,5 @@
+import {SupportedLanguages} from "./helper/i18n";
+
 /**
  * Parameters for game tuning.
  */
@@ -67,6 +69,16 @@ export const SKIP_COUNT_DOWN_FOR_GAME_START = false;
  * @type {boolean}
  */
 export const SKIP_BRAND_LOGO_ANIMATION = false;
+
+/**
+ * Supported languages.
+ */
+export const SUPPORTED_LANGUAGES: SupportedLanguages = {
+    EN: "en",
+    JA: "ja"
+};
+
+export const DEFAULT_LANGUAGE = SUPPORTED_LANGUAGES.EN;
 
 /**
  * Application server base URL

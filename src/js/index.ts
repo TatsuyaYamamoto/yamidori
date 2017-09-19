@@ -8,6 +8,7 @@ import ApplicationState from "./fsm/ApplicationState";
 import {getCurrentViewSize} from "./helper/utils";
 import {initI18n} from './helper/i18n';
 import resources from './resources/string';
+import {SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE} from "./Constants";
 
 import 'whatwg-fetch';
 
@@ -19,7 +20,11 @@ function init() {
     console.info("Welcome Toridori!");
 
     // Initialize internationalization.
-    initI18n(resources);
+    initI18n(
+        resources,
+        SUPPORTED_LANGUAGES,
+        DEFAULT_LANGUAGE
+    );
 
     const mainElement: HTMLElement = document.getElementById('main');
     const rootState = new ApplicationState(getCurrentViewSize());
