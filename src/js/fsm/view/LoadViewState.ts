@@ -1,5 +1,3 @@
-import {loaders} from 'pixi.js';
-
 import {Events as ApplicationEvents} from "../ApplicationState";
 
 import ViewContainer from "../internal/ViewContainer";
@@ -10,6 +8,8 @@ import LoadKotoriAnimation from '../../container/LoadKotoriAnimation';
 import {addEvents, removeEvents, dispatchEvent} from '../EventUtils';
 import AssetLoader, {Asset} from '../../helper/AssetLoader';
 
+import imageManifest from '../../resources/image';
+import soundManifest from '../../resources/sound';
 import {SKIP_BRAND_LOGO_ANIMATION} from "../../Constants";
 
 export enum Events {
@@ -69,6 +69,8 @@ class LoadViewState extends ViewContainer {
             .then(() => dispatchEvent(Events.COMPLETE_LOGO_ANIMATION));
 
         this._loader = new AssetLoader();
+        this._loader.setImageManifest(imageManifest);
+        this._loader.setSoundManifest(soundManifest);
         this._loader.onProgress.add(this._onLoadProgress);
         this._loader.load(this._onLoadComplete);
     }

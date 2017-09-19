@@ -1,12 +1,14 @@
 import {Sprite} from 'pixi.js';
-import manifest from '../../../resources/manifest';
+
+import manifest from '../../../resources/image';
+import {loadTexture} from "../../../helper/AssetLoader";
 
 /**
  * @class
  */
 class MenuBackground extends Sprite {
     public constructor() {
-        super(Sprite.fromImage(manifest.backgroundMenu).texture);
+        super(loadTexture(manifest.backgroundMenu));
     }
 }
 

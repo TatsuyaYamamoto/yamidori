@@ -13,7 +13,7 @@ import {loadSound} from "../../../helper/AssetLoader";
 import {t} from "../../../helper/i18n";
 
 import {Ids} from "../../../resources/string";
-import manifest from '../../../resources/manifest';
+import soundManifest from '../../../resources/sound';
 
 
 class TitleTopState extends ViewSectionContainer {
@@ -52,7 +52,7 @@ class TitleTopState extends ViewSectionContainer {
             this._tapInfoText
         );
 
-        this._okSound = loadSound(manifest.soundOk);
+        this._okSound = loadSound(soundManifest.soundOk);
 
         window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this.onWindowTap);
     }

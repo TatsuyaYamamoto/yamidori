@@ -1,8 +1,8 @@
-import {Sprite} from 'pixi.js';
-
-import manifest from '../../../resources/manifest';
 import ClickableSprite from "../ClickableSprite";
 
+import {loadTexture} from "../../../helper/AssetLoader";
+
+import manifest from '../../../resources/image';
 import {GAME_PARAMETERS} from '../../../Constants';
 
 export enum Speed {
@@ -33,7 +33,7 @@ class Kotori extends ClickableSprite {
 
     public constructor(params?: ConstructorParams) {
         params = Object.assign({}, defaultConstructorParams, params);
-        super(Sprite.fromImage(params.direction === Direction.RIGHT ? manifest.kotoriRight : manifest.kotoriLeft).texture);
+        super(loadTexture(params.direction === Direction.RIGHT ? manifest.kotoriRight : manifest.kotoriLeft));
 
         this.buttonMode = true;
         this._direction = params.direction;

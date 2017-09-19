@@ -1,8 +1,7 @@
-import {Container} from 'pixi.js';
+import {Sprite, Container} from 'pixi.js';
 
-import Sprite from "../Sprite";
-
-import manifest from '../../../resources/manifest';
+import manifest from '../../../resources/image';
+import {loadTexture} from "../../../helper/AssetLoader";
 
 /**
  * @class
@@ -11,11 +10,11 @@ class GameOverLogo extends Container {
     public constructor() {
         super();
 
-        const gameOverLogo = Sprite.fromImage(manifest.logoGameOver);
+        const gameOverLogo = new Sprite(loadTexture(manifest.logoGameOver));
         gameOverLogo.anchor.set(0.5);
         gameOverLogo.y = gameOverLogo.height * 1.6;
 
-        const gameOverImage = Sprite.fromImage(manifest.logoGameOverImage);
+        const gameOverImage = new Sprite(loadTexture(manifest.logoGameOverImage));
         gameOverImage.anchor.set(0.5);
 
         this.addChild(

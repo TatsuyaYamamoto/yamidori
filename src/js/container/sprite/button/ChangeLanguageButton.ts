@@ -1,11 +1,13 @@
-import {Texture} from 'pixi.js';
-
-import manifest from '../../../resources/manifest';
 import Button from "./Button";
+
+import {loadTexture} from "../../../helper/AssetLoader";
+
+import manifest from '../../../resources/image';
+
 
 class ChangeLanguageButton extends Button {
     constructor() {
-        super(Texture.fromImage(manifest.buttonChangeLanguage));
+        super(loadTexture(manifest.buttonChangeLanguage));
     }
 }
 
