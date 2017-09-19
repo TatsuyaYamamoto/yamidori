@@ -4,16 +4,28 @@
  */
 import {SoundManifest} from "../helper/AssetLoader";
 
+export const Ids = {
+    SOUND_ZENKAI: 'SOUND_ZENKAI',
+    SOUND_GAME_LOOP: 'SOUND_GAME_LOOP',
+    SOUND_GAME_END: 'SOUND_GAME_END',
+    SOUND_OK: 'OK',
+    SOUND_CANCEL: 'SOUND_CANCEL',
+    SOUND_TOGGLE_SOUND: 'SOUND_TOGGLE_SOUND',
+    SOUND_COUNT_HIGH: 'SOUND_COUNT_HIGH',
+    SOUND_COUNT_LOW: 'SOUND_COUNT_LOW',
+    SOUND_TAP_KOTORI: 'SOUND_TAP_KOTORI',
+};
+
 const manifest: SoundManifest = {
-    soundZenkai: 'zenkai.mp3',
-    soundGameLoop: 'game_loop.mp3',
-    soundGameEnd: 'game_end.mp3',
-    soundOk: 'ok.mp3',
-    soundCancel: 'cancel.mp3',
-    soundToggleSound: 'toggle_sound.mp3',
-    soundCountHigh: 'count_high.mp3',
-    soundCountLow: 'count_low.mp3',
-    soundTapKotori: 'tap_kotori.mp3',
+    [Ids.SOUND_ZENKAI]: 'zenkai.mp3',
+    [Ids.SOUND_GAME_LOOP]: 'game_loop.mp3',
+    [Ids.SOUND_GAME_END]: 'game_end.mp3',
+    [Ids.SOUND_OK]: 'ok.mp3',
+    [Ids.SOUND_CANCEL]: 'cancel.mp3',
+    [Ids.SOUND_TOGGLE_SOUND]: 'toggle_sound.mp3',
+    [Ids.SOUND_COUNT_HIGH]: 'count_high.mp3',
+    [Ids.SOUND_COUNT_LOW]: 'count_low.mp3',
+    [Ids.SOUND_TAP_KOTORI]: 'tap_kotori.mp3',
 };
 
 export default manifest;
