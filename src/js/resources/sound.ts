@@ -2,7 +2,9 @@
  * @fileOverview Sound resource manifest.
  * It's used to load with {@link AssetLoader#setSoundManifest}
  */
-export default {
+import {SoundManifest} from "../helper/AssetLoader";
+
+const manifest: SoundManifest = {
     soundZenkai: 'zenkai.mp3',
     soundGameLoop: 'game_loop.mp3',
     soundGameEnd: 'game_end.mp3',
@@ -13,3 +15,5 @@ export default {
     soundCountLow: 'count_low.mp3',
     soundTapKotori: 'tap_kotori.mp3',
 };
+
+export default manifest;

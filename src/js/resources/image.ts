@@ -2,6 +2,7 @@
  * @fileOverview Image resource manifest.
  * It's used to load with {@link AssetLoader#setImageManifest}
  */
+import {ImageManifest} from "../helper/AssetLoader";
 
 export const Ids = {
     BACKGROUND: 'BACKGROUND',
@@ -28,7 +29,7 @@ export const Ids = {
     BUTTON_CHANGE_LANGUAGE: 'BUTTON_CHANGE_LANGUAGE',
 };
 
-export default {
+const manifest: ImageManifest = {
     en: {
         [Ids.BACKGROUND]: 'background.png',
         [Ids.BACKGROUND_MENU]: 'background_menu.png',
@@ -55,3 +56,5 @@ export default {
     },
     ja: {}
 };
+
+export default manifest;

@@ -10,6 +10,9 @@
 import {Texture, loaders} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
+import {DEFAULT_LANGUAGE} from "../Constants";
+import {getCurrentLanguage} from "./i18n";
+
 const IMAGE_BASE_DIR = 'assets/image/';
 const SOUND_BASE_DIR = 'assets/sound/';
 
@@ -18,6 +21,16 @@ const SOUND_BASE_DIR = 'assets/sound/';
  */
 export interface Asset extends loaders.Resource {
     sound: Sound
+}
+
+export interface ImageManifest {
+    [language: string]: {
+        [key: string]: string
+    };
+}
+
+export interface SoundManifest {
+    [key: string]: string
 }
 
 /**
@@ -35,8 +48,11 @@ class AssetLoader extends loaders.Loader {
      *
      * @param {Object} imageManifest
      */
-    public setImageManifest(imageManifest: object): void {
-        Object.keys(imageManifest).forEach((key) => {
+    public setImageManifest(imageManifest: ImageManifest): void {
+        Object.keys(Object.assign({},
+            imageManifest[getCurrentLanguage()],
+            imageManifest[DEFAULT_LANGUAGE]
+        )).forEach((key) => {
             const name = `image@${key}`;
             const url = `${IMAGE_BASE_DIR}${imageManifest[key]}`;
             this.add(name, url);
@@ -48,7 +64,7 @@ class AssetLoader extends loaders.Loader {
      *
      * @param {Object} soundManifest
      */
-    public setSoundManifest(soundManifest: object): void {
+    public setSoundManifest(soundManifest: SoundManifest): void {
         Object.keys(soundManifest).forEach((key) => {
             const name = `sound@${key}`;
             const url = `${SOUND_BASE_DIR}${soundManifest[key]}`;
