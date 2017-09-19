@@ -8,7 +8,7 @@ import MenuTopState from "../section/top/MenuTopState";
 import ViewContainer from "../internal/ViewContainer";
 import Background from "../../container/sprite/background/Background";
 
-import soundManifest from '../../resources/sound';
+import {Ids} from '../../resources/sound';
 import {loadSound} from "../../helper/AssetLoader";
 import StateMachine from "../internal/StateMachine";
 
@@ -69,7 +69,7 @@ class TopViewState extends ViewContainer {
             [Events.REQUEST_BACK_TO_TOP]: this._changeToMenuTopState,
         });
 
-        this._zenkaiSound = loadSound(soundManifest.soundZenkai);
+        this._zenkaiSound = loadSound(Ids.SOUND_ZENKAI);
         this._zenkaiSound.play({loop: true});
 
         this._topViewStateMachine.init(TitleTopState.TAG);

@@ -1,14 +1,15 @@
 import Sprite from "../Sprite";
 
-import manifest from '../../../resources/image';
 import {loadTexture} from "../../../helper/AssetLoader";
+
+import  {Ids} from '../../../resources/image';
 
 /**
  * @class
  */
 class TitleLogo extends Sprite {
     public constructor() {
-        super(loadTexture(manifest.logoTitle));
+        super(loadTexture(Ids.LOGO_TITLE));
     }
 }
 

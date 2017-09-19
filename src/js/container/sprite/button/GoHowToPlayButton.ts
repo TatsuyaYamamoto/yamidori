@@ -2,11 +2,11 @@ import Button from "./Button";
 
 import {loadTexture} from "../../../helper/AssetLoader";
 
-import manifest from '../../../resources/image';
+import {Ids} from '../../../resources/image';
 
 class GoHowToPlayButton extends Button {
     constructor() {
-        super(loadTexture(manifest.buttonGoHowToPlay));
+        super(loadTexture(Ids.BUTTON_GO_HOW_TO_PLAY));
     }
 }
 

@@ -6,7 +6,7 @@ import CountDownText from "../../../container/components/CountDownText";
 import {dispatchEvent} from '../../EventUtils';
 import {Events} from '../../view/GameViewState';
 
-import soundManifest from '../../../resources/sound';
+import {Ids} from '../../../resources/sound';
 import {loadSound} from "../../../helper/AssetLoader";
 
 class CountGameState extends ViewSectionContainer {
@@ -51,8 +51,8 @@ class CountGameState extends ViewSectionContainer {
         super.onEnter();
 
         this._initialTimeMillis = 0;
-        this._countHighSound = loadSound(soundManifest.soundCountHigh);
-        this._countLowSound = loadSound(soundManifest.soundCountLow);
+        this._countHighSound = loadSound(Ids.SOUND_COUNT_HIGH);
+        this._countLowSound = loadSound(Ids.SOUND_COUNT_LOW);
 
         // Set deadline position.
         this._countInfo = new CountDownText();

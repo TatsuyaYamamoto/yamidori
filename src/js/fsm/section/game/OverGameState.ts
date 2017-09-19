@@ -16,7 +16,7 @@ import {loadSound} from "../../../helper/AssetLoader";
 import {getGamePoint} from "../../../helper/GlobalState";
 import {t} from "../../../helper/i18n";
 
-import soundManifest from '../../../resources/sound';
+import {Ids as SoundIds} from '../../../resources/sound';
 import {Ids} from '../../../resources/string';
 
 class OverGameState extends ViewSectionContainer {
@@ -68,9 +68,9 @@ class OverGameState extends ViewSectionContainer {
             this._gamePointCount
         );
 
-        this._gameOverSound = loadSound(soundManifest.soundGameEnd);
-        this._okSound = loadSound(soundManifest.soundOk);
-        this._cancelSound = loadSound(soundManifest.soundCancel);
+        this._gameOverSound = loadSound(SoundIds.SOUND_GAME_END);
+        this._okSound = loadSound(SoundIds.SOUND_OK);
+        this._cancelSound = loadSound(SoundIds.SOUND_CANCEL);
 
         this._gameOverSound.play();
 

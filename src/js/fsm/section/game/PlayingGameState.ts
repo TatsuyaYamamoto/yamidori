@@ -14,7 +14,7 @@ import {getRandomInteger} from "../../../helper/utils";
 import {loadSound} from "../../../helper/AssetLoader";
 import {clearGamePoint, getGamePoint, saveGamePoint} from "../../../helper/GlobalState";
 
-import soundManifest from '../../../resources/sound';
+import {Ids} from '../../../resources/sound';
 import {GAME_PARAMETERS} from "../../../Constants";
 
 export const DEAD_ZONE_WIDTH_RATE = 0.4;
@@ -75,9 +75,9 @@ class PlayingGameState extends ViewSectionContainer implements State {
         this._elapsedTimeMillis = 0;
         this._nextAppearTimeMillis = this.getNextAppearTimeMillis();
 
-        this._gameLoopSound = loadSound(soundManifest.soundGameLoop);
+        this._gameLoopSound = loadSound(Ids.SOUND_GAME_LOOP);
         this._gameLoopSound.play({loop: true});
-        this._tapKotoriSound = loadSound(soundManifest.soundTapKotori);
+        this._tapKotoriSound = loadSound(Ids.SOUND_TAP_KOTORI);
     }
 
     onExit(): void {

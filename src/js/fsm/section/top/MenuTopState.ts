@@ -20,7 +20,7 @@ import {toggleMute} from "../../../helper/utils";
 import {loadSound} from "../../../helper/AssetLoader";
 import {changeLanguage, getCurrentLanguage, SupportedLanguages, t} from "../../../helper/i18n";
 
-import soundManifest from '../../../resources/sound';
+import {Ids as SoundIds} from '../../../resources/sound';
 import {Ids} from "../../../resources/string";
 
 import {SUPPORTED_LANGUAGES, URL} from '../../../Constants';
@@ -93,8 +93,8 @@ class MenuTopState extends ViewSectionContainer {
             this._changeLanguageButton
         );
 
-        this._okSound = loadSound(soundManifest.soundOk);
-        this._toggleSound = loadSound(soundManifest.soundToggleSound);
+        this._okSound = loadSound(SoundIds.SOUND_OK);
+        this._toggleSound = loadSound(SoundIds.SOUND_TOGGLE_SOUND);
     }
 
     /**

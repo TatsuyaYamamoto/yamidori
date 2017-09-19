@@ -2,7 +2,7 @@ import ClickableSprite from "../ClickableSprite";
 
 import {loadTexture} from "../../../helper/AssetLoader";
 
-import manifest from '../../../resources/image';
+import {Ids} from '../../../resources/image';
 import {GAME_PARAMETERS} from '../../../Constants';
 
 export enum Speed {
@@ -33,7 +33,7 @@ class Kotori extends ClickableSprite {
 
     public constructor(params?: ConstructorParams) {
         params = Object.assign({}, defaultConstructorParams, params);
-        super(loadTexture(params.direction === Direction.RIGHT ? manifest.kotoriRight : manifest.kotoriLeft));
+        super(loadTexture(params.direction === Direction.RIGHT ? Ids.KOTORI_RIGHT : Ids.KOTORI_LEFT));
 
         this.buttonMode = true;
         this._direction = params.direction;

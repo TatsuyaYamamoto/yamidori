@@ -11,7 +11,7 @@ import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton"
 import {t} from "../../../helper/i18n";
 import {loadSound} from "../../../helper/AssetLoader";
 
-import soundManifest from '../../../resources/sound';
+import {Ids as SoundIds} from '../../../resources/sound';
 import {Ids} from "../../../resources/string";
 import {URL} from "../../../Constants";
 
@@ -66,7 +66,7 @@ class CreditTopState extends ViewSectionContainer {
             this._loveliveCredit,
         );
 
-        this._cancelSound = loadSound(soundManifest.soundCancel);
+        this._cancelSound = loadSound(SoundIds.SOUND_CANCEL);
     }
 
     /**

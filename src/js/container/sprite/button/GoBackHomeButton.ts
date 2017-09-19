@@ -2,11 +2,11 @@ import Button from "./Button";
 
 import {loadTexture} from "../../../helper/AssetLoader";
 
-import manifest from '../../../resources/image';
+import {Ids} from '../../../resources/image';
 
 class GoBackHomeButton extends Button {
     constructor() {
-        super(loadTexture(manifest.buttonGoBackHome));
+        super(loadTexture(Ids.BUTTON_GO_BACK_HOME));
     }
 }
 

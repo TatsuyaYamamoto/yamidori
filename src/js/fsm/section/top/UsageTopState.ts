@@ -11,7 +11,7 @@ import UsageTextArea from "../../../container/components/UsageTextArea";
 import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
 import {loadSound} from "../../../helper/AssetLoader";
-import soundManifest from '../../../resources/sound';
+import {Ids} from '../../../resources/sound';
 
 class UsageTopState extends ViewSectionContainer implements State{
     public static TAG = "UsageTopState";
@@ -64,8 +64,8 @@ class UsageTopState extends ViewSectionContainer implements State{
             this._usageTextArea,
         );
 
-        this._tapKotoriSound = loadSound(soundManifest.soundTapKotori);
-        this._cancelSound = loadSound(soundManifest.soundCancel);
+        this._tapKotoriSound = loadSound(Ids.SOUND_TAP_KOTORI);
+        this._cancelSound = loadSound(Ids.SOUND_CANCEL);
     }
 
     /**

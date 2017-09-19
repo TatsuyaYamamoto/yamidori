@@ -2,12 +2,12 @@ import Button from "./Button";
 
 import {loadTexture} from "../../../helper/AssetLoader";
 
-import manifest from '../../../resources/image';
+import {Ids} from '../../../resources/image';
 
 
 class GameRestartButton extends Button {
     constructor() {
-        super(loadTexture(manifest.buttonGameRestart));
+        super(loadTexture(Ids.BUTTON_GAME_RESTART));
     }
 }
 
