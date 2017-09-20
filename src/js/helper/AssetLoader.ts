@@ -17,18 +17,32 @@ const IMAGE_BASE_DIR = 'assets/image/';
 const SOUND_BASE_DIR = 'assets/sound/';
 
 /**
+ * Cache space of loaded resources.
+ *
+ * @type {any}
+ * @private
+ */
+const AssetsCache: { string: Asset } = Object.create(null);
+
+/**
  * Texture and Sound resource interface loaded with PIXI Loader.
  */
 export interface Asset extends loaders.Resource {
     sound: Sound
 }
 
+/**
+ * Image manifest interface that the loader requires.
+ */
 export interface ImageManifest {
     [language: string]: {
         [key: string]: string
     };
 }
 
+/**
+ * Sound manifest interface that the loader requires.
+ */
 export interface SoundManifest {
     [key: string]: string
 }
@@ -46,91 +60,73 @@ class AssetLoader extends loaders.Loader {
     /**
      * Set image asset manifest for loader.
      *
-     * @param {Object} imageManifest
+     * @param {ImageManifest} imageManifest
      */
     public setImageManifest(imageManifest: ImageManifest): void {
-        Object.keys(Object.assign({},
+        // Concat manifests with base and current language.
+        const targetManifest = Object.assign({},
+            imageManifest[DEFAULT_LANGUAGE],
             imageManifest[getCurrentLanguage()],
-            imageManifest[DEFAULT_LANGUAGE]
-        )).forEach((key) => {
-            const name = `image@${key}`;
-            const url = `${IMAGE_BASE_DIR}${imageManifest[key]}`;
-            this.add(name, url);
-        });
+        );
+
+        // add each asset info to loader.
+        const assetIds = Object.keys(targetManifest);
+        assetIds.forEach(id => this.add({
+            name: id,
+            url: `${IMAGE_BASE_DIR}${targetManifest[id]}`
+        }));
     }
 
     /**
      * Set sound manifest for loader.
      *
-     * @param {Object} soundManifest
+     * @param {SoundManifest} soundManifest
      */
     public setSoundManifest(soundManifest: SoundManifest): void {
-        Object.keys(soundManifest).forEach((key) => {
-            const name = `sound@${key}`;
-            const url = `${SOUND_BASE_DIR}${soundManifest[key]}`;
-            this.add(name, url);
-        });
+
+        // add each asset info to loader.
+        const assetIds = Object.keys(soundManifest);
+        assetIds.forEach(id => this.add({
+            name: id,
+            url: `${SOUND_BASE_DIR}${soundManifest[id]}`
+        }));
     }
 
     /**
      * Fire on complete load resources.
      *
      * @param {AssetLoader} loader
-     * @param {{string: Asset}} resources
+     * @param {{[string]: Asset}} assets
      * @private
      */
-    private setAssets(loader: AssetLoader, resources: { string: Asset }) {
-        Object.keys(resources).forEach((key) => setAsset(resources[key]));
+    private setAssets(loader: AssetLoader, assets: { [key: string]: Asset }) {
+        const assetIds = Object.keys(assets);
+
+        assetIds.forEach((id) => {
+            const asset = assets[id];
+            AssetsCache[asset.name] = asset;
+        });
     }
 }
 
 /**
- * Preloaded resources with Pixi loader.
+ * Convenience method for getting texture asset cached with the loader.
  *
- * @type {any}
- * @private
+ * @param {string} id
+ * @returns {Texture}
  */
-const AssetsCache: { string: Asset } = Object.create(null);
-
-/**
- * Cache asset resource.
- *
- * @param resource
- * @private
- */
-function setAsset(resource: Asset) {
-    AssetsCache[resource.url] = resource;
+export function loadTexture(id: string): Texture {
+    return AssetsCache[id].texture;
 }
 
 /**
- * Get cached asset resource.
+ * Convenience method for getting sound asset cached with the loader.
  *
- * @param url
- * @return {any}
- * @private
- */
-function getAsset(url: string): Asset {
-    return AssetsCache[url];
-}
-
-/**
- * Get cached texture asset.
- *
- * @param {string} url
+ * @param {string} id
  * @return {Sound}
  */
-export function loadTexture(url: string): Texture {
-    return getAsset(`${IMAGE_BASE_DIR}${url}`).texture;
-}
-
-/**
- * Get cached sound asset.
- *
- * @param {string} url
- * @return {Sound}
- */
-export function loadSound(url: string): Sound {
-    return getAsset(`${SOUND_BASE_DIR}${url}`).sound;
+export function loadSound(id: string): Sound {
+    return AssetsCache[id].sound;
 }
 
 export default AssetLoader;
