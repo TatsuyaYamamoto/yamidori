@@ -8,8 +8,8 @@ import CreditBackground from "../../../container/sprite/background/CreditBackgro
 import CreditComponent from "../../../container/components/CreditComponent";
 import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
-import {t} from "../../../helper/i18n";
-import {loadSound} from "../../../helper/AssetLoader";
+import {t} from "../../../framework/i18n";
+import {loadSound} from "../../../framework/AssetLoader";
 
 import {Ids as SoundIds} from '../../../resources/sound';
 import {Ids} from "../../../resources/string";

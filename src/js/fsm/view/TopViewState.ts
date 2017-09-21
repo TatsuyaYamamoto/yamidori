@@ -9,7 +9,7 @@ import ViewContainer from "../../framework/ViewContainer";
 import Background from "../../container/sprite/background/Background";
 
 import {Ids} from '../../resources/sound';
-import {loadSound} from "../../helper/AssetLoader";
+import {loadSound} from "../../framework/AssetLoader";
 import StateMachine from "../../framework/StateMachine";
 
 import {Events as ApplicationEvents} from "../ApplicationState";

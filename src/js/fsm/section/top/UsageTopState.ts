@@ -10,7 +10,7 @@ import UsageTapTargetInfo from "../../../container/components/UsageTapTargetInfo
 import UsageTextArea from "../../../container/components/UsageTextArea";
 import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
-import {loadSound} from "../../../helper/AssetLoader";
+import {loadSound} from "../../../framework/AssetLoader";
 import {Ids} from '../../../resources/sound';
 
 class UsageTopState extends ViewSectionContainer implements State{

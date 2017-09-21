@@ -1,6 +1,6 @@
 import Sprite from "../Sprite";
 
-import {loadTexture} from "../../../helper/AssetLoader";
+import {loadTexture} from "../../../framework/AssetLoader";
 
 import  {Ids} from '../../../resources/image';
 

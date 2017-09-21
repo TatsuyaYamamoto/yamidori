@@ -2,7 +2,7 @@
  * @fileOverview Sound resource manifest.
  * It's used to load with {@link AssetLoader#setSoundManifest}
  */
-import {SoundManifest} from "../helper/AssetLoader";
+import {SoundManifest} from "../framework/AssetLoader";
 
 export const Ids = {
     SOUND_ZENKAI: 'SOUND_ZENKAI',

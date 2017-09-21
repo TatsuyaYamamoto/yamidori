@@ -7,7 +7,7 @@ import {dispatchEvent} from '../../EventUtils';
 import {Events} from '../../view/GameViewState';
 
 import {Ids} from '../../../resources/sound';
-import {loadSound} from "../../../helper/AssetLoader";
+import {loadSound} from "../../../framework/AssetLoader";
 
 class CountGameState extends ViewSectionContainer {
     public static TAG = "CountGameState";

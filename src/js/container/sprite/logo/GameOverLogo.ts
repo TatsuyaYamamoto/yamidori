@@ -1,6 +1,6 @@
 import {Sprite, Container} from 'pixi.js';
 
-import {loadTexture} from "../../../helper/AssetLoader";
+import {loadTexture} from "../../../framework/AssetLoader";
 
 import  {Ids} from '../../../resources/image';
 

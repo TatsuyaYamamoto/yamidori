@@ -2,7 +2,7 @@
  * @fileOverview Image resource manifest.
  * It's used to load with {@link AssetLoader#setImageManifest}
  */
-import {ImageManifest} from "../helper/AssetLoader";
+import {ImageManifest} from "../framework/AssetLoader";
 
 export const Ids = {
     BACKGROUND: 'BACKGROUND',

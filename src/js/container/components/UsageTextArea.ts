@@ -2,8 +2,8 @@ import {Container, Graphics} from 'pixi.js';
 
 import Text from "../sprite/text/Text";
 
-import {getCurrentViewSize} from "../../helper/utils";
-import {t} from "../../helper/i18n";
+import {getCurrentViewSize} from "../../framework/utils";
+import {t} from "../../framework/i18n";
 
 import {Ids} from "../../resources/string";
 

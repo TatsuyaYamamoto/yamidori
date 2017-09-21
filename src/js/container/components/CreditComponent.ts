@@ -1,5 +1,5 @@
 import {Container} from 'pixi.js';
-import {getCurrentViewSize, isSupportTouchEvent} from "../../helper/utils";
+import {getCurrentViewSize, isSupportTouchEvent} from "../../framework/utils";
 import Text from "../sprite/text/Text";
 
 class CreditComponent extends Container {

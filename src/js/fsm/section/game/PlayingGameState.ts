@@ -9,9 +9,9 @@ import GamePointCount from "../../../container/components/GamePointCount";
 import {Events as GameEvents} from '../../view/GameViewState'
 import {dispatchEvent} from '../../EventUtils';
 
-import {getRandomInteger} from "../../../helper/utils";
+import {getRandomInteger} from "../../../framework/utils";
 
-import {loadSound} from "../../../helper/AssetLoader";
+import {loadSound} from "../../../framework/AssetLoader";
 import {clearGamePoint, getGamePoint, saveGamePoint} from "../../../helper/GlobalState";
 
 import {Ids} from '../../../resources/sound';

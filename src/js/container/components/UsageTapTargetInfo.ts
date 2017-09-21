@@ -1,6 +1,6 @@
 import {Container, Graphics} from 'pixi.js';
 import Text from "../sprite/text/Text";
-import {getCurrentViewSize} from "../../helper/utils";
+import {getCurrentViewSize} from "../../framework/utils";
 
 class UsageTapTargetInfo extends Container {
     private _text: Text;

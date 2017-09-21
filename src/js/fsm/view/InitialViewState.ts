@@ -3,9 +3,9 @@ import Text from "../../container/sprite/text/Text";
 
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
-import {isIOS, isSupportTouchEvent} from "../../helper/utils";
+import {isIOS, isSupportTouchEvent} from "../../framework/utils";
 import {Ids} from "../../resources/string";
-import {t} from "../../helper/i18n";
+import {t} from "../../framework/i18n";
 
 class InitialViewState extends ViewContainer {
     public static TAG = "InitialViewState";

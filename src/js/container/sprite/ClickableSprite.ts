@@ -1,7 +1,7 @@
 import {interaction} from 'pixi.js';
 
 import Sprite from "./Sprite";
-import {isSupportTouchEvent} from "../../helper/utils";
+import {isSupportTouchEvent} from "../../framework/utils";
 
 /**
  * @class

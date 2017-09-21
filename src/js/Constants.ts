@@ -1,4 +1,4 @@
-import {SupportedLanguages} from "./helper/i18n";
+import {SupportedLanguages} from "./framework/i18n";
 
 /**
  * Parameters for game tuning.

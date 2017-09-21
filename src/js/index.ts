@@ -5,8 +5,8 @@
  * @author Tatsuya Yamamoto
  */
 import ApplicationState from "./fsm/ApplicationState";
-import {getCurrentViewSize} from "./helper/utils";
-import {initI18n} from './helper/i18n';
+import {getCurrentViewSize} from "./framework/utils";
+import {initI18n} from './framework/i18n';
 import resources from './resources/string';
 import {SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE} from "./Constants";
 

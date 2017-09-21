@@ -1,6 +1,6 @@
 import ClickableSprite from "../ClickableSprite";
 
-import {loadTexture} from "../../../helper/AssetLoader";
+import {loadTexture} from "../../../framework/AssetLoader";
 
 import {Ids} from '../../../resources/image';
 import {GAME_PARAMETERS} from '../../../Constants';

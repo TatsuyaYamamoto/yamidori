@@ -6,9 +6,9 @@ import {addEvents, removeEvents} from './EventUtils';
 import InitialViewState from "./view/InitialViewState";
 import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";
-import {getCurrentViewSize, getScale} from "../helper/utils";
+import {getCurrentViewSize, getScale} from "../framework/utils";
 import GameViewState from "./view/GameViewState";
-import {toggleMute} from '../helper/utils';
+import {toggleMute} from '../framework/utils';
 
 export enum Events {
     INITIALIZED = "ApplicationState@INITIALIZED",

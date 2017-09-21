@@ -8,9 +8,9 @@ import TitleLogo from "../../../container/sprite/logo/TitleLogo";
 import VersionText from "../../../container/components/VersionText";
 import Text from '../../../container/sprite/text/Text';
 
-import {isSupportTouchEvent} from "../../../helper/utils";
-import {loadSound} from "../../../helper/AssetLoader";
-import {t} from "../../../helper/i18n";
+import {isSupportTouchEvent} from "../../../framework/utils";
+import {loadSound} from "../../../framework/AssetLoader";
+import {t} from "../../../framework/i18n";
 
 import {Ids} from "../../../resources/string";
 import {Ids as SoundIds} from '../../../resources/sound';

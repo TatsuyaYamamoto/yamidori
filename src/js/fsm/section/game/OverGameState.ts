@@ -10,11 +10,11 @@ import GoBackHomeButton from "../../../container/sprite/button/GoBackHomeButton"
 import ResultTweetButton from "../../../container/sprite/button/ResultTweetButton";
 import GamePointCount from "../../../container/components/GamePointCount";
 
-import {getRandomInteger} from "../../../helper/utils";
+import {getRandomInteger} from "../../../framework/utils";
 import {postPlayLog, tweetGameResult} from '../../../helper/network';
-import {loadSound} from "../../../helper/AssetLoader";
+import {loadSound} from "../../../framework/AssetLoader";
 import {getGamePoint} from "../../../helper/GlobalState";
-import {t} from "../../../helper/i18n";
+import {t} from "../../../framework/i18n";
 
 import {Ids as SoundIds} from '../../../resources/sound';
 import {Ids} from '../../../resources/string';

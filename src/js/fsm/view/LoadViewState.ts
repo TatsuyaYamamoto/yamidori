@@ -6,7 +6,7 @@ import BrandLogoAnimation from '../../container/BrandLogoAnimation';
 import LoadKotoriAnimation from '../../container/LoadKotoriAnimation';
 
 import {addEvents, removeEvents, dispatchEvent} from '../EventUtils';
-import AssetLoader, {Asset} from '../../helper/AssetLoader';
+import AssetLoader, {Asset} from '../../framework/AssetLoader';
 
 import imageManifest from '../../resources/image';
 import soundManifest from '../../resources/sound';
