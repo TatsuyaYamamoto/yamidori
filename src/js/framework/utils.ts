@@ -3,7 +3,7 @@
  */
 import PixiSound from 'pixi-sound/lib';
 
-import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "../Constants";
+import config from './config';
 
 /**
  * Detecting iOS
@@ -16,7 +16,7 @@ export function isIOS(): boolean {
 }
 
 /**
- * Return current view size in according to {@link window.innerWidth}, {@link window.innerHeight} and {@link ASPECT_RATIO}.
+ * Return current view size in according to calculated aspect ratio with {@link config}.
  *
  * @returns {{width: number; height: number}}
  */
@@ -25,12 +25,13 @@ export function getCurrentViewSize(): { width: number, height: number } {
 
     let width = window.innerWidth;
     let height = window.innerHeight;
+    const aspectRatio = config.basicImageWidth / config.basicImageHeight;
 
     // horizontally long then expected ratio.
-    if (ASPECT_RATIO < currentWindowAspectRatio) width = window.innerHeight * ASPECT_RATIO;
+    if (aspectRatio < currentWindowAspectRatio) width = window.innerHeight * aspectRatio;
 
     // vertically long then expected ratio.
-    if (currentWindowAspectRatio < ASPECT_RATIO) height = window.innerWidth / ASPECT_RATIO;
+    if (currentWindowAspectRatio < aspectRatio) height = window.innerWidth / aspectRatio;
 
     return {width, height}
 }
@@ -42,7 +43,7 @@ export function getCurrentViewSize(): { width: number, height: number } {
  */
 export function getScale(): number {
     const {width} = getCurrentViewSize();
-    return width / BASIC_IMAGE_WIDTH;
+    return width / config.basicImageWidth;
 }
 
 /**

@@ -2,7 +2,7 @@ import {Container} from 'pixi.js';
 
 import State from "./State";
 
-import {BASIC_IMAGE_HEIGHT, BASIC_IMAGE_WIDTH} from "../Constants";
+import config from "./config";
 
 abstract class ViewSectionContainer extends Container implements State {
     private _viewWidth: number;
@@ -11,8 +11,8 @@ abstract class ViewSectionContainer extends Container implements State {
     constructor() {
         super();
 
-        this._viewWidth = BASIC_IMAGE_WIDTH;
-        this._viewHeight = BASIC_IMAGE_HEIGHT;
+        this._viewWidth = config.basicImageWidth;
+        this._viewHeight = config.basicImageHeight;
     }
 
     protected get viewWidth(): number {
