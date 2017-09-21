@@ -1,8 +1,8 @@
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../../internal/State";
+import State from "../../../framework/State";
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewSectionContainer from "../../../framework/ViewSectionContainer";
 import Kotori, {Direction, Speed} from "../../../container/sprite/character/Kotori";
 import GamePointCount from "../../../container/components/GamePointCount";
 

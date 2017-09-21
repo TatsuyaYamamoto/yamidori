@@ -1,7 +1,7 @@
 import {Application} from 'pixi.js';
 
-import State from "./internal/State";
-import StateMachine from "./internal/StateMachine";
+import State from "../framework/State";
+import StateMachine from "../framework/StateMachine";
 import {addEvents, removeEvents} from './EventUtils';
 import InitialViewState from "./view/InitialViewState";
 import LoadViewState from "./view/LoadViewState";

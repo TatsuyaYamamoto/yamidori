@@ -1,4 +1,4 @@
-import ViewContainer from "../internal/ViewContainer";
+import ViewContainer from "../../framework/ViewContainer";
 import Text from "../../container/sprite/text/Text";
 
 import {Events} from "../ApplicationState";

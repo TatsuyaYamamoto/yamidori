@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewSectionContainer from "../../../framework/ViewSectionContainer";
 import CreditBackground from "../../../container/sprite/background/CreditBackground";
 import CreditComponent from "../../../container/components/CreditComponent";
 import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";

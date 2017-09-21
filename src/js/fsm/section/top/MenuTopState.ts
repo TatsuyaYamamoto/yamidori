@@ -5,7 +5,7 @@ import * as swal from 'sweetalert';
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewSectionContainer from "../../../framework/ViewSectionContainer";
 import MenuBackground from "../../../container/sprite/background/MenuBackground";
 import GameStartButton from "../../../container/sprite/button/GameStartButton";
 import GoHowToPlayButton from "../../../container/sprite/button/GoHowToPlayButton";

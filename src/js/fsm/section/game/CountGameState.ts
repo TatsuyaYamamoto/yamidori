@@ -1,6 +1,6 @@
 import Sound from "pixi-sound/lib/Sound";
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewSectionContainer from "../../../framework/ViewSectionContainer";
 import CountDownText from "../../../container/components/CountDownText";
 
 import {dispatchEvent} from '../../EventUtils';

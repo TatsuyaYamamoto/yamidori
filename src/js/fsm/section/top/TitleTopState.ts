@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 import {Events} from '../../view/TopViewState';
 import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewSectionContainer from "../../../framework/ViewSectionContainer";
 import TitleLogo from "../../../container/sprite/logo/TitleLogo";
 import VersionText from "../../../container/components/VersionText";
 import Text from '../../../container/sprite/text/Text';

@@ -2,9 +2,9 @@ import Sound from "pixi-sound/lib/Sound";
 
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
-import State from "../../internal/State";
+import State from "../../../framework/State";
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewSectionContainer from "../../../framework/ViewSectionContainer";
 import Kotori, {Direction} from "../../../container/sprite/character/Kotori";
 import UsageTapTargetInfo from "../../../container/components/UsageTapTargetInfo";
 import UsageTextArea from "../../../container/components/UsageTextArea";

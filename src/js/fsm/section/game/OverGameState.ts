@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 import {Events as ApplicationEvents} from "../../ApplicationState";
 import {dispatchEvent} from "../../EventUtils";
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewSectionContainer from "../../../framework/ViewSectionContainer";
 import GameOverLogo from '../../../container/sprite/logo/GameOverLogo';
 import GameRestartButton from "../../../container/sprite/button/GameRestartButton";
 import GoBackHomeButton from "../../../container/sprite/button/GoBackHomeButton";

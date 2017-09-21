@@ -5,12 +5,12 @@ import CreditTopState from "../section/top/CreditTopState";
 import UsageTopState from "../section/top/UsageTopState";
 import MenuTopState from "../section/top/MenuTopState";
 
-import ViewContainer from "../internal/ViewContainer";
+import ViewContainer from "../../framework/ViewContainer";
 import Background from "../../container/sprite/background/Background";
 
 import {Ids} from '../../resources/sound';
 import {loadSound} from "../../helper/AssetLoader";
-import StateMachine from "../internal/StateMachine";
+import StateMachine from "../../framework/StateMachine";
 
 import {Events as ApplicationEvents} from "../ApplicationState";
 import {dispatchEvent, addEvents, removeEvents} from "../EventUtils";

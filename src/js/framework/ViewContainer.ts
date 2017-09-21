@@ -2,7 +2,7 @@ import {Container} from 'pixi.js';
 
 import State from "./State";
 
-import {BASIC_IMAGE_HEIGHT, BASIC_IMAGE_WIDTH} from "../../Constants";
+import {BASIC_IMAGE_HEIGHT, BASIC_IMAGE_WIDTH} from "../Constants";
 
 abstract class ViewContainer extends Container implements State {
     private _backGroundLayer: Container;

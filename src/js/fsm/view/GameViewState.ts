@@ -1,11 +1,11 @@
-import StateMachine from "../internal/StateMachine";
+import StateMachine from "../../framework/StateMachine";
 import {addEvents, removeEvents} from "../EventUtils";
 
 import CountGameState from "../section/game/CountGameState";
 import OverGameState from "../section/game/OverGameState";
 import PlayingGameState from "../section/game/PlayingGameState";
 
-import ViewContainer from "../internal/ViewContainer";
+import ViewContainer from "../../framework/ViewContainer";
 import Background from "../../container/sprite/background/Background";
 
 import {SKIP_COUNT_DOWN_FOR_GAME_START} from "../../Constants";
