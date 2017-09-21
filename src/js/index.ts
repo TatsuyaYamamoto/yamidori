@@ -5,19 +5,20 @@
  * @author Tatsuya Yamamoto
  */
 import ApplicationState from "./fsm/ApplicationState";
-import {getCurrentViewSize} from "./framework/utils";
 import {initI18n} from './framework/i18n';
 import resources from './resources/string';
 import {SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE} from "./Constants";
 
 import 'whatwg-fetch';
 
+const mainElement: HTMLElement = document.getElementById('main');
+const app = new ApplicationState();
 
 /**
  * Initialize the application.
  */
 function init() {
-    console.info("Welcome Toridori!");
+    console.info("Welcome Yamidori!");
 
     // Initialize internationalization.
     initI18n(
@@ -26,19 +27,11 @@ function init() {
         DEFAULT_LANGUAGE
     );
 
-    const mainElement: HTMLElement = document.getElementById('main');
-    const rootState = new ApplicationState(getCurrentViewSize());
-
     // set application viewer.
-    mainElement.appendChild(<HTMLElement>rootState.view);
+    mainElement.appendChild(<HTMLElement>app.view);
 
     // start application.
-    rootState.onEnter();
-
-    // start application tick.
-    rootState.ticker.add((deltaTime: number) => {
-        rootState.update(rootState.ticker.elapsedMS);
-    });
+    app.start();
 }
 
 // Fire init() on page loaded.

@@ -1,14 +1,13 @@
-import {Application} from 'pixi.js';
-
-import State from "../framework/State";
+import Application from "../framework/Application";
 import StateMachine from "../framework/StateMachine";
+import {toggleMute} from '../framework/utils';
+import {getCurrentViewSize, getScale} from "../framework/utils";
+
 import {addEvents, removeEvents} from './EventUtils';
 import InitialViewState from "./view/InitialViewState";
 import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";
-import {getCurrentViewSize, getScale} from "../framework/utils";
 import GameViewState from "./view/GameViewState";
-import {toggleMute} from '../framework/utils';
 
 export enum Events {
     INITIALIZED = "ApplicationState@INITIALIZED",
@@ -17,15 +16,27 @@ export enum Events {
     BACK_TO_TOP_REQUEST = "ApplicationState@BACK_TO_TOP_REQUEST"
 }
 
-class ApplicationState extends Application implements State {
+class ApplicationState extends Application {
     private _viewStateMachine: StateMachine;
     private _initialViewState: InitialViewState;
     private _loadViewState: LoadViewState;
     private _topViewState: TopViewState;
     private _gameViewState: GameViewState;
 
-    constructor(options) {
-        super(Object.assign({}, options, {backgroundColor: 0xeeeeee}));
+    constructor() {
+        super(getCurrentViewSize());
+
+        this._initialViewState = new InitialViewState();
+        this._loadViewState = new LoadViewState();
+        this._topViewState = new TopViewState();
+        this._gameViewState = new GameViewState();
+
+        this._viewStateMachine = new StateMachine({
+            [InitialViewState.TAG]: this._initialViewState,
+            [LoadViewState.TAG]: this._loadViewState,
+            [TopViewState.TAG]: this._topViewState,
+            [GameViewState.TAG]: this._gameViewState
+        });
     }
 
     /**
@@ -43,18 +54,6 @@ class ApplicationState extends Application implements State {
     onEnter(): void {
         this._updateRendererSize();
         this._updateStageScale();
-
-        this._initialViewState = new InitialViewState();
-        this._loadViewState = new LoadViewState();
-        this._topViewState = new TopViewState();
-        this._gameViewState = new GameViewState();
-
-        this._viewStateMachine = new StateMachine({
-            [InitialViewState.TAG]: this._initialViewState,
-            [LoadViewState.TAG]: this._loadViewState,
-            [TopViewState.TAG]: this._topViewState,
-            [GameViewState.TAG]: this._gameViewState
-        });
 
         addEvents({
             [Events.INITIALIZED]: this._changeToLoadViewState,
