@@ -90,6 +90,15 @@ export function changeLanguage(language: string, callback?: i18next.Callback): v
 }
 
 /**
+ * Return default language.
+ *
+ * @return {string}
+ */
+export function getDefaultLanguage(): string {
+    return defaultLanguage;
+}
+
+/**
  * Return the current detected or set language.
  *
  * @see i18n#language

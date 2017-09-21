@@ -10,8 +10,7 @@
 import {Texture, loaders} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import {DEFAULT_LANGUAGE} from "../Constants";
-import {getCurrentLanguage} from "./i18n";
+import {getCurrentLanguage, getDefaultLanguage} from "./i18n";
 
 const IMAGE_BASE_DIR = 'assets/image/';
 const SOUND_BASE_DIR = 'assets/sound/';
@@ -65,7 +64,7 @@ class AssetLoader extends loaders.Loader {
     public setImageManifest(imageManifest: ImageManifest): void {
         // Concat manifests with base and current language.
         const targetManifest = Object.assign({},
-            imageManifest[DEFAULT_LANGUAGE],
+            imageManifest[getDefaultLanguage()],
             imageManifest[getCurrentLanguage()],
         );
 
