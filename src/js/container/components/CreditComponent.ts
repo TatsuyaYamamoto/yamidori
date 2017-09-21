@@ -1,5 +1,5 @@
 import {Container} from 'pixi.js';
-import {getCurrentViewSize, isSupportTouchEvent} from "../../framework/utils";
+import {isSupportTouchEvent} from "../../framework/utils";
 import Text from "../sprite/text/Text";
 
 class CreditComponent extends Container {
@@ -8,7 +8,6 @@ class CreditComponent extends Container {
 
     constructor(nameAndRole: string, url: string) {
         super();
-        const {width, height} = getCurrentViewSize();
 
         this._name = new Text(nameAndRole, {
             fontSize: 20,

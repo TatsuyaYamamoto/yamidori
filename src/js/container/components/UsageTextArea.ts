@@ -2,7 +2,6 @@ import {Container, Graphics} from 'pixi.js';
 
 import Text from "../sprite/text/Text";
 
-import {getCurrentViewSize} from "../../framework/utils";
 import {t} from "../../framework/i18n";
 
 import {Ids} from "../../resources/string";
@@ -14,14 +13,13 @@ class UsageTextArea extends Container {
 
     constructor() {
         super();
-        const {width, height} = getCurrentViewSize();
 
         this._text = new Text(t(Ids.HOW_TO_PLAY_INFORMATION), {
             fontSize: 16,
         });
 
-        const rectWidth = width * 0.6;
-        const rectHeight = height * 0.4;
+        const rectWidth = this._text.width * 1.2;
+        const rectHeight = this._text.height * 1.2;
 
         this._roundedRectangle = new Graphics();
         this._roundedRectangle.beginFill(0x001111, 0.25);

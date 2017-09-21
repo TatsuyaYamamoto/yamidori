@@ -1,6 +1,5 @@
 import {Container} from 'pixi.js';
 import Text from "../sprite/text/Text";
-import {getCurrentViewSize} from "../../framework/utils";
 
 import * as packageJson from '../../../../package.json';
 
@@ -9,7 +8,6 @@ class VersionText extends Container {
 
     constructor() {
         super();
-        const {width, height} = getCurrentViewSize();
 
         this._text = new Text(`v${(<any>packageJson).version}`, {
             fontSize: 20,

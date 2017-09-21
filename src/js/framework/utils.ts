@@ -1,3 +1,6 @@
+/**
+ * @fileOverview Convenience utilities.
+ */
 import PixiSound from 'pixi-sound/lib';
 
 import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "../Constants";
@@ -12,7 +15,11 @@ export function isIOS(): boolean {
     return !!navigator.userAgent && /iPad|iPhone|iPod/.test(navigator.userAgent);
 }
 
-
+/**
+ * Return current view size in according to {@link window.innerWidth}, {@link window.innerHeight} and {@link ASPECT_RATIO}.
+ *
+ * @returns {{width: number; height: number}}
+ */
 export function getCurrentViewSize(): { width: number, height: number } {
     const currentWindowAspectRatio = window.innerWidth / window.innerHeight;
 
