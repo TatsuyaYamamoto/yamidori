@@ -79,7 +79,7 @@ class MenuTopState extends ViewContainer {
         this._soundButton.setOnClickListener(this.onSoundButtonClick);
 
         this._changeLanguageButton = new ChangeLanguageButton();
-        this._changeLanguageButton.position.set(this.viewWidth * 0.2, this.viewHeight * 0.15);
+        this._changeLanguageButton.position.set(this.viewWidth * 0.17, this.viewHeight * 0.15);
         this._changeLanguageButton.setOnClickListener(this.onChangeLanguageButtonClick);
 
         this.applicationLayer.addChild(
