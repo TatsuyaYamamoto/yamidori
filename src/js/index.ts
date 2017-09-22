@@ -42,14 +42,14 @@ const app = new ApplicationState();
 function init() {
     console.info("Welcome Yamidori!");
 
-    // Initialize internationalization.
-    initI18n(resources);
-
     // set framework configuration
     config.supportedLanguages = Object.keys(SUPPORTED_LANGUAGES).map((key) => SUPPORTED_LANGUAGES[key]);
     config.defaultLanguage = DEFAULT_LANGUAGE;
     config.basicImageWidth = BASIC_IMAGE_WIDTH;
     config.basicImageHeight = BASIC_IMAGE_HEIGHT;
+
+    // Initialize internationalization.
+    initI18n({resources});
 
     // set application viewer.
     mainElement.appendChild(<HTMLElement>app.view);

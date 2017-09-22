@@ -14,18 +14,15 @@ let i18n: i18next.i18n = null;
 /**
  * Initialize i18next module.
  *
- * @param {i18next.Resource} resources
  * @param {i18next.InitOptions} options
  * @param {i18next.Callback} callback
  */
-export function initI18n(resources: i18next.Resource,
-                         options?: i18next.InitOptions,
+export function initI18n(options?: i18next.InitOptions,
                          callback?: i18next.Callback): void {
 
     const opts = Object.assign({}, {
         fallbackLng: config.defaultLanguage,
         debug: false,
-        resources,
     }, options);
 
     i18n = i18next
