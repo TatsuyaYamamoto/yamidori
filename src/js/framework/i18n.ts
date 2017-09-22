@@ -1,29 +1,7 @@
 import * as i18next from 'i18next';
 import * as Detector from 'i18next-browser-languagedetector';
 
-/**
- * Supported languages.
- */
-export interface SupportedLanguages {
-    [language: string]: string;
-}
-
-/**
- * Languages that this i18n module supports.
- *
- * @type {SupportedLanguages}
- * @private
- */
-let supportedLanguages: SupportedLanguages = null;
-
-/**
- * Default language.
- * This is fallback when user required unsupported language.
- *
- * @type {string}
- * @private
- */
-let defaultLanguage: string = null;
+import config from "./config";
 
 /**
  * Single instance to be set with {@link initI18n}.
@@ -37,22 +15,15 @@ let i18n: i18next.i18n = null;
  * Initialize i18next module.
  *
  * @param {i18next.Resource} resources
- * @param {SupportedLanguages} supportedLangs
- * @param {string} defaultLang
  * @param {i18next.InitOptions} options
  * @param {i18next.Callback} callback
  */
 export function initI18n(resources: i18next.Resource,
-                         supportedLangs: SupportedLanguages,
-                         defaultLang: string,
                          options?: i18next.InitOptions,
                          callback?: i18next.Callback): void {
 
-    supportedLanguages = supportedLangs;
-    defaultLanguage = defaultLang;
-
     const opts = Object.assign({}, {
-        fallbackLng: defaultLanguage,
+        fallbackLng: config.defaultLanguage,
         debug: false,
         resources,
     }, options);
@@ -85,17 +56,8 @@ export function changeLanguage(language: string, callback?: i18next.Callback): v
     if (isDefinedLanguage(language)) {
         i18n.changeLanguage(language, callback);
     } else {
-        i18n.changeLanguage(defaultLanguage, callback);
+        i18n.changeLanguage(config.defaultLanguage, callback);
     }
-}
-
-/**
- * Return default language.
- *
- * @return {string}
- */
-export function getDefaultLanguage(): string {
-    return defaultLanguage;
 }
 
 /**
@@ -107,7 +69,7 @@ export function getDefaultLanguage(): string {
 export function getCurrentLanguage(): string {
     return isDefinedLanguage(i18n.language) ?
         i18n.language :
-        defaultLanguage;
+        config.defaultLanguage;
 }
 
 /**
@@ -118,11 +80,5 @@ export function getCurrentLanguage(): string {
  * @private
  */
 function isDefinedLanguage(targetLanguage: string): boolean {
-    for (const key in supportedLanguages) {
-        if (supportedLanguages[key] === targetLanguage) {
-            return true;
-        }
-    }
-
-    return false;
+    return config.supportedLanguages.some((l) => l === targetLanguage);
 }

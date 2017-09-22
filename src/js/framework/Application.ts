@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 
 import State from "./State";
+import config from "./config";
 
 /**
  * Root class of the application.
@@ -31,7 +32,7 @@ import State from "./State";
 abstract class Application extends PIXI.Application implements State {
     constructor(options: PIXI.ApplicationOptions) {
         super(Object.assign({
-            backgroundColor: 0xeeeeee,
+            backgroundColor: config.rendererBackgroundColor,
             autoStart: false,
         }, options));
 

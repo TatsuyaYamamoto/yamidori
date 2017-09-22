@@ -1,5 +1,3 @@
-import {SupportedLanguages} from "./framework/i18n";
-
 /**
  * Parameters for game tuning.
  */
@@ -73,7 +71,7 @@ export const SKIP_BRAND_LOGO_ANIMATION = false;
 /**
  * Supported languages.
  */
-export const SUPPORTED_LANGUAGES: SupportedLanguages = {
+export const SUPPORTED_LANGUAGES = {
     EN: "en",
     JA: "ja"
 };

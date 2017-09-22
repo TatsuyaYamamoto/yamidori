@@ -25,18 +25,6 @@ class ApplicationState extends Application {
 
     constructor() {
         super(getCurrentViewSize());
-
-        this._initialViewState = new InitialViewState();
-        this._loadViewState = new LoadViewState();
-        this._topViewState = new TopViewState();
-        this._gameViewState = new GameViewState();
-
-        this._viewStateMachine = new StateMachine({
-            [InitialViewState.TAG]: this._initialViewState,
-            [LoadViewState.TAG]: this._loadViewState,
-            [TopViewState.TAG]: this._topViewState,
-            [GameViewState.TAG]: this._gameViewState
-        });
     }
 
     /**
@@ -54,6 +42,18 @@ class ApplicationState extends Application {
     onEnter(): void {
         this._updateRendererSize();
         this._updateStageScale();
+
+        this._initialViewState = new InitialViewState();
+        this._loadViewState = new LoadViewState();
+        this._topViewState = new TopViewState();
+        this._gameViewState = new GameViewState();
+
+        this._viewStateMachine = new StateMachine({
+            [InitialViewState.TAG]: this._initialViewState,
+            [LoadViewState.TAG]: this._loadViewState,
+            [TopViewState.TAG]: this._topViewState,
+            [GameViewState.TAG]: this._gameViewState
+        });
 
         addEvents({
             [Events.INITIALIZED]: this._changeToLoadViewState,
