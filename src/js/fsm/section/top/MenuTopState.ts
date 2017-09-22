@@ -5,7 +5,7 @@ import * as swal from 'sweetalert';
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../../../framework/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import MenuBackground from "../../../container/sprite/background/MenuBackground";
 import GameStartButton from "../../../container/sprite/button/GameStartButton";
 import GoHowToPlayButton from "../../../container/sprite/button/GoHowToPlayButton";
@@ -25,7 +25,7 @@ import {Ids} from "../../../resources/string";
 
 import {SUPPORTED_LANGUAGES, URL} from '../../../Constants';
 
-class MenuTopState extends ViewSectionContainer {
+class MenuTopState extends ViewContainer {
     public static TAG = "MenuTopState";
 
     private _menuBackground: MenuBackground;
@@ -82,7 +82,7 @@ class MenuTopState extends ViewSectionContainer {
         this._changeLanguageButton.position.set(this.viewWidth * 0.2, this.viewHeight * 0.15);
         this._changeLanguageButton.setOnClickListener(this.onChangeLanguageButtonClick);
 
-        this.addChild(
+        this.applicationLayer.addChild(
             this._menuBackground,
             this._gameStartButton,
             this._goCreditButton,

@@ -1,6 +1,6 @@
 import Sound from "pixi-sound/lib/Sound";
 
-import ViewSectionContainer from "../../../framework/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import CountDownText from "../../../container/components/CountDownText";
 
 import {dispatchEvent} from '../../EventUtils';
@@ -9,7 +9,7 @@ import {Events} from '../../view/GameViewState';
 import {Ids} from '../../../resources/sound';
 import {loadSound} from "../../../framework/AssetLoader";
 
-class CountGameState extends ViewSectionContainer {
+class CountGameState extends ViewContainer {
     public static TAG = "CountGameState";
     private _initialTimeMillis: number;
 
@@ -27,7 +27,7 @@ class CountGameState extends ViewSectionContainer {
         if (1000 < this._initialTimeMillis && !this._isCountedTwo) {
             console.log("Count down, 2!");
             this._countInfo.count = 2;
-            this.addChild(this._countInfo);
+            this.applicationLayer.addChild(this._countInfo);
             this._countLowSound.play();
             this._isCountedTwo = true;
         }

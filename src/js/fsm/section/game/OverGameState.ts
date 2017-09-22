@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 import {Events as ApplicationEvents} from "../../ApplicationState";
 import {dispatchEvent} from "../../EventUtils";
 
-import ViewSectionContainer from "../../../framework/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import GameOverLogo from '../../../container/sprite/logo/GameOverLogo';
 import GameRestartButton from "../../../container/sprite/button/GameRestartButton";
 import GoBackHomeButton from "../../../container/sprite/button/GoBackHomeButton";
@@ -19,7 +19,7 @@ import {t} from "../../../framework/i18n";
 import {Ids as SoundIds} from '../../../resources/sound';
 import {Ids} from '../../../resources/string';
 
-class OverGameState extends ViewSectionContainer {
+class OverGameState extends ViewContainer {
     public static TAG = "OverGameState";
 
     private _gameOverLogo: GameOverLogo;
@@ -60,7 +60,7 @@ class OverGameState extends ViewSectionContainer {
         this._gamePointCount.rotation = -1 * Math.PI * 0.02;
         this._gamePointCount.point = getGamePoint();
 
-        this.addChild(
+        this.applicationLayer.addChild(
             this._gameOverLogo,
             this._gameRestartButton,
             this._goBackHomeButton,

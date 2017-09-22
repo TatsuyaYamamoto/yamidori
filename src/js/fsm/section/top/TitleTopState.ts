@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 import {Events} from '../../view/TopViewState';
 import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../../../framework/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import TitleLogo from "../../../container/sprite/logo/TitleLogo";
 import VersionText from "../../../container/components/VersionText";
 import Text from '../../../container/sprite/text/Text';
@@ -16,7 +16,7 @@ import {Ids} from "../../../resources/string";
 import {Ids as SoundIds} from '../../../resources/sound';
 
 
-class TitleTopState extends ViewSectionContainer {
+class TitleTopState extends ViewContainer {
     public static TAG = "TitleTopState";
 
     private _titleLog: TitleLogo;
@@ -46,7 +46,7 @@ class TitleTopState extends ViewSectionContainer {
         this._tapInfoText = new Text(t(Ids.TAP_DISPLAY_INFO));
         this._tapInfoText.position.set(this.viewWidth * 0.5, this.viewHeight * 0.9);
 
-        this.addChild(
+        this.applicationLayer.addChild(
             this._titleLog,
             this._appVersion,
             this._tapInfoText

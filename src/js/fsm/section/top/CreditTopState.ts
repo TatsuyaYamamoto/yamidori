@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../../../framework/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import CreditBackground from "../../../container/sprite/background/CreditBackground";
 import CreditComponent from "../../../container/components/CreditComponent";
 import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
@@ -15,7 +15,7 @@ import {Ids as SoundIds} from '../../../resources/sound';
 import {Ids} from "../../../resources/string";
 import {URL} from "../../../Constants";
 
-class CreditTopState extends ViewSectionContainer {
+class CreditTopState extends ViewContainer {
     public static TAG = "CreditTopState";
 
     private _creditBackground: CreditBackground;
@@ -57,7 +57,7 @@ class CreditTopState extends ViewSectionContainer {
         this._backToMenuButton.position.set(this.viewWidth * 0.15, this.viewHeight * 0.8);
         this._backToMenuButton.setOnClickListener(this.onBackToMenuButtonClick);
 
-        this.addChild(
+        this.applicationLayer.addChild(
             this._creditBackground,
             this._backToMenuButton,
             this._t28Credit,

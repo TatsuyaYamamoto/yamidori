@@ -1,9 +1,15 @@
-import {Container} from 'pixi.js';
+import {Container, DisplayObject} from 'pixi.js';
 
 import State from "./State";
 
 import config from "./config";
 
+/**
+ * A Container represents a collection of basic containers; {@link this#backGroundLayer},
+ * {@link this#applicationLayer} and {@link this#informationLayer}.
+ *
+ * @class
+ */
 abstract class ViewContainer extends Container implements State {
     private _backGroundLayer: Container;
     private _applicationLayer: Container;
@@ -19,6 +25,7 @@ abstract class ViewContainer extends Container implements State {
         this._applicationLayer = new Container();
         this._informationLayer = new Container();
 
+        // Set only containers that {@link this} manages
         this.addChild(
             this._backGroundLayer,
             this._applicationLayer,
@@ -75,6 +82,58 @@ abstract class ViewContainer extends Container implements State {
         this.backGroundLayer.removeChildren();
         this.applicationLayer.removeChildren();
         this.informationLayer.removeChildren();
+    }
+
+    /**
+     * @deprecated
+     * Deprecated to {@link addChild} some {@link DisplayObject}s to {@link this} container directly.
+     * You should use {@link this#backGroundLayer}, {@link this#applicationLayer}, {@link this#informationLayer}
+     * in according to providing {@link DisplayObject}'s role.
+     *
+     * @override
+     */
+    public addChild<T extends DisplayObject>(child: T, ...additionalChildren: DisplayObject[]): T {
+        return super.addChild(child, ...additionalChildren);
+    }
+
+    /**
+     * @deprecated
+     * @inheritDoc
+     * @see this#addChild
+     * @override
+     */
+    public addChildAt<T extends DisplayObject>(child: T, index: number): T {
+        return super.addChildAt(child, index);
+    }
+
+    /**
+     * @deprecated
+     * @inheritDoc
+     * @see this#addChild
+     * @override
+     */
+    public removeChild(child: DisplayObject): DisplayObject {
+        return super.removeChild(child);
+    }
+
+    /**
+     * @deprecated
+     * @inheritDoc
+     * @see this#addChild
+     * @override
+     */
+    public removeChildAt(index: number): DisplayObject {
+        return super.removeChildAt(index);
+    }
+
+    /**
+     * @deprecated
+     * @inheritDoc
+     * @see this#addChild
+     * @override
+     */
+    public removeChildren(beginIndex?: number, endIndex?: number): DisplayObject[] {
+        return super.removeChildren(beginIndex, endIndex);
     }
 }
 
