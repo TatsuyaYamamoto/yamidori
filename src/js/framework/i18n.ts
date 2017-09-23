@@ -1,3 +1,15 @@
+/**
+ * @fileOverview i18n, internationalization, module.
+ * You should execute {@link initI18n} before using other functions.
+ *
+ * This detects user language with {@link Detector} in initializing.
+ * First access, this detects browser language.
+ * From the second time, this check in saved localStorage value.
+ *
+ * This dependents on {@link config.defaultLanguage} and {@link config.supportedLanguages}.
+ * These language configs is supported language string only, for example "en" or "jp".
+ * If it's detected with locale string, for example en-US or ja-JP, this module deletes locale section.
+ */
 import * as i18next from 'i18next';
 import * as Detector from 'i18next-browser-languagedetector';
 
@@ -28,6 +40,9 @@ export function initI18n(options?: i18next.InitOptions,
     i18n = i18next
         .use(Detector)
         .init(opts, callback);
+
+    const detectedLang = i18n.language.substr(0, 2); // extract language string only.
+    changeLanguage(detectedLang);
 }
 
 /**
@@ -64,8 +79,12 @@ export function changeLanguage(language: string, callback?: i18next.Callback): v
  * @return {string}
  */
 export function getCurrentLanguage(): string {
-    return isDefinedLanguage(i18n.language) ?
-        i18n.language :
+    // Step against rewriting directly by user.
+    // remove locale if it exists.
+    const lang = i18n.language.substr(0, 2);
+
+    return isDefinedLanguage(lang) ?
+        lang :
         config.defaultLanguage;
 }
 
