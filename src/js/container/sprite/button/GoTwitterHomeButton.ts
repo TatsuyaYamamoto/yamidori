@@ -1,11 +1,13 @@
-import {Sprite} from 'pixi.js';
-
-import manifest from '../../../resources/manifest';
 import Button from "./Button";
+
+import {loadTexture} from "../../../framework/AssetLoader";
+
+import {Ids} from '../../../resources/image';
+
 
 class GoTwitterHomeButton extends Button {
     constructor() {
-        super(Sprite.fromImage(manifest.buttonGoTwitterHome).texture);
+        super(loadTexture(Ids.BUTTON_GO_TWITTER_HOME));
     }
 }
 

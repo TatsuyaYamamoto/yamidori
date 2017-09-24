@@ -69,6 +69,16 @@ export const SKIP_COUNT_DOWN_FOR_GAME_START = false;
 export const SKIP_BRAND_LOGO_ANIMATION = false;
 
 /**
+ * Supported languages.
+ */
+export const SUPPORTED_LANGUAGES = {
+    EN: "en",
+    JA: "ja"
+};
+
+export const DEFAULT_LANGUAGE = SUPPORTED_LANGUAGES.EN;
+
+/**
  * Application server base URL
  * @type {string}
  */
@@ -87,11 +97,4 @@ export const URL = {
     TWITTER_TWEET_PAGE: "https://twitter.com/intent/tweet",
     ONJIN_TOP: 'https://on-jin.com/',
     LOVELIVE_TOP: 'http://www.lovelive-anime.jp/',
-};
-
-export const NAME_AND_ROLE = {
-    T28: 'プラグラム, 音楽, 思いつき: T28',
-    SANZASHI: 'イラスト: さんざし',
-    ON_JIN: '効果音: フリー効果音 On-Jin ～音人～',
-    LOVELIVE: 'プロジェクト ラブライブ！'
 };

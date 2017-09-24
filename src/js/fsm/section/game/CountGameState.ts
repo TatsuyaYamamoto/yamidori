@@ -1,18 +1,15 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../../internal/State";
-
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import CountDownText from "../../../container/components/CountDownText";
 
 import {dispatchEvent} from '../../EventUtils';
 import {Events} from '../../view/GameViewState';
 
-import manifest from '../../../resources/manifest';
-import {loadSound} from "../../../helper/SoundManager";
+import {Ids} from '../../../resources/sound';
+import {loadSound} from "../../../framework/AssetLoader";
 
-class CountGameState extends ViewSectionContainer implements State {
+class CountGameState extends ViewContainer {
     public static TAG = "CountGameState";
     private _initialTimeMillis: number;
 
@@ -30,7 +27,7 @@ class CountGameState extends ViewSectionContainer implements State {
         if (1000 < this._initialTimeMillis && !this._isCountedTwo) {
             console.log("Count down, 2!");
             this._countInfo.count = 2;
-            this.addChild(this._countInfo);
+            this.applicationLayer.addChild(this._countInfo);
             this._countLowSound.play();
             this._isCountedTwo = true;
         }
@@ -51,10 +48,11 @@ class CountGameState extends ViewSectionContainer implements State {
     }
 
     onEnter(): void {
-        console.log(`${CountGameState.TAG}@onEnter`);
+        super.onEnter();
+
         this._initialTimeMillis = 0;
-        this._countHighSound = loadSound(manifest.soundCountHigh);
-        this._countLowSound = loadSound(manifest.soundCountLow);
+        this._countHighSound = loadSound(Ids.SOUND_COUNT_HIGH);
+        this._countLowSound = loadSound(Ids.SOUND_COUNT_LOW);
 
         // Set deadline position.
         this._countInfo = new CountDownText();
@@ -62,7 +60,7 @@ class CountGameState extends ViewSectionContainer implements State {
     }
 
     onExit(): void {
-        console.log(`${CountGameState.TAG}@onExit`);
+        super.onExit();
     }
 }
 

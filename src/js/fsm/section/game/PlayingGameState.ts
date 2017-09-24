@@ -1,26 +1,25 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../../internal/State";
+import State from "../../../framework/State";
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import Kotori, {Direction, Speed} from "../../../container/sprite/character/Kotori";
 import GamePointCount from "../../../container/components/GamePointCount";
 
 import {Events as GameEvents} from '../../view/GameViewState'
 import {dispatchEvent} from '../../EventUtils';
 
-import {getCurrentViewSize, getRandomInteger} from "../../../helper/utils";
+import {getRandomInteger} from "../../../framework/utils";
 
-import {loadSound} from "../../../helper/SoundManager";
+import {loadSound} from "../../../framework/AssetLoader";
 import {clearGamePoint, getGamePoint, saveGamePoint} from "../../../helper/GlobalState";
 
-import manifest from '../../../resources/manifest';
+import {Ids} from '../../../resources/sound';
 import {GAME_PARAMETERS} from "../../../Constants";
 
 export const DEAD_ZONE_WIDTH_RATE = 0.4;
 
-class PlayingGameState extends ViewSectionContainer implements State {
+class PlayingGameState extends ViewContainer implements State {
     public static TAG = "PlayingGameState";
 
     private _gamePointCount: GamePointCount;
@@ -43,7 +42,7 @@ class PlayingGameState extends ViewSectionContainer implements State {
             this._nextAppearTimeMillis += this.getNextAppearTimeMillis();
 
             const kotori = this.createKotori();
-            this.addChild(kotori);
+            this.applicationLayer.addChild(kotori);
             this._kotoriMap.set(kotori.id, kotori);
         }
 
@@ -58,7 +57,7 @@ class PlayingGameState extends ViewSectionContainer implements State {
     }
 
     onEnter(): void {
-        console.log(`${PlayingGameState.TAG}@onEnter`);
+        super.onEnter();
 
         // reset prev game point.
         clearGamePoint();
@@ -70,19 +69,20 @@ class PlayingGameState extends ViewSectionContainer implements State {
         // set container
         this._gamePointCount = new GamePointCount();
         this._gamePointCount.position.set(this.viewWidth * 0.5, this.viewHeight * 0.1);
-        this.addChild(this._gamePointCount);
+        this.applicationLayer.addChild(this._gamePointCount);
 
         this._kotoriMap = new Map();
         this._elapsedTimeMillis = 0;
         this._nextAppearTimeMillis = this.getNextAppearTimeMillis();
 
-        this._gameLoopSound = loadSound(manifest.soundGameLoop);
+        this._gameLoopSound = loadSound(Ids.SOUND_GAME_LOOP);
         this._gameLoopSound.play({loop: true});
-        this._tapKotoriSound = loadSound(manifest.soundTapKotori);
+        this._tapKotoriSound = loadSound(Ids.SOUND_TAP_KOTORI);
     }
 
     onExit(): void {
-        console.log(`${PlayingGameState.TAG}@onExit`);
+        super.onExit();
+
         this._kotoriMap.forEach((k: Kotori) => k.destroy());
         this._kotoriMap.clear();
         this._gameLoopSound.stop();

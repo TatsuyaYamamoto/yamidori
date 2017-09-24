@@ -1,21 +1,19 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
-import State from "../../internal/State";
+import State from "../../../framework/State";
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import Kotori, {Direction} from "../../../container/sprite/character/Kotori";
 import UsageTapTargetInfo from "../../../container/components/UsageTapTargetInfo";
 import UsageTextArea from "../../../container/components/UsageTextArea";
 import BackToMenuButton from "../../../container/sprite/button/BackToMenuButton";
 
-import {getCurrentViewSize} from "../../../helper/utils";
-import {loadSound} from "../../../helper/SoundManager";
-import manifest from '../../../resources/manifest';
+import {loadSound} from "../../../framework/AssetLoader";
+import {Ids} from '../../../resources/sound';
 
-class UsageTopState extends ViewSectionContainer implements State{
+class UsageTopState extends ViewContainer implements State{
     public static TAG = "UsageTopState";
 
     private _usageTextArea: UsageTextArea;
@@ -33,7 +31,7 @@ class UsageTopState extends ViewSectionContainer implements State{
         if (!this._usageTarget) {
             this._usageTarget = new Kotori({direction: Direction.LEFT});
             this._usageTarget.position.set(this.viewWidth * 1.1, this.viewHeight * 0.4);
-            this.addChild(this._usageTarget);
+            this.applicationLayer.addChild(this._usageTarget);
         }
 
         if (this._usageTarget && this.viewWidth * 0.8 < this._usageTarget.x) {
@@ -43,7 +41,7 @@ class UsageTopState extends ViewSectionContainer implements State{
                 this._usageTarget.setOnClickListener(this.onUsageModelTargetClick);
                 this._usageTapTargetInfo = new UsageTapTargetInfo();
                 this._usageTapTargetInfo.position.set(this.viewWidth * 0.8, this.viewHeight * 0.7);
-                this.addChild(this._usageTapTargetInfo);
+                this.applicationLayer.addChild(this._usageTapTargetInfo);
             }
         }
     }
@@ -52,7 +50,7 @@ class UsageTopState extends ViewSectionContainer implements State{
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${UsageTopState.TAG}@onEnter`);
+        super.onEnter();
 
         this._usageTextArea = new UsageTextArea();
         this._usageTextArea.position.set(this.viewWidth * 0.35, this.viewHeight * 0.3);
@@ -61,20 +59,21 @@ class UsageTopState extends ViewSectionContainer implements State{
         this._backToMenuButton.position.set(this.viewWidth * 0.15, this.viewHeight * 0.8);
         this._backToMenuButton.setOnClickListener(this.onBackToMenuButtonClick);
 
-        this.addChild(
+        this.applicationLayer.addChild(
             this._backToMenuButton,
             this._usageTextArea,
         );
 
-        this._tapKotoriSound = loadSound(manifest.soundTapKotori);
-        this._cancelSound = loadSound(manifest.soundCancel);
+        this._tapKotoriSound = loadSound(Ids.SOUND_TAP_KOTORI);
+        this._cancelSound = loadSound(Ids.SOUND_CANCEL);
     }
 
     /**
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${UsageTopState.TAG}@onExit`);
+        super.onExit();
+
         this._usageTarget = null;
         this._usageTapTargetInfo = null;
     }

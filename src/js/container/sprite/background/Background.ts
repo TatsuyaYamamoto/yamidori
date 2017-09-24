@@ -1,12 +1,14 @@
 import {Sprite} from 'pixi.js';
-import manifest from '../../../resources/manifest';
+
+import {loadTexture} from "../../../framework/AssetLoader";
+import {Ids} from '../../../resources/image';
 
 /**
  * @class
  */
 class Background extends Sprite {
     public constructor() {
-        super(Sprite.fromImage(manifest.background).texture);
+        super(loadTexture(Ids.BACKGROUND));
     }
 }
 

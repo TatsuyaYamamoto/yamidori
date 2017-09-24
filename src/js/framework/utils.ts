@@ -1,7 +1,9 @@
-import {loaders} from 'pixi.js';
+/**
+ * @fileOverview Convenience utilities.
+ */
+import PixiSound from 'pixi-sound/lib';
 
-import {ASPECT_RATIO, BASIC_IMAGE_WIDTH} from "../Constants";
-import strings from "../resources/string";
+import config from './config';
 
 /**
  * Detecting iOS
@@ -13,18 +15,23 @@ export function isIOS(): boolean {
     return !!navigator.userAgent && /iPad|iPhone|iPod/.test(navigator.userAgent);
 }
 
-
+/**
+ * Return current view size in according to calculated aspect ratio with {@link config}.
+ *
+ * @returns {{width: number; height: number}}
+ */
 export function getCurrentViewSize(): { width: number, height: number } {
     const currentWindowAspectRatio = window.innerWidth / window.innerHeight;
 
     let width = window.innerWidth;
     let height = window.innerHeight;
+    const aspectRatio = config.basicImageWidth / config.basicImageHeight;
 
     // horizontally long then expected ratio.
-    if (ASPECT_RATIO < currentWindowAspectRatio) width = window.innerHeight * ASPECT_RATIO;
+    if (aspectRatio < currentWindowAspectRatio) width = window.innerHeight * aspectRatio;
 
     // vertically long then expected ratio.
-    if (currentWindowAspectRatio < ASPECT_RATIO) height = window.innerWidth / ASPECT_RATIO;
+    if (currentWindowAspectRatio < aspectRatio) height = window.innerWidth / aspectRatio;
 
     return {width, height}
 }
@@ -36,28 +43,7 @@ export function getCurrentViewSize(): { width: number, height: number } {
  */
 export function getScale(): number {
     const {width} = getCurrentViewSize();
-    return width / BASIC_IMAGE_WIDTH;
-}
-
-/**
- * Get string resource with ID.
- *
- * @param id
- * @return {any}
- */
-export function getString(id: string): string {
-    const text = strings[id];
-
-    if (typeof text === 'string') {
-        return text;
-    }
-
-    if (typeof text === 'object') {
-        // TODO: handle value in accordance with user lang.
-        return text['en']
-    }
-
-    throw new Error('Could not find a string resource with provided id.');
+    return width / config.basicImageWidth;
 }
 
 /**
@@ -70,33 +56,6 @@ export function isSupportTouchEvent(): boolean {
 }
 
 /**
- * Preloaded resources with Pixi loader.
- *
- * @type {any}
- * @private
- */
-const AssetsCache: { string: loaders.Resource } = Object.create(null);
-
-/**
- * Cache asset resource.
- *
- * @param resource
- */
-export function setAsset(resource: loaders.Resource) {
-    AssetsCache[resource.url] = resource;
-}
-
-/**
- * Get cached asset resource.
- *
- * @param url
- * @return {any}
- */
-export function getAsset(url: string) {
-    return AssetsCache[url];
-}
-
-/**
  * Get integer. this value is generated randomly between min and max.
  *
  * @param min
@@ -105,4 +64,19 @@ export function getAsset(url: string) {
  */
 export function getRandomInteger(min: number, max: number): number {
     return Math.floor(Math.random() * (max + 1 - min)) + min;
+}
+
+/**
+ * Toggle muted property for all sounds.
+ *
+ * @return {boolean} if all sounds are muted.
+ */
+export function toggleMute(): boolean {
+    if (PixiSound.context.muted) {
+        PixiSound.unmuteAll();
+    } else {
+        PixiSound.muteAll();
+    }
+
+    return PixiSound.context.muted;
 }

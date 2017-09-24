@@ -1,22 +1,22 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../../internal/State";
 import {Events} from '../../view/TopViewState';
 import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import TitleLogo from "../../../container/sprite/logo/TitleLogo";
 import VersionText from "../../../container/components/VersionText";
 import Text from '../../../container/sprite/text/Text';
 
-import {getCurrentViewSize, getString, isSupportTouchEvent} from "../../../helper/utils";
+import {isSupportTouchEvent} from "../../../framework/utils";
+import {loadSound} from "../../../framework/AssetLoader";
+import {t} from "../../../framework/i18n";
+
 import {Ids} from "../../../resources/string";
-import {loadSound} from "../../../helper/SoundManager";
-import manifest from '../../../resources/manifest';
+import {Ids as SoundIds} from '../../../resources/sound';
 
 
-class TitleTopState extends ViewSectionContainer implements State {
+class TitleTopState extends ViewContainer {
     public static TAG = "TitleTopState";
 
     private _titleLog: TitleLogo;
@@ -35,7 +35,7 @@ class TitleTopState extends ViewSectionContainer implements State {
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${TitleTopState.TAG}@onEnter`);
+        super.onEnter();
 
         this._titleLog = new TitleLogo();
         this._titleLog.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
@@ -43,16 +43,16 @@ class TitleTopState extends ViewSectionContainer implements State {
         this._appVersion = new VersionText();
         this._appVersion.position.set(this.viewWidth * 0.1, this.viewHeight * 0.95);
 
-        this._tapInfoText = new Text(getString(Ids.TAP_DISPLAY_INFO));
+        this._tapInfoText = new Text(t(Ids.TAP_DISPLAY_INFO));
         this._tapInfoText.position.set(this.viewWidth * 0.5, this.viewHeight * 0.9);
 
-        this.addChild(
+        this.applicationLayer.addChild(
             this._titleLog,
             this._appVersion,
             this._tapInfoText
         );
 
-        this._okSound = loadSound(manifest.soundOk);
+        this._okSound = loadSound(SoundIds.SOUND_OK);
 
         window.addEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this.onWindowTap);
     }
@@ -61,7 +61,7 @@ class TitleTopState extends ViewSectionContainer implements State {
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${TitleTopState.TAG}@onExit`);
+        super.onExit();
     }
 
     private onWindowTap = (): void => {

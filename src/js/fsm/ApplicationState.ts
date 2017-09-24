@@ -1,14 +1,13 @@
-import {Application} from 'pixi.js';
+import Application from "../framework/Application";
+import StateMachine from "../framework/StateMachine";
+import {toggleMute} from '../framework/utils';
+import {getCurrentViewSize, getScale} from "../framework/utils";
 
-import State from "./internal/State";
-import StateMachine from "./internal/StateMachine";
 import {addEvents, removeEvents} from './EventUtils';
 import InitialViewState from "./view/InitialViewState";
 import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";
-import {getCurrentViewSize, getScale} from "../helper/utils";
 import GameViewState from "./view/GameViewState";
-import {toggleMute} from '../helper/SoundManager';
 
 export enum Events {
     INITIALIZED = "ApplicationState@INITIALIZED",
@@ -17,15 +16,15 @@ export enum Events {
     BACK_TO_TOP_REQUEST = "ApplicationState@BACK_TO_TOP_REQUEST"
 }
 
-class ApplicationState extends Application implements State {
+class ApplicationState extends Application {
     private _viewStateMachine: StateMachine;
     private _initialViewState: InitialViewState;
     private _loadViewState: LoadViewState;
     private _topViewState: TopViewState;
     private _gameViewState: GameViewState;
 
-    constructor(options) {
-        super(Object.assign({}, options, {backgroundColor: 0xeeeeee}));
+    constructor() {
+        super(getCurrentViewSize());
     }
 
     /**

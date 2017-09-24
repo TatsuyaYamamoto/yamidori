@@ -1,6 +1,6 @@
 {
   "name": "yamidori",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "LoveLive fun game! Darkside nabe with cheese cake.",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   "author": "Tatsuya Yamamoto",
   "license": "ISC",
   "devDependencies": {
+    "@types/i18next": "^8.4.2",
     "@types/node": "^8.0.28",
     "@types/pixi.js": "^4.5.3",
     "copy-webpack-plugin": "^4.0.1",
@@ -35,9 +36,13 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "@types/i18next-browser-languagedetector": "^2.0.0",
     "animejs": "^2.0.2",
+    "i18next": "^9.0.0",
+    "i18next-browser-languagedetector": "^2.0.0",
     "pixi-sound": "^1.4.2",
     "pixi.js": "^4.5.4",
+    "sweetalert": "^2.0.3",
     "whatwg-fetch": "^2.0.3"
   }
 }

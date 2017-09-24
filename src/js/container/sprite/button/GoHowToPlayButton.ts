@@ -1,11 +1,12 @@
-import {Sprite} from 'pixi.js';
-
-import manifest from '../../../resources/manifest';
 import Button from "./Button";
+
+import {loadTexture} from "../../../framework/AssetLoader";
+
+import {Ids} from '../../../resources/image';
 
 class GoHowToPlayButton extends Button {
     constructor() {
-        super(Sprite.fromImage(manifest.buttonGoHowToPlay).texture);
+        super(loadTexture(Ids.BUTTON_GO_HOW_TO_PLAY));
     }
 }
 

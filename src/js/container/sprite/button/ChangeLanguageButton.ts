@@ -4,10 +4,11 @@ import {loadTexture} from "../../../framework/AssetLoader";
 
 import {Ids} from '../../../resources/image';
 
-class BackToTopButton extends Button {
+
+class ChangeLanguageButton extends Button {
     constructor() {
-        super(loadTexture(Ids.BUTTON_GAME_RESTART));
+        super(loadTexture(Ids.BUTTON_CHANGE_LANGUAGE));
     }
 }
 
-export default BackToTopButton;
+export default ChangeLanguageButton;

@@ -1,17 +1,15 @@
-import {Container, loaders} from 'pixi.js';
-
 import {Events as ApplicationEvents} from "../ApplicationState";
-import State from "../internal/State";
 
-import ViewContainer from "../internal/ViewContainer";
+import ViewContainer from "../../framework/ViewContainer";
 import Text from "../../container/sprite/text/Text";
 import BrandLogoAnimation from '../../container/BrandLogoAnimation';
 import LoadKotoriAnimation from '../../container/LoadKotoriAnimation';
 
 import {addEvents, removeEvents, dispatchEvent} from '../EventUtils';
-import AssetLoader from '../../helper/AssetLoader';
-import {setAsset} from "../../helper/utils";
+import AssetLoader, {Asset} from '../../framework/AssetLoader';
 
+import imageManifest from '../../resources/image';
+import soundManifest from '../../resources/sound';
 import {SKIP_BRAND_LOGO_ANIMATION} from "../../Constants";
 
 export enum Events {
@@ -19,7 +17,7 @@ export enum Events {
     COMPLETE_LOGO_ANIMATION = "LoadViewState@COMPLETE_LOGO_ANIMATION",
 }
 
-class LoadViewState extends ViewContainer implements State {
+class LoadViewState extends ViewContainer {
     public static TAG = "LoadViewState";
 
     private _loader: AssetLoader;
@@ -43,7 +41,7 @@ class LoadViewState extends ViewContainer implements State {
      * @override
      */
     onEnter(): void {
-        console.log(`${LoadViewState.TAG}@onEnter`);
+        super.onEnter();
 
         addEvents({
             [Events.COMPLETE_LOAD]: this._handleLoadCompleteEvent,
@@ -71,6 +69,8 @@ class LoadViewState extends ViewContainer implements State {
             .then(() => dispatchEvent(Events.COMPLETE_LOGO_ANIMATION));
 
         this._loader = new AssetLoader();
+        this._loader.setImageManifest(imageManifest);
+        this._loader.setSoundManifest(soundManifest);
         this._loader.onProgress.add(this._onLoadProgress);
         this._loader.load(this._onLoadComplete);
     }
@@ -79,7 +79,7 @@ class LoadViewState extends ViewContainer implements State {
      * @override
      */
     onExit(): void {
-        console.log(`${LoadViewState.TAG}@onExit`);
+        super.onExit();
 
         removeEvents([
             Events.COMPLETE_LOAD,
@@ -87,7 +87,7 @@ class LoadViewState extends ViewContainer implements State {
         ]);
     }
 
-    private _onLoadProgress = (event: loaders.Loader): void => {
+    private _onLoadProgress = (event: AssetLoader): void => {
         const percentage = event.progress;
 
         this._loadedProgressPercentage = percentage;
@@ -95,10 +95,9 @@ class LoadViewState extends ViewContainer implements State {
         this._loadKotoriAnimation.progress(percentage);
     };
 
-    private _onLoadComplete = (loader: AssetLoader, resources: { string: loaders.Resource }): void => {
+    private _onLoadComplete = (loader: AssetLoader, resources: { string: Asset }): void => {
         console.log(`Complete to load [${Object.keys(resources).length}] resources.`);
 
-        Object.keys(resources).forEach((key) => setAsset(resources[key]));
         dispatchEvent(Events.COMPLETE_LOAD);
     };
 

@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@types/i18next-browser-languagedetector@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/i18next-browser-languagedetector/-/i18next-browser-languagedetector-2.0.0.tgz#b6c1b87d2de4213414290efd4af1f45ed9fbdb1a"
+
+"@types/i18next@^8.4.2":
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/@types/i18next/-/i18next-8.4.2.tgz#9f809c4a9d3687f7643254cde85b1127db616180"
+
 "@types/node@^8.0.28":
   version "8.0.28"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.28.tgz#86206716f8d9251cf41692e384264cbd7058ad60"
@@ -1544,6 +1552,14 @@ http-signature@~1.1.0:
 https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
+
+i18next-browser-languagedetector@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-2.0.0.tgz#4d9df2bd1a5deda3c8c0a6d3db62d50388b9eedd"
+
+i18next@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-9.0.0.tgz#a89ab0481b5b6b3964f55b12f03de9063d8f4500"
 
 ieee754@^1.1.4:
   version "1.1.8"
@@ -3245,6 +3261,10 @@ supports-color@^4.0.0, supports-color@^4.2.1:
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-4.2.1.tgz#65a4bb2631e90e02420dba5554c375a4754bb836"
   dependencies:
     has-flag "^2.0.0"
+
+sweetalert@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/sweetalert/-/sweetalert-2.0.3.tgz#a6027b741fca4db6d7a2e4a2769c971d7ed7f95e"
 
 tapable@^0.2.7:
   version "0.2.8"

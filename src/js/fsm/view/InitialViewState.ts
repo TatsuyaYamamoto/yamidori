@@ -1,16 +1,13 @@
-import {Container} from 'pixi.js';
-
-import State from "../internal/State";
-
-import ViewContainer from "../internal/ViewContainer";
+import ViewContainer from "../../framework/ViewContainer";
 import Text from "../../container/sprite/text/Text";
 
 import {Events} from "../ApplicationState";
 import {dispatchEvent} from '../EventUtils';
-import {getString, isIOS, isSupportTouchEvent} from "../../helper/utils";
+import {isIOS, isSupportTouchEvent} from "../../framework/utils";
 import {Ids} from "../../resources/string";
+import {t} from "../../framework/i18n";
 
-class InitialViewState extends ViewContainer implements State {
+class InitialViewState extends ViewContainer {
     public static TAG = "InitialViewState";
 
     private _tapInfo: Text;
@@ -26,12 +23,12 @@ class InitialViewState extends ViewContainer implements State {
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${InitialViewState.TAG}@onEnter`);
+        super.onEnter();
 
         // TODO: Check login?
 
         if (isIOS()) {
-            this._tapInfo = new Text(getString(Ids.TAP_DISPLAY_INFO));
+            this._tapInfo = new Text(t(Ids.TAP_DISPLAY_INFO));
             this._tapInfo.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
             this.addChild(this._tapInfo);
 
@@ -45,7 +42,7 @@ class InitialViewState extends ViewContainer implements State {
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${InitialViewState.TAG}@onExit`);
+        super.onExit();
 
         if (isIOS()) {
             window.removeEventListener(isSupportTouchEvent() ? 'touchstart' : 'click', this._handleGoNextStateAction);

@@ -1,11 +1,11 @@
-import {Container, interaction} from 'pixi.js';
+import {interaction} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
+import * as swal from 'sweetalert';
 
-import State from "../../internal/State";
 import {Events} from "../../view/TopViewState";
 import {dispatchEvent} from '../../EventUtils';
 
-import ViewSectionContainer from "../../internal/ViewSectionContainer";
+import ViewContainer from "../../../framework/ViewContainer";
 import MenuBackground from "../../../container/sprite/background/MenuBackground";
 import GameStartButton from "../../../container/sprite/button/GameStartButton";
 import GoHowToPlayButton from "../../../container/sprite/button/GoHowToPlayButton";
@@ -13,15 +13,19 @@ import GoRankingButton from "../../../container/sprite/button/GoRankingButton";
 import GoCreditButton from "../../../container/sprite/button/GoCreditButton";
 import GoTwitterHomeButton from "../../../container/sprite/button/GoTwitterHomeButton";
 import SoundButton from "../../../container/sprite/button/SoundButton";
+import ChangeLanguageButton from "../../../container/sprite/button/ChangeLanguageButton";
 
 import {goTo} from "../../../helper/network";
-import {toggleMute} from "../../../helper/SoundManager";
-import {loadSound} from "../../../helper/SoundManager";
-import manifest from '../../../resources/manifest';
+import {toggleMute} from "../../../framework/utils";
+import {loadSound} from "../../../framework/AssetLoader";
+import {changeLanguage, getCurrentLanguage, t} from "../../../framework/i18n";
 
-import {URL} from '../../../Constants';
+import {Ids as SoundIds} from '../../../resources/sound';
+import {Ids} from "../../../resources/string";
 
-class MenuTopState extends ViewSectionContainer implements State {
+import {SUPPORTED_LANGUAGES, URL} from '../../../Constants';
+
+class MenuTopState extends ViewContainer {
     public static TAG = "MenuTopState";
 
     private _menuBackground: MenuBackground;
@@ -32,6 +36,7 @@ class MenuTopState extends ViewSectionContainer implements State {
     private _goRankingButton: GoRankingButton;
     private _goTwitterHomeButton: GoTwitterHomeButton;
     private _soundButton: SoundButton;
+    private _changeLanguageButton: ChangeLanguageButton;
 
     private _okSound: Sound;
     private _toggleSound: Sound;
@@ -46,7 +51,7 @@ class MenuTopState extends ViewSectionContainer implements State {
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${MenuTopState.TAG}@onEnter`);
+        super.onEnter();
 
         this._menuBackground = new MenuBackground();
 
@@ -73,25 +78,30 @@ class MenuTopState extends ViewSectionContainer implements State {
         this._soundButton.position.set(this.viewWidth * 0.8, this.viewHeight * 0.15);
         this._soundButton.setOnClickListener(this.onSoundButtonClick);
 
-        this.addChild(
+        this._changeLanguageButton = new ChangeLanguageButton();
+        this._changeLanguageButton.position.set(this.viewWidth * 0.17, this.viewHeight * 0.15);
+        this._changeLanguageButton.setOnClickListener(this.onChangeLanguageButtonClick);
+
+        this.applicationLayer.addChild(
             this._menuBackground,
             this._gameStartButton,
             this._goCreditButton,
             this._goHowToPlayButton,
             this._goRankingButton,
             this._goTwitterHomeButton,
-            this._soundButton
+            this._soundButton,
+            this._changeLanguageButton
         );
 
-        this._okSound = loadSound(manifest.soundOk);
-        this._toggleSound = loadSound(manifest.soundToggleSound);
+        this._okSound = loadSound(SoundIds.SOUND_OK);
+        this._toggleSound = loadSound(SoundIds.SOUND_TOGGLE_SOUND);
     }
 
     /**
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${MenuTopState.TAG}@onExit`);
+        super.onExit();
     }
 
     private onGameStartButtonClick = (event: interaction.InteractionEvent): void => {
@@ -117,6 +127,24 @@ class MenuTopState extends ViewSectionContainer implements State {
         this._toggleSound.play();
         toggleMute();
     };
+
+    private onChangeLanguageButtonClick = () => {
+        this._okSound.play();
+        swal(t(Ids.CHANGE_LANGUAGE_INFO), {buttons: true})
+            .then((willChange) => {
+                if (willChange) {
+                    swal(t(Ids.RELOAD_APP_INFO))
+                        .then(() => {
+                            const nextLang = getCurrentLanguage() === SUPPORTED_LANGUAGES.EN ?
+                                SUPPORTED_LANGUAGES.JA :
+                                SUPPORTED_LANGUAGES.EN;
+                            changeLanguage(nextLang);
+
+                            location.reload()
+                        });
+                }
+            });
+    }
 }
 
 export default MenuTopState;

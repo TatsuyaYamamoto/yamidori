@@ -1,11 +1,12 @@
-import {Sprite} from 'pixi.js';
-
-import manifest from '../../../resources/manifest';
 import Button from "./Button";
+
+import {loadTexture} from "../../../framework/AssetLoader";
+
+import {Ids} from '../../../resources/image';
 
 class BackToMenuButton extends Button {
     constructor() {
-        super(Sprite.fromImage(manifest.buttonGoBackMenu).texture);
+        super(loadTexture(Ids.BUTTON_GO_BACK_MENU));
     }
 }
 

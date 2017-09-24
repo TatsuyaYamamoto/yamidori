@@ -1,18 +1,16 @@
-import {Container} from 'pixi.js';
 import Sound from "pixi-sound/lib/Sound";
 
-import State from "../internal/State";
 import TitleTopState from "../section/top/TitleTopState";
 import CreditTopState from "../section/top/CreditTopState";
 import UsageTopState from "../section/top/UsageTopState";
 import MenuTopState from "../section/top/MenuTopState";
 
-import ViewContainer from "../internal/ViewContainer";
+import ViewContainer from "../../framework/ViewContainer";
 import Background from "../../container/sprite/background/Background";
 
-import manifest from '../../resources/manifest';
-import {loadSound} from "../../helper/SoundManager";
-import StateMachine from "../internal/StateMachine";
+import {Ids} from '../../resources/sound';
+import {loadSound} from "../../framework/AssetLoader";
+import StateMachine from "../../framework/StateMachine";
 
 import {Events as ApplicationEvents} from "../ApplicationState";
 import {dispatchEvent, addEvents, removeEvents} from "../EventUtils";
@@ -25,7 +23,7 @@ export enum Events {
     REQUEST_BACK_TO_TOP = "TopViewState@REQUEST_BACK_TO_TOP"
 }
 
-class TopViewState extends ViewContainer implements State {
+class TopViewState extends ViewContainer {
     public static TAG = "TopViewState";
 
     private _topViewStateMachine: StateMachine;
@@ -49,7 +47,7 @@ class TopViewState extends ViewContainer implements State {
      * @inheritDoc
      */
     onEnter(): void {
-        console.log(`${TopViewState.TAG}@onEnter`);
+        super.onEnter();
 
         this._titleTopState = new TitleTopState();
         this._menuTopState = new MenuTopState();
@@ -71,7 +69,7 @@ class TopViewState extends ViewContainer implements State {
             [Events.REQUEST_BACK_TO_TOP]: this._changeToMenuTopState,
         });
 
-        this._zenkaiSound = loadSound(manifest.soundZenkai);
+        this._zenkaiSound = loadSound(Ids.SOUND_ZENKAI);
         this._zenkaiSound.play({loop: true});
 
         this._topViewStateMachine.init(TitleTopState.TAG);
@@ -86,7 +84,8 @@ class TopViewState extends ViewContainer implements State {
      * @inheritDoc
      */
     onExit(): void {
-        console.log(`${TopViewState.TAG}@onExit`);
+        super.onEnter();
+
         this._zenkaiSound.stop();
         removeEvents([
             Events.REQUEST_GO_TO_MENU,
