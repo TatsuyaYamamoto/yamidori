@@ -2,7 +2,7 @@ import ViewContainer from "../../framework/ViewContainer";
 import Text from "../../container/sprite/text/Text";
 
 import {Events} from "../ApplicationState";
-import {dispatchEvent} from '../EventUtils';
+import {dispatchEvent} from '../../framework/EventUtils';
 import {isIOS, isSupportTouchEvent} from "../../framework/utils";
 import {Ids} from "../../resources/string";
 import {t} from "../../framework/i18n";

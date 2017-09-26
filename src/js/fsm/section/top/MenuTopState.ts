@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 import * as swal from 'sweetalert';
 
 import {Events} from "../../view/TopViewState";
-import {dispatchEvent} from '../../EventUtils';
+import {dispatchEvent} from '../../../framework/EventUtils';
 
 import ViewContainer from "../../../framework/ViewContainer";
 import MenuBackground from "../../../container/sprite/background/MenuBackground";

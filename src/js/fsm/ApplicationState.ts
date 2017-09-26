@@ -3,7 +3,7 @@ import StateMachine from "../framework/StateMachine";
 import {toggleMute} from '../framework/utils';
 import {getCurrentViewSize, getScale} from "../framework/utils";
 
-import {addEvents, removeEvents} from './EventUtils';
+import {addEvents, removeEvents} from '../framework/EventUtils';
 import InitialViewState from "./view/InitialViewState";
 import LoadViewState from "./view/LoadViewState";
 import TopViewState from "./view/TopViewState";

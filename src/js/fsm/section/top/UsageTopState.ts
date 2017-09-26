@@ -1,7 +1,7 @@
 import Sound from "pixi-sound/lib/Sound";
 
 import {Events} from "../../view/TopViewState";
-import {dispatchEvent} from '../../EventUtils';
+import {dispatchEvent} from '../../../framework/EventUtils';
 import State from "../../../framework/State";
 
 import ViewContainer from "../../../framework/ViewContainer";

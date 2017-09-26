@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 import ViewContainer from "../../../framework/ViewContainer";
 import CountDownText from "../../../container/components/CountDownText";
 
-import {dispatchEvent} from '../../EventUtils';
+import {dispatchEvent} from '../../../framework/EventUtils';
 import {Events} from '../../view/GameViewState';
 
 import {Ids} from '../../../resources/sound';

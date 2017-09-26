@@ -13,7 +13,7 @@ import {loadSound} from "../../framework/AssetLoader";
 import StateMachine from "../../framework/StateMachine";
 
 import {Events as ApplicationEvents} from "../ApplicationState";
-import {dispatchEvent, addEvents, removeEvents} from "../EventUtils";
+import {dispatchEvent, addEvents, removeEvents} from "../../framework/EventUtils";
 
 export enum Events {
     REQUEST_GAME_START = "GameViewState@REQUEST_GAME_START",

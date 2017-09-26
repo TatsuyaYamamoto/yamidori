@@ -7,7 +7,7 @@ import Kotori, {Direction, Speed} from "../../../container/sprite/character/Koto
 import GamePointCount from "../../../container/components/GamePointCount";
 
 import {Events as GameEvents} from '../../view/GameViewState'
-import {dispatchEvent} from '../../EventUtils';
+import {dispatchEvent} from '../../../framework/EventUtils';
 
 import {getRandomInteger} from "../../../framework/utils";
 
