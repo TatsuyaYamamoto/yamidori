@@ -1,7 +1,8 @@
 import {Container, Texture, Sprite, Text} from 'pixi.js';
 import * as anime from 'animejs'
 
-const HAMMER_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAADXUAAA11AFeZeUIAAAAzElEQVRIie2WwQ2DMAwA3aqj5Oks0BfqGAzAUAzANxugvlggfmYX+koUqpoQK4BUclIeRsEXGRIH4GrcBO/MJXI9BGLoW4BX8wyx6qbsHHeJGABgfOfLYlLl4coKiJhMTkRs/jUxK+UWopQKsXNuVS4u9TdEFGTGmMUidhXHcq11cm5Rscdae454C7uJ/ffmKPZXe+JtRkQpBysWDUSM45+ID5CNiA4Qjrlvlw+6IT+XqEl4QqMYDmwScXeS8H/7uIqruIoP47QL/fX4AHCDQfcvNliwAAAAAElFTkSuQmCC";
+import hammerImage from './hammerImageBase64';
+
 const BRAND_CHARACTERS = ['そ', 'こ', 'ん', 'と', 'こ', 'ろ', '工', '房'];
 const TIMELINE = {
     HAMMER_DELAY: 220,
@@ -42,7 +43,7 @@ class BrandLogoAnimation extends Container {
             return text;
         });
 
-        this._hammer = Sprite.fromImage(HAMMER_IMAGE);
+        this._hammer = Sprite.fromImage(hammerImage);
         this._hammer.anchor.set(0.5, 1);
         this._hammer.position.set(
             this.x + this._width * 0.05,
