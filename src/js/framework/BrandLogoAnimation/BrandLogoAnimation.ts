@@ -1,7 +1,8 @@
-import {Container, Texture, Sprite, Text} from 'pixi.js';
+import {Container} from 'pixi.js';
 import * as anime from 'animejs'
 
-import hammerImage from './hammerImageBase64';
+import BrandLogoText from "./BrandLogoText";
+import HammerSprite from "./HammerSprite";
 
 const BRAND_CHARACTERS = ['そ', 'こ', 'ん', 'と', 'こ', 'ろ', '工', '房'];
 const TIMELINE = {
@@ -21,8 +22,8 @@ class BrandLogoAnimation extends Container {
     private _height: number;
     private _timeoutAfterComplete: number;
 
-    private _hammer: Sprite;
-    private _characters: Text[];
+    private _hammer: HammerSprite;
+    private _characters: BrandLogoText[];
 
     private _hammerTimeLine;
     private _charTimeLine;
@@ -36,38 +37,23 @@ class BrandLogoAnimation extends Container {
         this._height = height || this._width;
         this._timeoutAfterComplete = 500;
 
-        // create sprites
-        this._characters = BRAND_CHARACTERS.map((char) => {
-            const text = new Text(char);
-            text.anchor.set(0.5, 1);
-            return text;
-        });
-
-        this._hammer = Sprite.fromImage(hammerImage);
-        this._hammer.anchor.set(0.5, 1);
-        this._hammer.position.set(
-            this.x + this._width * 0.05,
-            this.y - this._height * 0.04
-        );
-
-        // add sprites
+        // setup sprites
+        this._characters = BRAND_CHARACTERS.map((char) => new BrandLogoText(char));
         this._characters.forEach((c) => this.addChild(c));
+
+        this._hammer = new HammerSprite();
+        this._hammer.position.set(this.x + this._width * 0.05, this.y - this._height * 0.04);
         this.addChild(this._hammer);
 
         // create animjs timeline instances
         this._hammerTimeLine = anime.timeline();
         this._charTimeLine = anime.timeline();
 
-        // create promise that fire on complete animation.
-        const hammerPromise = new Promise((resolve) => {
-            this._defineHammerTimeLineItems(resolve)
-        });
-        const charsPromise = new Promise((resolve) => {
-            this._defineCharacterTimeLineItems(resolve)
-        });
-
         // set promise that fire on complete all animation.
-        this._promise = Promise.all([hammerPromise, charsPromise]);
+        this._promise = Promise.all([
+            new Promise((resolve) => this._defineHammerTimeLineItems(resolve)),
+            new Promise((resolve) => this._defineCharacterTimeLineItems(resolve)),
+        ]);
     }
 
     /**
