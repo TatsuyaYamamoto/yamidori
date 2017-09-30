@@ -1,3 +1,31 @@
+/**
+ * @fileOverview BrandLogoAnimation module.
+ * This PIXI container has Sokontokoro-factory logo animation with anim.js.
+ * Animation logo font is PixelMplus, {@see http://itouhiro.hatenablog.com/entry/20130602/font}.
+ * The font should be loaded out of the module.
+ * {@link BrandLogoAnimation#start} return promise instance.
+ * This promise's going to resolve on complete animation.
+ *
+ * @example
+ * // PixelMplus10-Regular.css
+ * @font-face {
+ *   font-family: 'PixelMplus10-Regular';
+ *   src: url('./PixelMplus10-Regular.woff');
+ * }
+ *
+ * // load stylesheet to load font.
+ * require('[font-dir]/PixelMplus10-Regular.css');
+ *
+ * // Create the animation instance.
+ * const animation = new BrandLogoAnimation();
+ *
+ * // Start animation.
+ * animation
+ *   .start()
+ *   .then(() => { fire on complete animation! }));
+ *
+ * @class
+ */
 import {Container} from 'pixi.js';
 import * as anime from 'animejs'
 
