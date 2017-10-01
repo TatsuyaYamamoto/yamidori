@@ -47,7 +47,7 @@ abstract class ViewContainer extends Container implements State {
     }
 
     protected get elapsedTimeMillis(): number {
-        return this.elapsedTimeMillis;
+        return this._elapsedTimeMillis;
     }
 
     public get backGroundLayer(): Container {
