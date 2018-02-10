@@ -18,6 +18,8 @@ abstract class ViewContainer extends Container implements State {
     private _viewWidth: number;
     private _viewHeight: number;
 
+    private _elapsedTimeMillis: number;
+
     constructor() {
         super();
 
@@ -44,6 +46,10 @@ abstract class ViewContainer extends Container implements State {
         return this._viewHeight;
     }
 
+    protected get elapsedTimeMillis(): number {
+        return this._elapsedTimeMillis;
+    }
+
     public get backGroundLayer(): Container {
         return this._backGroundLayer;
     }
@@ -61,7 +67,7 @@ abstract class ViewContainer extends Container implements State {
      * @see State#update
      */
     update(elapsedTime: number): void {
-
+        this._elapsedTimeMillis += elapsedTime;
     }
 
     /**
@@ -70,6 +76,7 @@ abstract class ViewContainer extends Container implements State {
      */
     onEnter(): void {
         console.log(`${this.constructor.name}@onEnter`);
+        this._elapsedTimeMillis = 0;
     }
 
     /**

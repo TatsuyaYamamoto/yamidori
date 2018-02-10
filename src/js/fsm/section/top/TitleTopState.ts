@@ -1,11 +1,10 @@
 import Sound from "pixi-sound/lib/Sound";
 
 import {Events} from '../../view/TopViewState';
-import {dispatchEvent} from '../../EventUtils';
+import {dispatchEvent} from '../../../framework/EventUtils';
 
 import ViewContainer from "../../../framework/ViewContainer";
 import TitleLogo from "../../../container/sprite/logo/TitleLogo";
-import VersionText from "../../../container/components/VersionText";
 import Text from '../../../container/sprite/text/Text';
 
 import {isSupportTouchEvent} from "../../../framework/utils";
@@ -15,12 +14,13 @@ import {t} from "../../../framework/i18n";
 import {Ids} from "../../../resources/string";
 import {Ids as SoundIds} from '../../../resources/sound';
 
+const {version} = require('../../../../../package.json');
 
 class TitleTopState extends ViewContainer {
     public static TAG = "TitleTopState";
 
     private _titleLog: TitleLogo;
-    private _appVersion: VersionText;
+    private _appVersion: Text;
     private _tapInfoText: Text;
 
     private _okSound: Sound;
@@ -40,10 +40,14 @@ class TitleTopState extends ViewContainer {
         this._titleLog = new TitleLogo();
         this._titleLog.position.set(this.viewWidth * 0.5, this.viewHeight * 0.5);
 
-        this._appVersion = new VersionText();
+        this._appVersion = new Text(`v${version}`, {
+            fontSize: 40,
+        });
         this._appVersion.position.set(this.viewWidth * 0.1, this.viewHeight * 0.95);
 
-        this._tapInfoText = new Text(t(Ids.TAP_DISPLAY_INFO));
+        this._tapInfoText = new Text(t(Ids.TAP_DISPLAY_INFO),{
+            fontSize: 40,
+        });
         this._tapInfoText.position.set(this.viewWidth * 0.5, this.viewHeight * 0.9);
 
         this.applicationLayer.addChild(

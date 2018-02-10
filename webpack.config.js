@@ -50,7 +50,9 @@ const config = {
                 use: [
                     {loader: 'ts-loader'}
                 ]
-            }
+            },
+            {test: /\.css$/, loader: 'style-loader!css-loader'},
+            {test: /\.woff$/, loader: 'url-loader'},
         ]
     },
     // https://github.com/pixijs/pixi-sound/issues/28

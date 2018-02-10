@@ -1,5 +1,5 @@
 import StateMachine from "../../framework/StateMachine";
-import {addEvents, removeEvents} from "../EventUtils";
+import {addEvents, removeEvents} from "../../framework/EventUtils";
 
 import CountGameState from "../section/game/CountGameState";
 import OverGameState from "../section/game/OverGameState";

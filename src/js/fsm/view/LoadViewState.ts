@@ -2,10 +2,10 @@ import {Events as ApplicationEvents} from "../ApplicationState";
 
 import ViewContainer from "../../framework/ViewContainer";
 import Text from "../../container/sprite/text/Text";
-import BrandLogoAnimation from '../../container/BrandLogoAnimation';
+import BrandLogoAnimation from '../../framework/BrandLogoAnimation';
 import LoadKotoriAnimation from '../../container/LoadKotoriAnimation';
 
-import {addEvents, removeEvents, dispatchEvent} from '../EventUtils';
+import {addEvents, removeEvents, dispatchEvent} from '../../framework/EventUtils';
 import AssetLoader, {Asset} from '../../framework/AssetLoader';
 
 import imageManifest from '../../resources/image';

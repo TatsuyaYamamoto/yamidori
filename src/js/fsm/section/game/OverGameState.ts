@@ -1,7 +1,7 @@
 import Sound from "pixi-sound/lib/Sound";
 
 import {Events as ApplicationEvents} from "../../ApplicationState";
-import {dispatchEvent} from "../../EventUtils";
+import {dispatchEvent} from "../../../framework/EventUtils";
 
 import ViewContainer from "../../../framework/ViewContainer";
 import GameOverLogo from '../../../container/sprite/logo/GameOverLogo';

@@ -1,7 +1,37 @@
-import {Container, Texture, Sprite, Text} from 'pixi.js';
+/**
+ * @fileOverview BrandLogoAnimation module.
+ * This PIXI container has Sokontokoro-factory logo animation with anim.js.
+ * Animation logo font is PixelMplus, {@see http://itouhiro.hatenablog.com/entry/20130602/font}.
+ * The font should be loaded out of the module.
+ * {@link BrandLogoAnimation#start} return promise instance.
+ * This promise's going to resolve on complete animation.
+ *
+ * @example
+ * // PixelMplus10-Regular.css
+ * @font-face {
+ *   font-family: 'PixelMplus10-Regular';
+ *   src: url('./PixelMplus10-Regular.woff');
+ * }
+ *
+ * // load stylesheet to load font.
+ * require('[font-dir]/PixelMplus10-Regular.css');
+ *
+ * // Create the animation instance.
+ * const animation = new BrandLogoAnimation();
+ *
+ * // Start animation.
+ * animation
+ *   .start()
+ *   .then(() => { fire on complete animation! }));
+ *
+ * @class
+ */
+import {Container} from 'pixi.js';
 import * as anime from 'animejs'
 
-const HAMMER_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAADXUAAA11AFeZeUIAAAAzElEQVRIie2WwQ2DMAwA3aqj5Oks0BfqGAzAUAzANxugvlggfmYX+koUqpoQK4BUclIeRsEXGRIH4GrcBO/MJXI9BGLoW4BX8wyx6qbsHHeJGABgfOfLYlLl4coKiJhMTkRs/jUxK+UWopQKsXNuVS4u9TdEFGTGmMUidhXHcq11cm5Rscdae454C7uJ/ffmKPZXe+JtRkQpBysWDUSM45+ID5CNiA4Qjrlvlw+6IT+XqEl4QqMYDmwScXeS8H/7uIqruIoP47QL/fX4AHCDQfcvNliwAAAAAElFTkSuQmCC";
+import BrandLogoText from "./BrandLogoText";
+import HammerSprite from "./HammerSprite";
+
 const BRAND_CHARACTERS = ['そ', 'こ', 'ん', 'と', 'こ', 'ろ', '工', '房'];
 const TIMELINE = {
     HAMMER_DELAY: 220,
@@ -20,8 +50,8 @@ class BrandLogoAnimation extends Container {
     private _height: number;
     private _timeoutAfterComplete: number;
 
-    private _hammer: Sprite;
-    private _characters: Text[];
+    private _hammer: HammerSprite;
+    private _characters: BrandLogoText[];
 
     private _hammerTimeLine;
     private _charTimeLine;
@@ -35,38 +65,23 @@ class BrandLogoAnimation extends Container {
         this._height = height || this._width;
         this._timeoutAfterComplete = 500;
 
-        // create sprites
-        this._characters = BRAND_CHARACTERS.map((char) => {
-            const text = new Text(char);
-            text.anchor.set(0.5, 1);
-            return text;
-        });
-
-        this._hammer = Sprite.fromImage(HAMMER_IMAGE);
-        this._hammer.anchor.set(0.5, 1);
-        this._hammer.position.set(
-            this.x + this._width * 0.05,
-            this.y - this._height * 0.04
-        );
-
-        // add sprites
+        // setup sprites
+        this._characters = BRAND_CHARACTERS.map((char) => new BrandLogoText(char));
         this._characters.forEach((c) => this.addChild(c));
+
+        this._hammer = new HammerSprite();
+        this._hammer.position.set(this.x + this._width * 0.05, this.y - this._height * 0.04);
         this.addChild(this._hammer);
 
         // create animjs timeline instances
         this._hammerTimeLine = anime.timeline();
         this._charTimeLine = anime.timeline();
 
-        // create promise that fire on complete animation.
-        const hammerPromise = new Promise((resolve) => {
-            this._defineHammerTimeLineItems(resolve)
-        });
-        const charsPromise = new Promise((resolve) => {
-            this._defineCharacterTimeLineItems(resolve)
-        });
-
         // set promise that fire on complete all animation.
-        this._promise = Promise.all([hammerPromise, charsPromise]);
+        this._promise = Promise.all([
+            new Promise((resolve) => this._defineHammerTimeLineItems(resolve)),
+            new Promise((resolve) => this._defineCharacterTimeLineItems(resolve)),
+        ]);
     }
 
     /**

@@ -20,7 +20,12 @@ import {
     BASIC_IMAGE_HEIGHT,
 } from "./Constants";
 
+
+// Network fetch module
 import 'whatwg-fetch';
+
+// Brand logo text font
+require('../fonts/PixelMplus10-Regular.css');
 
 /**
  * Rendering target on html.

@@ -3,7 +3,7 @@ import Sound from "pixi-sound/lib/Sound";
 import ViewContainer from "../../../framework/ViewContainer";
 import CountDownText from "../../../container/components/CountDownText";
 
-import {dispatchEvent} from '../../EventUtils';
+import {dispatchEvent} from '../../../framework/EventUtils';
 import {Events} from '../../view/GameViewState';
 
 import {Ids} from '../../../resources/sound';
@@ -11,7 +11,6 @@ import {loadSound} from "../../../framework/AssetLoader";
 
 class CountGameState extends ViewContainer {
     public static TAG = "CountGameState";
-    private _initialTimeMillis: number;
 
     private _countInfo: CountDownText;
 
@@ -22,9 +21,7 @@ class CountGameState extends ViewContainer {
     private _countHighSound: Sound;
 
     update(elapsedTimeMillis: number): void {
-        this._initialTimeMillis += elapsedTimeMillis;
-
-        if (1000 < this._initialTimeMillis && !this._isCountedTwo) {
+        if (1000 < this.elapsedTimeMillis && !this._isCountedTwo) {
             console.log("Count down, 2!");
             this._countInfo.count = 2;
             this.applicationLayer.addChild(this._countInfo);
@@ -32,7 +29,7 @@ class CountGameState extends ViewContainer {
             this._isCountedTwo = true;
         }
 
-        if (2000 < this._initialTimeMillis && !this._isCountedOne) {
+        if (2000 < this.elapsedTimeMillis && !this._isCountedOne) {
             console.log("Count down, 1!");
             this._countInfo.count = 1;
             this._countLowSound.play();
@@ -40,7 +37,7 @@ class CountGameState extends ViewContainer {
         }
 
         // is finished counting.
-        if (3000 < this._initialTimeMillis && this._isCountedOne && this._isCountedTwo) {
+        if (3000 < this.elapsedTimeMillis && this._isCountedOne && this._isCountedTwo) {
             console.log("Count down, done!");
             this._countHighSound.play();
             dispatchEvent(Events.GAME_START);
@@ -50,7 +47,6 @@ class CountGameState extends ViewContainer {
     onEnter(): void {
         super.onEnter();
 
-        this._initialTimeMillis = 0;
         this._countHighSound = loadSound(Ids.SOUND_COUNT_HIGH);
         this._countLowSound = loadSound(Ids.SOUND_COUNT_LOW);
 

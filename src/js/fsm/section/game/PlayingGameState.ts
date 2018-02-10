@@ -1,4 +1,4 @@
-import Sound from "pixi-sound/lib/Sound";
+import {Sound} from "pixi-sound/lib/Sound";
 
 import State from "../../../framework/State";
 
@@ -7,7 +7,7 @@ import Kotori, {Direction, Speed} from "../../../container/sprite/character/Koto
 import GamePointCount from "../../../container/components/GamePointCount";
 
 import {Events as GameEvents} from '../../view/GameViewState'
-import {dispatchEvent} from '../../EventUtils';
+import {dispatchEvent} from '../../../framework/EventUtils';
 
 import {getRandomInteger} from "../../../framework/utils";
 
@@ -25,7 +25,6 @@ class PlayingGameState extends ViewContainer implements State {
     private _gamePointCount: GamePointCount;
 
     private _kotoriMap: Map<number, Kotori>;
-    private _elapsedTimeMillis = 0;
     private _nextAppearTimeMillis = 0;
 
     private _rightDeadLine: number;
@@ -35,9 +34,7 @@ class PlayingGameState extends ViewContainer implements State {
     private _tapKotoriSound: Sound;
 
     update(elapsedTime: number): void {
-        this._elapsedTimeMillis += elapsedTime;
-
-        if (this._nextAppearTimeMillis < this._elapsedTimeMillis) {
+        if (this._nextAppearTimeMillis < this.elapsedTimeMillis) {
             console.log('Appear kotori!');
             this._nextAppearTimeMillis += this.getNextAppearTimeMillis();
 
@@ -72,7 +69,6 @@ class PlayingGameState extends ViewContainer implements State {
         this.applicationLayer.addChild(this._gamePointCount);
 
         this._kotoriMap = new Map();
-        this._elapsedTimeMillis = 0;
         this._nextAppearTimeMillis = this.getNextAppearTimeMillis();
 
         this._gameLoopSound = loadSound(Ids.SOUND_GAME_LOOP);
